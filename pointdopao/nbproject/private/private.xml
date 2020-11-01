@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/bcovies/Documents/NetBeansProjects/pointdopao/pointdopao/src/java/Controllers/LoginController.java</file>
+=======
+            <file>file:/C:/Users/henio/Git/pointdopao/pointdopao/src/java/Controllers/LoginController.java</file>
+            <file>file:/C:/Users/henio/Git/pointdopao/pointdopao/web/index.html</file>
+>>>>>>> b629b5bef84131a2d49bd516f03fb71704feec55
         </group>
     </open-files>
 </project-private>
