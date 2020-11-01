@@ -26,3 +26,5 @@ hs_err_pid*
 
 /app/pointdopao/nbproject/private/
 /app/pointdopao/build/
+/app/app/nbproject/private/
+/app/build/
