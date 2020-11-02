@@ -18,7 +18,7 @@ Carrinho
     listaProdutos   <Produto>
 
 Compra
-    id
+    id              (INTEGER  AI)
     Carrinho
     Usuario
     metodoPagamento
