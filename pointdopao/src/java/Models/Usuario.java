@@ -16,6 +16,10 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public Usuario() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getTipo() {
         return tipo;
     }

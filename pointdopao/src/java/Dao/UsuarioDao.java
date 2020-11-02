@@ -8,6 +8,7 @@ package Dao;
 import Models.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import util.ConexaoBD;
 
@@ -41,7 +42,7 @@ public class UsuarioDao {
 
     public void deletarUsuario(int id) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("delete from usuario where id=?");         
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from usuario where id=?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
@@ -49,6 +50,7 @@ public class UsuarioDao {
             System.out.println("Erro na função Deletar Usuario!" + "\n" + e.getMessage());
         }
     }
+
     public void atualizarUsuario(Usuario usuario) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("update usuario set nome=?, sobrenome=?, email=?, senha=? where id=?");
@@ -59,5 +61,25 @@ public class UsuarioDao {
         } catch (SQLException e) {
             System.out.println("Erro na atualizar usuario!" + "\n" + e.getMessage());
         }
-    }    
+    }
+
+    public Usuario retornarIdUsuario(int id) {
+        Usuario usuario = new Usuario();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where userid=?");
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                usuario.setNome(rs.getString("nome"));
+                usuario.setNome(rs.getString("sobrenome"));
+                usuario.setNome(rs.getString("email"));
+                usuario.setNome(rs.getString("nome"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao retornar id do usuário!" + "\n" + e.getMessage());
+        }
+
+        return usuario;
+    }
 }

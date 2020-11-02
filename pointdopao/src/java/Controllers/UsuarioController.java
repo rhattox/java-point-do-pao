@@ -6,8 +6,10 @@
 package Controllers;
 
 import Dao.UsuarioDao;
+import Models.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,10 +24,12 @@ import javax.servlet.http.HttpServletResponse;
 public class UsuarioController extends HttpServlet {
 
     private UsuarioDao usuarioDao;
-    public UsuarioController(){
+
+    public UsuarioController() {
         super();
         usuarioDao = new UsuarioDao();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,7 +47,7 @@ public class UsuarioController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UsuarioController</title>");            
+            out.println("<title>Servlet UsuarioController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UsuarioController at " + request.getContextPath() + "</h1>");
@@ -65,6 +69,24 @@ public class UsuarioController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
+        String forward = "";
+        String action = request.getParameter("action");
+
+        if (action.equalsIgnoreCase("adicionar")) {
+            forward = "/adicionar.jsp";
+        } else if (action.equalsIgnoreCase("editar")) {
+            forward = "/editar.jsp";
+            int id = Integer.parseInt(request.getParameter("id"));
+            Usuario usuario = usuarioDao.retornarIdUsuario(id);
+            request.setAttribute("usuario", usuario);
+        } else {
+            int id = Integer.parseInt(request.getParameter("id"));
+            usuarioDao.deletarUsuario(id);
+            forward = "/deletar.jsp";
+        }
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
     }
 
     /**
@@ -79,6 +101,14 @@ public class UsuarioController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        Usuario usuario = new Usuario();
+        usuario.setNome(request.getParameter("nome"));
+        usuario.setSobrenome(request.getParameter("sobrenome"));
+        
+        usuario.setEmail(request.getParameter("email"));
+        usuario.setSenha(request.getParameter("senha"));
+        RequestDispatcher view = request.getRequestDispatcher("/listar.jsp");
+        view.forward(request, response);
     }
 
     /**
