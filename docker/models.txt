@@ -1,0 +1,25 @@
+Usuario
+    id          (INTEGER  AI)
+    tipo        (INTEGER  0 {ADM} ou 1 {CLIENTE})
+    nome        (VARCHAR 25)
+    sobrenome   (VARCHAR 25)
+    email       (VARCHAR 50)
+    senha       (VARCHAR 16)
+
+Produto
+    id              (INTEGER  AI)
+    nome            (VARCHAR 25)
+    descricao       (VARCHAR 99)
+    preco           (NUMERIC 5,2)
+    quantidade      (INTEGER)
+
+Carrinho
+    id              (INTEGER  AI)
+    listaProdutos   <Produto>
+
+Compra
+    id
+    Carrinho
+    Usuario
+    metodoPagamento
+    estado

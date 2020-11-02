@@ -1,0 +1,42 @@
+MODEL ->
+	
+    CLASSES 
+		
+        POR EXEMPLO:
+
+			USUARIO
+				ATRIBUTOS	
+                    nome
+                    telefone
+                    etc
+
+					    GETTERS
+					    SETTTERS
+            ADM
+                ATRIBUTOS  
+                    GETTERS
+                    SETTTERS
+				
+DAO ->
+
+    DATA ACCESS OBJETIC (ACESSA OS MODELOS -- MODELS MAPEADOS)
+
+    meio de campo entre o MODEL  E A CHAMADA HTTP
+
+    POR EXEMPLO:
+        USUARIO.DAO
+            todos os acessos aos atributos do model, no caso, USUARIO
+        ADM.DAO
+
+CONTROLLER (RESOURCES)->
+
+    RECEBE POR ONDE VAI SER DEFINIDA AS ROTAS
+
+    FAZ O GET E O POST, CHAMANDO OS DAOs
+
+
+
+
+dúvidas
+
+Henio - Parte das vendas, seria uma pag com todos os produtos ou um site com várias categorias
