@@ -26,15 +26,7 @@ hs_err_pid*
 
 /app/pointdopao/nbproject/private/
 /app/pointdopao/build/
-/app/app/nbproject/private/
 /app/build/
-/WebApplication1/nbproject/private/
-/WebApplication1/build/
-/WebApplication2/nbproject/private/
-/WebApplication2/build/
-/WebApplication2/dist/
-/WebApplication3/nbproject/private/
-/WebApplication3/build/
-/WebApplication4/nbproject/private/
 /pointdopao/dist/
-/nbproject
+/pointdopao/nbproject/
+/pointdopao/build/
