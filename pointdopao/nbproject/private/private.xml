@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/henio/Git/pointdopao/pointdopao/web/index.jsp</file>
-            <file>file:/C:/Users/henio/Git/pointdopao/pointdopao/src/java/Util/Conn.java</file>
-=======
-            <file>file:/C:/Users/bcovies/Documents/NetBeansProjects/pointdopao/pointdopao/src/java/Controllers/LoginController.java</file>
-            <file>file:/C:/Users/bcovies/Documents/NetBeansProjects/pointdopao/pointdopao/src/java/Util/Conn.java</file>
->>>>>>> 48b5b75321929636f4806987528e6c3e6bf39441
+            <file>file:/C:/Users/bcovies/Documents/NetBeansProjects/pointdopao/pointdopao/src/java/Dao/UsuarioDao.java</file>
+            <file>file:/C:/Users/bcovies/Documents/NetBeansProjects/pointdopao/pointdopao/src/java/Util/ConexaoBD.java</file>
         </group>
     </open-files>
 </project-private>
