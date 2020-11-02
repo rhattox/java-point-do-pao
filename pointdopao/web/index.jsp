@@ -4,53 +4,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/app.css">
         <title>Point do Pão</title>
     </head>
-    <style>
-        a:link, a:visited {
-            text-decoration: none;
-            font-size: larger;
-            color: #ac4d21;
-        }
-        a:hover {
-            text-decoration: underline; 
-            color: #f89d16;
-        }
-        a:active {
-            text-decoration: none
-        }
-        .navbar, .barra-botoes {
-            justify-content: space-between !important;
-        }
-        .btn-procurar {
-            color: #b34c1b;
-            border-color: #b34c1b;
-        }
-        .btn-procurar:hover {
-            color: #fff;
-            background-color: #b34c1b;
-            border-color: #b34c1b;
-        }
-        .footer-bg {
-            background-color: #4e230c;
-        }
-        .footer-copyright {
-            color: white;
-        }
-        .centralizar-img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: -webkit-fill-available;
-        }
-        .alinhamento-conteudo {
-            margin-left: 1.2rem;
-        }
-        .titulos {
-            font-family: cursive;
-            color: #b34c1b;
-        }
-    </style>
     <body>
         <section id="cabecalho">
             <nav class="navbar">
