@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Models.Usuario;
 import java.sql.Connection;
 import util.ConexaoBD;
 
@@ -18,5 +19,15 @@ public class UsuarioDao {
     
     public UsuarioDao(){
         connection = ConexaoBD.getConnection();
+    }
+    
+    public void AdicionarUsuario(Usuario usuario){
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into Usuario(tipo,nome,sobrenome,email,senha)");
+        }
+        catch(Exception e){
+            System.out.println("Erro na função Adicionar Usuario!"+ "\n" + e.getMessage());
+        }
     }
 }
