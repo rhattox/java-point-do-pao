@@ -22,4 +22,4 @@ Compra
     Carrinho
     Usuario
     metodoPagamento
-    estado
+    estadoCompra
