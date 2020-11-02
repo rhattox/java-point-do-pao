@@ -7,6 +7,7 @@ package Dao;
 
 import Models.Usuario;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import util.ConexaoBD;
 
 /**
