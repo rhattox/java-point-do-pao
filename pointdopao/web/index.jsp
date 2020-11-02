@@ -37,6 +37,19 @@
         .footer-copyright {
             color: white;
         }
+        .centralizar-img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: -webkit-fill-available;
+        }
+        .alinhamento-conteudo {
+            margin-left: 1.2rem;
+        }
+        .titulos {
+            font-family: cursive;
+            color: #b34c1b;
+        }
     </style>
     <body>
         <section id="cabecalho">
@@ -72,10 +85,25 @@
         </section>
 
         <section id="conteudo">
-
+            <div>
+                <img src="./assets/banner_home.jpg" class="centralizar-img" alt="">
+            </div>
+          
+            <section id="produtos" class="alinhamento-conteudo">
+                <h3 class="mt-4 mb-4 titulos">Nossos Produtos</h3>
+                <div class="card mb-3" style="width: 15rem;">
+                    <img class="card-img-top" src="./assets/produtos/pao_frances.jpg" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Pão Francês</h5>
+                        <p class="card-text">O queridinho do café da manhã.</p>
+                        <button class="btn btn-procurar d-flex ml-auto">Adicionar</button>
+                    </div>
+                </div>
+            </section>
         </section>
+        
         <section id="rodape">
-            <footer class="fixed-bottom footer-bg">
+            <footer class="bottom footer-bg">
                 <div class="footer-copyright text-center py-3">© 2020 Copyright:
                     <a href="https://github.com/bcovies/pointdopao">Github.com</a>
                 </div>
