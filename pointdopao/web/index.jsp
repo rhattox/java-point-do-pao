@@ -4,7 +4,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/app.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="./css/app.css"> 
+        <script src="./js/app.js"></script>
         <title>Point do Pão</title>
     </head>
     <body>
@@ -13,6 +15,10 @@
                 <a class="navbar-brand" href="#">
                     <img src="./assets/logo_pdp.jpg" width="351" height="59.4" class="d-inline-block align-top" alt="">
                 </a>
+                <div class="align-self-end">
+                    <a href="#" class="mr-2">Entrar</a>
+                    <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('cadastrar')">Cadastrar</button>
+                </div>
             </nav>
             <hr class="mb-0" style="border-top: 2px solid #b34c1b;">
 
@@ -29,8 +35,10 @@
                 </section>
                 <section class="d-inline-flex">
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-procurar my-2 my-sm-0" type="submit">Search</button>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Procurar" aria-label="Search">
+                        <button class="btn btn-procurar my-2 my-sm-0" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </form>
                     <a class="navbar-brand ml-4" href="#">
                         <img src="./assets/carrinho.svg" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -44,8 +52,8 @@
             <div>
                 <img src="./assets/banner_home.jpg" class="centralizar-img" alt="">
             </div>
-          
-            <section id="produtos" class="alinhamento-conteudo">
+
+            <section id="produtos" class="alinhamento-conteudo-esq">
                 <h3 class="mt-4 mb-4 titulos">Nossos Produtos</h3>
                 <div class="card mb-3" style="width: 15rem;">
                     <img class="card-img-top" src="./assets/produtos/pao_frances.jpg" alt="">
@@ -57,7 +65,7 @@
                 </div>
             </section>
         </section>
-        
+
         <section id="rodape">
             <footer class="bottom footer-bg">
                 <div class="footer-copyright text-center py-3">© 2020 Copyright:

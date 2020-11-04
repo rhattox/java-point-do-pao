@@ -4,7 +4,7 @@ a:link, a:visited {
     color: #ac4d21;
 }
 a:hover {
-    text-decoration: underline; 
+    text-decoration: none; 
     color: #f89d16;
 }
 a:active {
@@ -12,6 +12,9 @@ a:active {
 }
 .navbar, .barra-botoes {
     justify-content: space-between !important;
+}
+.cor-padrao-txt {
+    color: #b34c1b;
 }
 .btn-procurar {
     color: #b34c1b;
@@ -34,10 +37,30 @@ a:active {
     margin-right: auto;
     max-width: -webkit-fill-available;
 }
-.alinhamento-conteudo {
+.alinhamento-conteudo-esq {
     margin-left: 1.2rem;
+}
+.alinhamento-conteudo-dir {
+    margin-right: 1.2rem;
 }
 .titulos {
     font-family: cursive;
     color: #b34c1b;
+}
+
+.linha-vertical {
+  border-left: 4px solid #b34c1b;
+  height: 450px;
+}
+
+.img-container-cadastro {
+    max-width: 500px;
+    position: relative;
+}
+.img-size {
+    max-width: 100%;
+}
+
+.cadastro-container {
+    margin-top: 10%;
 }
