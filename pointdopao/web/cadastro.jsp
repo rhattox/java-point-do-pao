@@ -22,32 +22,32 @@
                         <div class="form-row">
                             <div class="col">
                                 <label for="Nome">Nome</label>
-                                <input type="text" class="form-control" placeholder="Nome" value="${usuario.nome}">
-                                <small id="nomeHelp" class="form-text text-muted">Futura validação.</small>
+                                <input id="nomeForm" type="text" class="form-control" placeholder="Nome" onblur="validaCampoTexto('nomeForm', 'nomeHelp', 'nome')">
+                                <small id="nomeHelp" class="form-text text-danger"></small>
                             </div>
                             <div class="col">
                                 <label for="Sobrenome">Sobrenome</label>
-                                <input type="text" class="form-control" placeholder="Sobrenome" value="${usuario.sobrenome}">
-                                <small id="sobrenomeHelp" class="form-text text-muted">Futura validação.</small>
+                                <input id="sobrenomeForm" type="text" class="form-control" placeholder="Sobrenome" onblur="validaCampoTexto('sobrenomeForm', 'sobrenomeHelp', 'sobrenome')">
+                                <small id="sobrenomeHelp" class="form-text text-danger"></small>
                             </div>
                         </div>
                         <div class="form-row mt-2">
                             <div class="col-12">
                                 <label for="Nome">Email</label>
-                                <input type="email" class="form-control" placeholder="Email" value="${usuario.email}">
-                                <small id="emailHelp" class="form-text text-muted">Futura validação.</small>
+                                <input id="emailForm" type="email" class="form-control" placeholder="Email" onblur="validaCampoTexto('emailForm', 'emailHelp', 'email')">
+                                <small id="emailHelp" class="form-text text-danger"></small>
                             </div>                      
                         </div>
                         <div class="form-row mt-2">
                             <div class="col">
                                 <label for="Nome">Senha</label>
-                                <input type="password" class="form-control" placeholder="Senha" value="${usuario.senha}">
-                                <small id="senhaHelp" class="form-text text-muted">Futura validação.</small>
+                                <input id="senhaForm" type="password" class="form-control" placeholder="Senha" onblur="validaSenhas()">
+                                <small id="senhaHelp" class="form-text text-danger"></small>
                             </div>
                             <div class="col">
                                 <label for="Sobrenome">Confirmar senha</label>
-                                <input type="password" class="form-control" placeholder="Confirme a senha" value="${usuario.confirmacaoSenha}">
-                                <small id="confirmacaoSenhaHelp" class="form-text text-muted">Futura validação.</small>
+                                <input id="confirmacaoSenhaForm" type="password" class="form-control" placeholder="Confirme a senha" onblur="validaSenhas()">
+                                <small id="confirmacaoSenhaHelp" class="form-text text-danger"></small>
                             </div>
                         </div>
                     </form>
@@ -56,7 +56,7 @@
                             <i class="fas fa-angle-left"></i>
                             voltar
                         </button>        
-                        <button type="submit" class="btn btn-procurar" onclick="navegarParaPagina('entrar')">Cadastrar</button>
+                        <button type="submit" class="btn btn-procurar" onclick="validaForm('entrar')">Cadastrar</button>
                     </div>        
                 </div>
             </section>           

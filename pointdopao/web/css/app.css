@@ -10,6 +10,9 @@ a:hover {
 a:active {
     text-decoration: none
 }
+input:focus::placeholder {
+  color: transparent;
+}
 .navbar, .barra-botoes {
     justify-content: space-between !important;
 }
