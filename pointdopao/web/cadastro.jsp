@@ -56,7 +56,7 @@
                             <i class="fas fa-angle-left"></i>
                             voltar
                         </button>        
-                        <button type="submit" class="btn btn-procurar" onclick="validaForm('entrar')">Cadastrar</button>
+                        <button type="submit" class="btn btn-procurar" onclick="validaFormCadastro('entrar')">Cadastrar</button>
                     </div>        
                 </div>
             </section>           

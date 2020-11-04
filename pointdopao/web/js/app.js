@@ -32,7 +32,7 @@ function validaSenhas() {
         document.getElementById('confirmacaoSenhaHelp').innerHTML = "As senhas não são iguais.";
     }
 }
-function validaForm(urlDestino) {
+function validaFormCadastro(urlDestino) {
     if (document.getElementById('nomeHelp').style.display === "none" &&
         document.getElementById('sobrenomeHelp').style.display === "none" &&
         document.getElementById('emailHelp').style.display === "none" &&
