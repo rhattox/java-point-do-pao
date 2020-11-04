@@ -16,7 +16,7 @@
                     <img src="./assets/logo_pdp.jpg" width="351" height="59.4" class="d-inline-block align-top" alt="">
                 </a>
                 <div class="align-self-end">
-                    <a href="#" class="mr-2">Entrar</a>
+                    <a href="entrar" class="mr-2">Entrar</a>
                     <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('cadastrar')">Cadastrar</button>
                 </div>
             </nav>
