@@ -13,7 +13,7 @@
         <div class="container container-login-mt">
             <section class="d-flex">
                 <div class="img-container-login">
-                    <img class="img-size" src="./assets/logo_pdp1.jpg"/>
+                    <img class="img-size" src="./assets/logo_pdp1.jpg" onclick="navegarParaPagina('/pointdopao')"/>
                 </div>
             </section>
             <div>
@@ -30,16 +30,16 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="senhaLoginForm" placeholder="Senha">
+                            <input type="password" class="form-control" id="senhaLoginForm" placeholder="Senha">
                         </div>
                     </section>
                 </form>
                 
                 <div class="d-flex flex-row-reverse mx-auto mt-2 col-4">
-                    <span>Esqueci minha <a class="font-normal" href="#">senha</a>.</span>
+                    <span>Esqueci minha <a class="font-normal" href="redefinir">senha</a>.</span>
                 </div>
                 <div class="d-flex flex-row-reverse mx-auto mt-3 col-4">
-                    <button class="btn btn-procurar btn-block">
+                    <button type="submit" class="btn btn-procurar btn-block" onclick="validarLogin()">
                         Entrar
                     </button> 
                 </div>
@@ -47,7 +47,7 @@
                     <span>Ainda não é nosso cliente?</span> 
                 </div>
                 <div class="d-flex flex-row-reverse mx-auto mt-1 col-4">
-                    <span> Junte-se a <a class="font-normal" href="#">nós</a>.</span>
+                    <span> Junte-se a <a class="font-normal" href="cadastrar">nós</a>.</span>
                 </div>
             </div>
         </div>

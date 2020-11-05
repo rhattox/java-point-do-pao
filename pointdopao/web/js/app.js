@@ -48,3 +48,17 @@ function validaFormCadastro(urlDestino) {
     }
 }
 /*------------------------------*/
+
+/*Validação na tela de login*/
+function validarLogin() {
+    var email = document.getElementById('emailLoginForm').value;
+    var senha = document.getElementById('senhaLoginForm').value;
+    
+    if (email.length > 0 &&
+        (senha.length >= 6 && senha.length <= 10)) {
+        navegarParaPagina('/pointdopao');
+    } else {
+        window.alert("O email e/ou senha inválido(s).");
+    }
+}
+/*-----------------------------*/
