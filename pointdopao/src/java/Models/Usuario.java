@@ -1,6 +1,7 @@
 package Models;
 
 public class Usuario {
+
     private int id;
     private int tipo;
     private String nome;
@@ -8,8 +9,41 @@ public class Usuario {
     private String email;
     private String senha;
 
-    public Usuario( int tipo, String nome, String sobrenome, String email, String senha) {
+    public Usuario(int id, int tipo, String nome, String sobrenome, String email, String senha) {
+        this.id = id;
         this.tipo = tipo;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public Usuario(int tipo, String nome, String sobrenome, String email, String senha) {
+        this.tipo = tipo;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public Usuario(String nome, String sobrenome, String email, String senha) {
+
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public Usuario(int id, String nome, String sobrenome, String email) {
+        this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
@@ -59,5 +93,5 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-  
+
 }
