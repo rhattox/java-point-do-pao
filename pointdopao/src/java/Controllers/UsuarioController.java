@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UsuarioController extends HttpServlet {
 
     private UsuarioDao usuarioDao;
-
+    private static String ENTRAR = "/entrar.jsp";
     public UsuarioController() {
         super();
         usuarioDao = new UsuarioDao();
@@ -42,18 +42,9 @@ public class UsuarioController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UsuarioController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UsuarioController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        String forward = ENTRAR;
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,23 +61,23 @@ public class UsuarioController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
-        String forward = "";
-        String action = request.getParameter("action");
-
-        if (action.equalsIgnoreCase("adicionar")) {
-            forward = "/adicionar.jsp";
-        } else if (action.equalsIgnoreCase("editar")) {
-            forward = "/editar.jsp";
-            int id = Integer.parseInt(request.getParameter("id"));
-            Usuario usuario = usuarioDao.retornarIdUsuario(id);
-            request.setAttribute("usuario", usuario);
-        } else {
-            int id = Integer.parseInt(request.getParameter("id"));
-            usuarioDao.deletarUsuario(id);
-            forward = "/deletar.jsp";
-        }
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+//        String forward = "";
+//        String action = request.getParameter("action");
+//
+//        if (action.equalsIgnoreCase("adicionar")) {
+//            forward = "/adicionar.jsp";
+//        } else if (action.equalsIgnoreCase("editar")) {
+//            forward = "/editar.jsp";
+//            int id = Integer.parseInt(request.getParameter("id"));
+//            Usuario usuario = usuarioDao.retornarIdUsuario(id);
+//            request.setAttribute("usuario", usuario);
+//        } else {
+//            int id = Integer.parseInt(request.getParameter("id"));
+//            usuarioDao.deletarUsuario(id);
+//            forward = "/deletar.jsp";
+//        }
+//        RequestDispatcher view = request.getRequestDispatcher(forward);
+//        view.forward(request, response);
     }
 
     /**

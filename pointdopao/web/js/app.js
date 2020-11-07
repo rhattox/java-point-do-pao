@@ -32,19 +32,20 @@ function validaSenhas() {
         document.getElementById('confirmacaoSenhaHelp').innerHTML = "As senhas não são iguais.";
     }
 }
-function validaFormCadastro(urlDestino) {
+function validaFormCadastro() {
     if (document.getElementById('nomeHelp').style.display === "none" &&
         document.getElementById('sobrenomeHelp').style.display === "none" &&
         document.getElementById('emailHelp').style.display === "none" &&
         document.getElementById('senhaHelp').style.display === "none" &&
         document.getElementById('senhaHelp').style.display === "none") {
-        navegarParaPagina(urlDestino);
+        return true;
     } else {
         validaCampoTexto('nomeForm', 'nomeHelp', 'nome');
         validaCampoTexto('sobrenomeForm', 'sobrenomeHelp', 'sobrenome');
         validaCampoTexto('emailForm', 'emailHelp', 'email');
         validaSenhas();
         window.alert("O formulário contém campos inválidos!");
+        return false;
     }
 }
 /*------------------------------*/
@@ -56,9 +57,10 @@ function validarLogin() {
     
     if (email.length > 0 &&
         (senha.length >= 6 && senha.length <= 10)) {
-        navegarParaPagina('/pointdopao');
+        return true;
     } else {
         window.alert("O email e/ou senha inválido(s).");
+        return false;
     }
 }
 /*-----------------------------*/

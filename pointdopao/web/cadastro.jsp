@@ -19,7 +19,7 @@
 
                 <div class="ml-5">
                     <h1 class="mt-3 cor-padrao-txt">Junte-se a nós!</h1>
-                    <form class="mt-4" method="POST" action='UsuarioController' name="adicionarUsuario">
+                    <form class="mt-4" method="POST" action='usuario' name="adicionarUsuario" onsubmit="return validaFormCadastro()">
                         <div class="form-row">
                             <div class="col">
                                 <label for="Nome">Nome</label>
@@ -51,14 +51,14 @@
                                 <small id="confirmacaoSenhaHelp" class="form-text text-danger"></small>
                             </div>
                         </div>
-                    </form>
-                    <div class="d-flex justify-content-end mt-4">
-                        <button type="submit" class="btn btn-secondary mr-2" onclick="voltar()">
+                        <div class="d-flex justify-content-end mt-4">
+                        <button type="button" class="btn btn-secondary mr-2" onclick="voltar()">
                             <i class="fas fa-angle-left"></i>
                             voltar
                         </button>        
-                        <button type="submit" class="btn btn-procurar" onclick="validaFormCadastro('entrar')">Cadastrar</button>
-                    </div>        
+                        <button type="submit" class="btn btn-procurar">Cadastrar</button>
+                    </div> 
+                    </form>        
                 </div>
             </section>           
         </div>

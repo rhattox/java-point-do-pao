@@ -17,7 +17,7 @@
                 </div>
             </section>
             <div>
-                <form method="POST" action='UsuarioController' name="adicionarUsuario">          
+                <form method="POST" action='/pointdopao' onsubmit="return validarLogin()" name="adicionarUsuario">          
                     <section>
                         <div class="input-group col-4 mx-auto">
                             <div class="input-group-prepend">
@@ -33,16 +33,16 @@
                             <input type="password" class="form-control" id="senhaLoginForm" placeholder="Senha">
                         </div>
                     </section>
+                    <div class="d-flex flex-row-reverse mx-auto mt-2 col-4">
+                        <span>Esqueci minha <a class="font-normal" href="redefinir">senha</a>.</span>
+                    </div>
+                    <div class="d-flex flex-row-reverse mx-auto mt-3 col-4">
+                        <button type="submit" class="btn btn-procurar btn-block">
+                            Entrar
+                        </button> 
+                    </div>
                 </form>
-                
-                <div class="d-flex flex-row-reverse mx-auto mt-2 col-4">
-                    <span>Esqueci minha <a class="font-normal" href="redefinir">senha</a>.</span>
-                </div>
-                <div class="d-flex flex-row-reverse mx-auto mt-3 col-4">
-                    <button type="submit" class="btn btn-procurar btn-block" onclick="validarLogin()">
-                        Entrar
-                    </button> 
-                </div>
+
                 <div class="d-flex flex-row-reverse mx-auto mt-4 col-4">
                     <span>Ainda não é nosso cliente?</span> 
                 </div>
