@@ -19,7 +19,7 @@
 
                 <div class="ml-5">
                     <h1 class="mt-3 cor-padrao-txt">Junte-se a nós!</h1>
-                    <form class="mt-4" method="POST" action='usuario' name="adicionarUsuario" onsubmit="return validaFormCadastro()">
+                    <form class="mt-4" method="POST" action='cadastrar' name="adicionarUsuario" onsubmit="return validaFormCadastro()">
                         <div class="form-row">
                             <div class="col">
                                 <label for="Nome">Nome</label>

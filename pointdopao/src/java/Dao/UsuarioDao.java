@@ -70,6 +70,7 @@ public class UsuarioDao {
         }
     }
 
+    /*
     public Usuario selectUser(int id) {
         Usuario usuario = null;
         // Step 1: Establishing a Connection
@@ -151,7 +152,7 @@ public class UsuarioDao {
             rowUpdated = statement.executeUpdate() > 0;
         }
         return rowUpdated;
-    }
+    }*/
 
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {

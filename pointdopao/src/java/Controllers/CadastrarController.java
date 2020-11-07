@@ -1,6 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,15 +14,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ *
+ * @author bcovies
+ */
+@WebServlet(name = "CadastrarController", urlPatterns = {"/cadastrar"})
+public class CadastrarController extends HttpServlet {
 
-@WebServlet(name = "SigninController", urlPatterns = {"/entrar"})
-public class SigninController extends HttpServlet {
+    private static String CADASTRAR = "/cadastro.jsp";
+    private static String NOVOUSUARIO = "/entrar.jsp";
 
-    private static String ENTRAR = "/entrar.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String forward = ENTRAR;
+        String forward = CADASTRAR;
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
@@ -48,6 +58,10 @@ public class SigninController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        String forward = NOVOUSUARIO;
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
+
     }
 
     /**
