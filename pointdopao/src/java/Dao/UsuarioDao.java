@@ -26,7 +26,7 @@ public class UsuarioDao {
     private String jdbcPassword = "admin";
 
     private static final String INSERT_USERS_SQL = "INSERT INTO usuario (tipo, nome, sobrenome, email, senha) VALUES (?,?,?,?,?);";
-    private static final String SELECT_USER_BY_EMAIL = "select id, tipo, nome, sobrenome, email, senha from usuario where email = ?";
+    private static final String SELECT_USER_BY_EMAIL = "SELECT email, senha FROM usuario WHERE email = ? AND senha = ?";
 //    private static final String SELECT_ALL_USERS = "select * from usuario";
 //    private static final String DELETE_USERS_SQL = "delete from usuario where id = ?;";
 //    private static final String UPDATE_USERS_SQL = "update usuario set nome = ?,sobrenome= ?, email =? where id = ?;";
@@ -66,22 +66,31 @@ public class UsuarioDao {
         }
     }
 
-    public Usuario searchUser(String email) {
-        Usuario user = null;
-        // Step 1: Establishing a Connection
-        try (Connection connection = getConnection();
-                // Step 2:Create a statement using connection object
-                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_EMAIL);) {
-            preparedStatement.setString(1, email);
-            System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
-            ResultSet rs = preparedStatement.executeQuery();
+    public Boolean searchUser(String email, String senha) {
 
-            // Step 4: Process the ResultSet object.
-            
+        boolean autenticado = false;
+
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_EMAIL)) {
+
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, senha);
+
+            ResultSet rs;
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                String loginBanco = rs.getString("email");
+                String senhaBanco = rs.getString("senha");
+                autenticado = true;
+                System.out.println("RETORNO BOOL"+loginBanco + senhaBanco);
+            }
+
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.getMessage();
         }
-        return user;
+        return autenticado;
     }
 }

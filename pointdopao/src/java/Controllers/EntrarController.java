@@ -2,6 +2,7 @@ package Controllers;
 
 import Dao.UsuarioDao;
 import Models.Usuario;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -13,34 +14,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebServlet(name = "EntrarController", urlPatterns = {"/entrar"})
 public class EntrarController extends HttpServlet {
 
-    
     private static String POSTLOGIN = "/index.jsp";
+    private static String ERROR = "/entrar.jsp";
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         UsuarioDao usuarioDao = new UsuarioDao();
         Usuario usuario = new Usuario();
 
+        usuario.setEmail(request.getParameter("emailLoginForm"));
+        usuario.setSenha(request.getParameter("senhaLoginForm"));
+        System.out.println(request.getParameter("emailLoginForm") + request.getParameter("senhaLoginForm"));
         
-        usuario.setEmail(request.getParameter("emailForm"));
-        usuario.setSenha(request.getParameter("senhaForm"));
-        System.out.println( request.getParameter("emailForm") +  request.getParameter("senhaForm") );
-
         try {
-            usuarioDao.insertUser(usuario);
-            String forward = POSTLOGIN;
-            RequestDispatcher view = request.getRequestDispatcher(forward);
-            view.forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(CadastrarController.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
+            Boolean login = usuarioDao.searchUser(usuario.getEmail(), usuario.getSenha());
+            if (login) {
+                String forward = POSTLOGIN;
+                RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            } else {
+                String forward = ERROR;
+                RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 
     @Override
