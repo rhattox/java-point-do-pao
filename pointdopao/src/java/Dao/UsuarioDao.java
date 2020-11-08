@@ -26,10 +26,11 @@ public class UsuarioDao {
     private String jdbcPassword = "admin";
 
     private static final String INSERT_USERS_SQL = "INSERT INTO usuario (tipo, nome, sobrenome, email, senha) VALUES (?,?,?,?,?);";
-//    private static final String SELECT_USER_BY_ID = "select id, tipo, name, sobrenome, email, senha from usuario where id =?";
+    private static final String SELECT_USER_BY_EMAIL = "select id, tipo, nome, sobrenome, email, senha from usuario where email = ?";
 //    private static final String SELECT_ALL_USERS = "select * from usuario";
 //    private static final String DELETE_USERS_SQL = "delete from usuario where id = ?;";
 //    private static final String UPDATE_USERS_SQL = "update usuario set nome = ?,sobrenome= ?, email =? where id = ?;";
+
     protected Connection getConnection() {
         Connection connection = null;
         System.out.println(INSERT_USERS_SQL);
@@ -65,4 +66,22 @@ public class UsuarioDao {
         }
     }
 
+    public Usuario searchUser(String email) {
+        Usuario user = null;
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+                // Step 2:Create a statement using connection object
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_EMAIL);) {
+            preparedStatement.setString(1, email);
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return user;
+    }
 }

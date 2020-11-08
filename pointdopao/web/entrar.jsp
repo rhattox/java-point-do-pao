@@ -17,20 +17,20 @@
                 </div>
             </section>
             <div>
-                <form method="POST" action='/pointdopao' onsubmit="return validarLogin()" name="adicionarUsuario">          
+                <form method="POST" action='entrar' onsubmit="return validarLogin()" name="adicionarUsuario">          
                     <section>
                         <div class="input-group col-4 mx-auto">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">@</div>
                             </div>
-                            <input type="text" class="form-control" id="emailLoginForm" placeholder="Email">
+                            <input type="text" class="form-control" name="emailLoginForm" placeholder="Email">
                         </div>
 
                         <div class="input-group col-4 mx-auto mt-4">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" id="senhaLoginForm" placeholder="Senha">
+                            <input type="password" class="form-control" name="senhaLoginForm" placeholder="Senha">
                         </div>
                     </section>
                     <div class="d-flex flex-row-reverse mx-auto mt-2 col-4">
