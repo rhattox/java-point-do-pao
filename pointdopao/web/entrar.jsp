@@ -34,7 +34,7 @@
                         </div>
                     </section>
                     <div class="d-flex flex-row-reverse mx-auto mt-2 col-4">
-                        <span>Esqueci minha <a class="font-normal" href="redefinir">senha</a>.</span>
+                        <span>Esqueci minha <a class="font-normal" href="javascript:navegarParaPagina('acesso','redefinir');">senha</a>.</span>
                     </div>
                     <div class="d-flex flex-row-reverse mx-auto mt-3 col-4">
                         <button type="submit" class="btn btn-procurar btn-block">
@@ -47,7 +47,7 @@
                     <span>Ainda não é nosso cliente?</span> 
                 </div>
                 <div class="d-flex flex-row-reverse mx-auto mt-1 col-4">
-                    <span> Junte-se a <a class="font-normal" href="cadastrar">nós</a>.</span>
+                    <span> Junte-se a <a class="font-normal" href="javascript:navegarParaPagina('acesso','cadastrar');">nós</a>.</span>
                 </div>
             </div>
         </div>

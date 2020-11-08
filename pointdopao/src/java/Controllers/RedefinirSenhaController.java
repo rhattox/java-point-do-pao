@@ -1,5 +1,7 @@
 package Controllers;
 
+import Dao.UsuarioDao;
+import Models.Usuario;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,56 +10,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebServlet(name = "RedefinirSenhaController", urlPatterns = {"/redefinir"})
 public class RedefinirSenhaController extends HttpServlet {
+
     private static String REDEFINIR_SENHA = "/redefinir-senha.jsp";
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String forward = REDEFINIR_SENHA;
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
-    }
+    private static String POSTLOGIN = "/index.jsp";
+    private static String ERROR = "/redefinir-senha.jsp";
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        UsuarioDao usuarioDao = new UsuarioDao();
+        Usuario usuario = new Usuario();
+
+        usuario.setEmail(request.getParameter("emailResetForm"));
+        usuario.setSenha(request.getParameter("senhaResetForm"));
+        System.out.println(request.getParameter("emailResetForm") + request.getParameter("senhaResetForm"));
+
+        try {
+
+            Boolean reset = usuarioDao.changeUserPass(usuario.getEmail(), usuario.getSenha());
+            if (reset) {
+                String forward = POSTLOGIN;
+                RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            } else {
+                String forward = ERROR;
+                RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

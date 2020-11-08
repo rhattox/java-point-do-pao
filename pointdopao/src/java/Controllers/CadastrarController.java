@@ -40,7 +40,7 @@ public class CadastrarController extends HttpServlet {
         usuario.setSobrenome(request.getParameter("sobrenomeForm"));
         usuario.setEmail(request.getParameter("emailForm"));
         usuario.setSenha(request.getParameter("senhaForm"));
-//        System.out.println(request.getParameter("nomeForm") + request.getParameter("sobrenomeForm") +  request.getParameter("emailForm") +  request.getParameter("senhaForm") );
+       System.out.println(request.getParameter("nomeForm") + request.getParameter("sobrenomeForm") +  request.getParameter("emailForm") +  request.getParameter("senhaForm") );
 
         try {
             usuarioDao.insertUser(usuario);
