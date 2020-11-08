@@ -32,14 +32,16 @@ public class CadastrarController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("AQUI: " + request.getParameter("nomeForm"));
         UsuarioDao usuarioDao = new UsuarioDao();
         Usuario usuario = new Usuario();
 
         usuario.setTipo(1);
-        System.out.println("AQUI: " + usuario.getTipo());
-        
         usuario.setNome(request.getParameter("nomeForm"));
+        usuario.setSobrenome(request.getParameter("sobrenomeForm"));
+        usuario.setEmail(request.getParameter("emailForm"));
+        usuario.setSenha(request.getParameter("senhaForm"));
+//        System.out.println(request.getParameter("nomeForm") + request.getParameter("sobrenomeForm") +  request.getParameter("emailForm") +  request.getParameter("senhaForm") );
+
         try {
             usuarioDao.insertUser(usuario);
             String forward = NOVOUSUARIO;

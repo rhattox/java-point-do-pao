@@ -25,8 +25,7 @@ public class UsuarioDao {
     private String jdbcUsername = "admin";
     private String jdbcPassword = "admin";
 
-    private static final String INSERT_USERS_SQL = "INSERT INTO usuario (tipo, nome) VALUES (?, ?);";
-
+    private static final String INSERT_USERS_SQL = "INSERT INTO usuario (tipo, nome, sobrenome, email, senha) VALUES (?,?,?,?,?);";
 //    private static final String SELECT_USER_BY_ID = "select id, tipo, name, sobrenome, email, senha from usuario where id =?";
 //    private static final String SELECT_ALL_USERS = "select * from usuario";
 //    private static final String DELETE_USERS_SQL = "delete from usuario where id = ?;";
@@ -55,6 +54,10 @@ public class UsuarioDao {
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
             preparedStatement.setInt(1, user.getTipo());
             preparedStatement.setString(2, user.getNome());
+            preparedStatement.setString(3, user.getSobrenome());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(5, user.getSenha());
+
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
