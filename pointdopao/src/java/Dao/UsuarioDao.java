@@ -25,9 +25,13 @@ public class UsuarioDao {
     private String jdbcUsername = "admin";
     private String jdbcPassword = "admin";
 
-    private static final String INSERT_USERS_SQL = "INSERT INTO usuario (tipo, nome) VALUES (?, ?);";
+    private static final String INSERT_USERS_SQL = "INSERT INTO usuario (tipo, nome, sobrenome, email, senha) VALUES (?,?,?,?,?);";
 
-//    private static final String SELECT_USER_BY_ID = "select id, tipo, name, sobrenome, email, senha from usuario where id =?";
+    private static final String SELECT_USER_BY_EMAIL_PASS = "SELECT email, senha FROM usuario WHERE email = ? AND senha = ?";
+    private static final String SELECT_USER_BY_EMAIL = "SELECT email FROM usuario WHERE email = ?";
+
+    private static final String UPDATE_USER_PASS_BY_EMAIL = "UPDATE usuario SET senha = ? WHERE email = ?";
+
 //    private static final String SELECT_ALL_USERS = "select * from usuario";
 //    private static final String DELETE_USERS_SQL = "delete from usuario where id = ?;";
 //    private static final String UPDATE_USERS_SQL = "update usuario set nome = ?,sobrenome= ?, email =? where id = ?;";
@@ -47,7 +51,6 @@ public class UsuarioDao {
         return connection;
     }
 
-//    
     public void insertUser(Usuario user) throws SQLException {
         System.out.println(INSERT_USERS_SQL);
         // try-with-resource statement will auto close the connection.
@@ -55,6 +58,10 @@ public class UsuarioDao {
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
             preparedStatement.setInt(1, user.getTipo());
             preparedStatement.setString(2, user.getNome());
+            preparedStatement.setString(3, user.getSobrenome());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(5, user.getSenha());
+
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -62,4 +69,73 @@ public class UsuarioDao {
         }
     }
 
+    public Boolean searchUser(String email, String senha) {
+        System.out.println(SELECT_USER_BY_EMAIL_PASS);
+        boolean autenticado = false;
+
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_EMAIL_PASS)) {
+
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, senha);
+
+            ResultSet rs;
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                String loginBanco = rs.getString("email");
+                String senhaBanco = rs.getString("senha");
+                autenticado = true;
+                System.out.println("RETORNO BOOL: " + loginBanco + senhaBanco);
+            }
+
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return autenticado;
+    }
+
+    public boolean changeUserPass(String email, String senha) {
+
+        boolean autenticado = false;
+
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_EMAIL)) {
+            preparedStatement.setString(1, email);
+
+            ResultSet rs;
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                String loginBanco = rs.getString("email");
+                int row = rs.getRow();
+
+                if (row == 1) {
+                    try (PreparedStatement preparePostCheck = connection.prepareStatement(UPDATE_USER_PASS_BY_EMAIL)) {
+
+                        preparePostCheck.setString(2, email);
+                        preparePostCheck.setString(1, senha);
+                        System.out.println(preparePostCheck);
+                        preparePostCheck.executeUpdate();
+                        autenticado = true;
+                    }
+
+                } else {
+                    autenticado = false;
+                    System.out.println("EMAIL NÃO ENCONTRADO!!");
+                }
+
+            }
+
+        } catch (Exception e) {
+
+            e.getMessage();
+        }
+        return autenticado;
+    }
+    
+    
+    
 }
