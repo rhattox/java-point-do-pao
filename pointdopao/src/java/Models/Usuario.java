@@ -9,6 +9,9 @@ public class Usuario {
     private String email;
     private String senha;
 
+    public Usuario() {
+    }
+
     public Usuario(int id, int tipo, String nome, String sobrenome, String email, String senha) {
         this.id = id;
         this.tipo = tipo;
@@ -24,34 +27,6 @@ public class Usuario {
 
     public String getSenha() {
         return senha;
-    }
-
-    public Usuario(int tipo, String nome, String sobrenome, String email, String senha) {
-        this.tipo = tipo;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
-        this.senha = senha;
-    }
-
-    public Usuario(String nome, String sobrenome, String email, String senha) {
-
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
-        this.senha = senha;
-    }
-
-    public Usuario(int id, String nome, String sobrenome, String email) {
-        this.id = id;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
-        this.senha = senha;
-    }
-
-    public Usuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getTipo() {

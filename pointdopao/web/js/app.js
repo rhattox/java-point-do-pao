@@ -1,5 +1,6 @@
-function navegarParaPagina(page) {
-    window.location = page;
+function navegarParaPagina(page, pr) {
+    window.location = `${page}?pr=${pr}`;
+
 }
 
 function voltar() {
@@ -34,10 +35,10 @@ function validaSenhas() {
 }
 function validaFormCadastro() {
     if (document.getElementById('nomeHelp').style.display === "none" &&
-        document.getElementById('sobrenomeHelp').style.display === "none" &&
-        document.getElementById('emailHelp').style.display === "none" &&
-        document.getElementById('senhaHelp').style.display === "none" &&
-        document.getElementById('senhaHelp').style.display === "none") {
+            document.getElementById('sobrenomeHelp').style.display === "none" &&
+            document.getElementById('emailHelp').style.display === "none" &&
+            document.getElementById('senhaHelp').style.display === "none" &&
+            document.getElementById('senhaHelp').style.display === "none") {
         return true;
     } else {
         validaCampoTexto('nomeForm', 'nomeHelp', 'nome');
@@ -54,9 +55,9 @@ function validaFormCadastro() {
 function validarLogin() {
     var email = document.getElementById('emailLoginForm').value;
     var senha = document.getElementById('senhaLoginForm').value;
-    
+
     if (email.length > 0 &&
-        (senha.length >= 6 && senha.length <= 10)) {
+            (senha.length >= 6 && senha.length <= 10)) {
         return true;
     } else {
         window.alert("O email e/ou senha inválido(s).");
