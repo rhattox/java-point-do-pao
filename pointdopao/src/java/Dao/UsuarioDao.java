@@ -58,7 +58,7 @@ public class UsuarioDao {
 
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
             preparedStatement.setInt(1, user.getTipo());
             preparedStatement.setString(2, user.getNome());
             preparedStatement.setString(3, user.getSobrenome());
@@ -134,22 +134,19 @@ public class UsuarioDao {
         }
         return autenticado;
     }
-<<<<<<< HEAD
 
-=======
-    
     public String searchUsernameByEmail(String email) {
         System.out.println(SELECT_NAME_BY_EMAIL);
         String nome = "";
-        
+
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_NAME_BY_EMAIL)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_NAME_BY_EMAIL)) {
 
             preparedStatement.setString(1, email);
 
             ResultSet rs;
             rs = preparedStatement.executeQuery();
-            
+
             if (rs.next()) {
                 nome = rs.getString("nome");
             }
@@ -162,7 +159,5 @@ public class UsuarioDao {
         }
         return nome;
     }
-    
-    
->>>>>>> 92e0f7eefa64eac70af92326bb2b1e7232e6f0f4
+
 }
