@@ -15,7 +15,12 @@
                 <a class="navbar-brand" href="#">
                     <img src="./assets/logo_pdp.jpg" width="351" height="59.4" class="d-inline-block align-top" alt="">
                 </a>
-                <div class="align-self-end">
+                <div id="statusUsuarioLogado" class="align-self-end">
+                    <i class="fas fa-user-circle fa-lg"></i>
+                    <span>Bem vindo, ${sessionScope['nome']}.</span>
+                    <span class="mr-3">Deseja sair? <a class="font-normal" href="#">sign out</a>.</span>
+                </div>
+                    <div id="statusUsuarioDeslogado" class="align-self-end">
                     <a href="javascript:navegarParaPagina('acesso','entrar');"  class="mr-2">Entrar</a>
                     <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('acesso','cadastrar')">Cadastrar</button>
                 </div>

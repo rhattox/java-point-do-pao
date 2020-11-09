@@ -19,28 +19,36 @@
                     <h1 class="mt-3 cor-padrao-txt">Troque sua senha!</h1>
                     <form class="mt-4" method="POST" action='redefinir' name="redefinirSenha" onsubmit="return validaFormCadastro()">
                         <div class="form-row">
-                            <div class="form-row mt-2">
-                                <div class="col-12">
-                                    <label for="Nome">Email</label>
-                                    <input name="emailResetForm" type="email" class="form-control" placeholder="Email" onblur="validaCampoTexto('emailForm', 'emailHelp', 'email')">
-                                    <small id="emailHelp" class="form-text text-danger"></small>
-                                </div>                      
-                            </div>
-                            <div class="form-row mt-2">
-                                <div class="col-12">
-                                    <label for="Nome">Senha</label>
-                                    <input name="senhaResetForm" type="password" class="form-control" placeholder="Nova Senha" onblur="validaCampoTexto('emailForm', 'emailHelp', 'email')">
-                                    <small id="emailHelp" class="form-text text-danger"></small>
-                                </div>                      
-                            </div>
 
-                            <div class="d-flex justify-content-end mt-4">
-                                <button type="button" class="btn btn-secondary mr-2" onclick="voltar()">
-                                    <i class="fas fa-angle-left"></i>
-                                    voltar
-                                </button>        
-                                <button type="submit" class="btn btn-procurar">Redefinir</button>
-                            </div> 
+                            <div class="col-12">
+                                <label for="Email">Email</label>
+                                <input id="emailResetForm" name="emailResetForm" type="email" class="form-control" placeholder="Email" onblur="validaCampoTexto('emailResetForm', 'emailHelpReset', 'email')">
+                                <small id="emailHelpReset" class="form-text text-danger"></small>
+                            </div>                      
+
+                        </div>
+                        <div class="form-row mt-2">
+                            <div class="col-12">
+                                <label for="NovaSenha">Nova Senha</label>
+                                <input id="novaSenhaResetForm" name="senhaResetForm" type="password" class="form-control" placeholder="Nova Senha" onblur="validaSenhasRedefinicao()">
+                                <small id="novaSenhaHelpReset" class="form-text text-danger"></small>
+                            </div>                      
+                        </div>
+                        <div class="form-row mt-2">
+                            <div class="col-12">
+                                <label for="ConfirmacaoNovaSenha">Confirmar Nova Senha</label>
+                                <input id="confirmacaoNovaSenhaResetForm" name="confirmacaoNovaSenhaResetForm" type="password" class="form-control" placeholder="Confirmar Nova Senha" onblur="validaSenhasRedefinicao()">
+                                <small id="confirmacaoNovaSenhaHelpReset" class="form-text text-danger"></small>
+                            </div>                      
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-4">
+                            <button type="button" class="btn btn-secondary mr-2" onclick="voltar()">
+                                <i class="fas fa-angle-left"></i>
+                                voltar
+                            </button>        
+                            <button type="submit" class="btn btn-procurar">Redefinir</button>
+                        </div> 
                     </form>        
                 </div>
             </section>           
