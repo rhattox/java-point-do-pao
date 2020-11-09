@@ -3,17 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/bcovies/Documents/NetBeansProjects/pointdopao/pointdopao/src/java/Controllers/AcessoController.java</file>
-            <file>file:/C:/Users/bcovies/Documents/NetBeansProjects/pointdopao/pointdopao/src/java/Controllers/CadastrarController.java</file>
-=======
-            <file>file:/F:/Git/pointdopao/pointdopao/web/index.jsp</file>
-            <file>file:/F:/Git/pointdopao/pointdopao/web/entrar.jsp</file>
-            <file>file:/F:/Git/pointdopao/pointdopao/src/java/Dao/UsuarioDao.java</file>
-            <file>file:/F:/Git/pointdopao/pointdopao/src/java/Controllers/CadastrarController.java</file>
-            <file>file:/F:/Git/pointdopao/pointdopao/web/cadastro.jsp</file>
-            <file>file:/F:/Git/pointdopao/pointdopao/web/js/app.js</file>
->>>>>>> 92e0f7eefa64eac70af92326bb2b1e7232e6f0f4
+            <file>file:/C:/Users/henio/OneDrive/Documentos/NetBeansProjects/pointdopao/pointdopao/web/index.jsp</file>
+            <file>file:/C:/Users/henio/OneDrive/Documentos/NetBeansProjects/pointdopao/pointdopao/web/entrar.jsp</file>
+            <file>file:/C:/Users/henio/OneDrive/Documentos/NetBeansProjects/pointdopao/pointdopao/web/css/app.css</file>
+            <file>file:/C:/Users/henio/OneDrive/Documentos/NetBeansProjects/pointdopao/pointdopao/web/cadastro.jsp</file>
         </group>
     </open-files>
 </project-private>

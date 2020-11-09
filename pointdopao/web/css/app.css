@@ -98,3 +98,7 @@ input:focus::placeholder {
 .esqueci-senha-pl {
     padding-left: 17%;
 }
+
+.card{
+    width: 15rem;
+}
