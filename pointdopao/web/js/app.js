@@ -1,6 +1,5 @@
 function navegarParaPagina(page, pr) {
     window.location = `${page}?pr=${pr}`;
-
 }
 
 function voltar() {

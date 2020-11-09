@@ -29,7 +29,7 @@ public class UsuarioDao {
 
     private static final String SELECT_USER_BY_EMAIL_PASS = "SELECT email, senha FROM usuario WHERE email = ? AND senha = ?";
     private static final String SELECT_USER_BY_EMAIL = "SELECT email FROM usuario WHERE email = ?";
-
+    private static final String SELECT_NAME_BY_EMAIL = "SELECT nome FROM usuario WHERE email = ?";
     private static final String UPDATE_USER_PASS_BY_EMAIL = "UPDATE usuario SET senha = ? WHERE email = ?";
 
 //    private static final String SELECT_ALL_USERS = "select * from usuario";
@@ -136,6 +136,30 @@ public class UsuarioDao {
         return autenticado;
     }
     
+    public String searchUsernameByEmail(String email) {
+        System.out.println(SELECT_NAME_BY_EMAIL);
+        String nome = "";
+        
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_NAME_BY_EMAIL)) {
+
+            preparedStatement.setString(1, email);
+
+            ResultSet rs;
+            rs = preparedStatement.executeQuery();
+            
+            if (rs.next()) {
+                nome = rs.getString("nome");
+            }
+
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+            return nome;
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+        return nome;
+    }
     
     
 }
