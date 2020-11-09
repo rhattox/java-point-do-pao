@@ -33,6 +33,24 @@ function validaSenhas() {
         document.getElementById('confirmacaoSenhaHelp').innerHTML = "As senhas não são iguais.";
     }
 }
+
+function validaSenhasRedefinicao() {
+    var senha = document.getElementById('novaSenhaResetForm').value;
+    var confirmacaoSenha = document.getElementById('confirmacaoNovaSenhaResetForm').value;
+    if (senha.length >= 6 && senha.length <= 10) {
+        document.getElementById('novaSenhaHelpReset').style.display = "none";
+    } else {
+        document.getElementById('novaSenhaHelpReset').style.display = "block";
+        document.getElementById('novaSenhaHelpReset').innerHTML = "A senha deve conter de 6-10 dígitos.";
+    }
+    if (confirmacaoSenha === senha) {
+        document.getElementById('confirmacaoNovaSenhaHelpReset').style.display = "none";
+    } else {
+        document.getElementById('confirmacaoNovaSenhaHelpReset').style.display = "block";
+        document.getElementById('confirmacaoNovaSenhaHelpReset').innerHTML = "As senhas não são iguais.";
+    }
+}
+
 function validaFormCadastro() {
     if (document.getElementById('nomeHelp').style.display === "none" &&
             document.getElementById('sobrenomeHelp').style.display === "none" &&
