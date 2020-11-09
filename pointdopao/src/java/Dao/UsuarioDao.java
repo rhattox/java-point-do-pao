@@ -36,11 +36,13 @@ public class UsuarioDao {
 //    private static final String DELETE_USERS_SQL = "delete from usuario where id = ?;";
 //    private static final String UPDATE_USERS_SQL = "update usuario set nome = ?,sobrenome= ?, email =? where id = ?;";
     protected Connection getConnection() {
+
         Connection connection = null;
-        System.out.println(INSERT_USERS_SQL);
+
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -48,11 +50,12 @@ public class UsuarioDao {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        System.out.println("\nUSUARIODAO:\nIniciada a conexão com o banco de dados:\t" + connection);
         return connection;
     }
 
     public void insertUser(Usuario user) throws SQLException {
-        System.out.println(INSERT_USERS_SQL);
+
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
@@ -62,15 +65,15 @@ public class UsuarioDao {
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getSenha());
 
-            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
+            System.out.println("\nUSUARIODAO:\n" + preparedStatement);
         } catch (Exception e) {
             e.getMessage();
         }
     }
 
     public Boolean searchUser(String email, String senha) {
-        System.out.println(SELECT_USER_BY_EMAIL_PASS);
+
         boolean autenticado = false;
 
         try (Connection connection = getConnection();
@@ -86,11 +89,9 @@ public class UsuarioDao {
                 String loginBanco = rs.getString("email");
                 String senhaBanco = rs.getString("senha");
                 autenticado = true;
-                System.out.println("RETORNO BOOL: " + loginBanco + senhaBanco);
             }
-
-            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
+            System.out.println("\nUSUARIODAO:\n" + preparedStatement);
         } catch (Exception e) {
             e.getMessage();
         }
@@ -98,7 +99,6 @@ public class UsuarioDao {
     }
 
     public boolean changeUserPass(String email, String senha) {
-
         boolean autenticado = false;
 
         try (Connection connection = getConnection();
@@ -107,7 +107,7 @@ public class UsuarioDao {
 
             ResultSet rs;
             rs = preparedStatement.executeQuery();
-
+            System.out.println("\nUSUARIODAO:\n" + preparedStatement);
             if (rs.next()) {
                 String loginBanco = rs.getString("email");
                 int row = rs.getRow();
@@ -119,23 +119,20 @@ public class UsuarioDao {
                         preparePostCheck.setString(1, senha);
                         System.out.println(preparePostCheck);
                         preparePostCheck.executeUpdate();
+                        System.out.println("\nUSUARIODAO:\n" + preparePostCheck);
                         autenticado = true;
                     }
-
                 } else {
                     autenticado = false;
-                    System.out.println("EMAIL NÃO ENCONTRADO!!");
+
                 }
 
             }
-
         } catch (Exception e) {
 
             e.getMessage();
         }
         return autenticado;
     }
-    
-    
-    
+
 }

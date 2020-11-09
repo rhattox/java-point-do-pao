@@ -25,15 +25,19 @@ public class AcessoController extends HttpServlet {
 
         switch (action) {
             case "cadastrar":
+                System.out.println("Passando para Cadastro!");
                 forward = CADASTRAR;
                 break;
             case "entrar":
+                System.out.println("Passando para Entrar!");
                 forward = ENTRAR;
                 break;
             case "redefinir":
+                System.out.println("Passando para Redefinir!");
                 forward = REDEFINIR_SENHA;
                 break;
             default:
+                System.out.println("Passando para Index!");
                 forward = INDEX;
                 break;
         }
