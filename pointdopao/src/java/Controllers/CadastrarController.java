@@ -8,7 +8,6 @@ package Controllers;
 import Dao.UsuarioDao;
 import Models.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +43,9 @@ public class CadastrarController extends HttpServlet {
 
         try {
             usuarioDao.insertUser(usuario);
+            boolean success = true;
+            request.setAttribute("success", success);
+            
             String forward = NOVOUSUARIO;
             RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);

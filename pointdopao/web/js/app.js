@@ -65,3 +65,8 @@ function validarLogin() {
     }
 }
 /*-----------------------------*/
+function alertLoginSuccess(variable) {
+    if (variable===true) {
+        alert('Usuário cadastrado com sucesso!');
+    }
+}
