@@ -16,6 +16,7 @@ public class AcessoController extends HttpServlet {
     private static String ENTRAR = "/entrar.jsp";
     private static String REDEFINIR_SENHA = "/redefinir-senha.jsp";
     private static String INDEX = "/index.jsp";
+    private static String SAIR = "/sair";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,6 +36,10 @@ public class AcessoController extends HttpServlet {
             case "redefinir":
                 System.out.println("Passando para Redefinir!");
                 forward = REDEFINIR_SENHA;
+                break;
+            case "sair":
+                System.out.println("Passando para Sair!");
+                forward = SAIR;
                 break;
             default:
                 System.out.println("Passando para Index!");

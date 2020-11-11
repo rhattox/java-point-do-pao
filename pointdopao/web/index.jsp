@@ -19,7 +19,7 @@
                     <i class="fas fa-user-circle fa-lg"></i>
                     <span>Bem vindo, ${SessionEmail}.</span>
 
-                    <span class="mr-3">Deseja sair? <a class="font-normal" href="#">sign out</a>.</span>
+                    <span class="mr-3">Deseja sair? <a class="font-normal" href="javascript:navegarParaPagina('acesso','sair');">sign out</a>.</span>
                 </div>
                 <div id="statusUsuarioDeslogado" class="align-self-end">
                     <a href="javascript:navegarParaPagina('acesso','entrar');"  class="mr-2">Entrar</a>
