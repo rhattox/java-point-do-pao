@@ -46,6 +46,7 @@ public class EntrarController extends HttpServlet {
                 String SessionNome = usuarioDao.searchUsernameByEmail(usuario.getEmail());
                 String forward = "";
                 if (ehAdm(emailLoginForm, senhaLoginForm)) {
+                    session.setAttribute("SessionNome", SessionNome);
                     ProdutoDao produtoDao = new ProdutoDao();
                     List<Produto> listaProdutos = produtoDao.getAllProducts();
                     request.setAttribute("listaProdutos", listaProdutos); // Will be available as ${products} in JSP

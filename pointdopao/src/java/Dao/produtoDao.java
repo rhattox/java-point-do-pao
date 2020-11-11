@@ -67,18 +67,21 @@ public class ProdutoDao {
         List<Produto> listaProduto = new ArrayList<Produto>();
         try (Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(GET_PRODUTOS_SQL)) {
-            ResultSet rs = preparedStatement.executeQuery();
+            ResultSet rs;
+            rs = preparedStatement.executeQuery();
             
             while (rs.next()) {
                 Produto produto = new Produto();
                 produto.setId(rs.getInt("id"));
-                produto.setNome(rs.getString("name"));
+                produto.setNome(rs.getString("nome"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setPreco(rs.getFloat("preco"));
                 listaProduto.add(produto);
             }
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
             
         } catch (Exception e) {
             e.getMessage();

@@ -138,7 +138,7 @@ public class UsuarioDao {
     public String searchUsernameByEmail(String email) {
         String nome = null;
         try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_NAME_BY_EMAIL)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_NAME_BY_EMAIL)) {
             preparedStatement.setString(1, email);
             ResultSet rs;
             rs = preparedStatement.executeQuery();
