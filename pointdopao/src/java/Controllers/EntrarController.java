@@ -28,23 +28,20 @@ public class EntrarController extends HttpServlet {
         usuario.setEmail(request.getParameter("emailLoginForm"));
         usuario.setSenha(request.getParameter("senhaLoginForm"));
         System.out.println("\nENTRARCONROLLER:\nEmail: " + request.getParameter("emailLoginForm") + "\t Senha: " + request.getParameter("senhaLoginForm"));
-        /*
-        String emailLoginForm = request.getParameter("emailLoginForm");
-        String senhaLoginForm = request.getParameter("senhaLoginForm");
 
-        usuario.setEmail(emailLoginForm);
-        usuario.setSenha(senhaLoginForm);
-        System.out.println(request.getParameter("emailLoginForm") + request.getParameter("senhaLoginForm"));
-         */
         try {
 
             Boolean login = usuarioDao.searchUser(usuario.getEmail(), usuario.getSenha());
             if (login) {
-
+                HttpSession session = request.getSession();
+                String SessionEmail = usuario.getEmail();
+                session.setAttribute("SessionEmail", SessionEmail);
+                System.out.println("Email de sessão: "+SessionEmail);
                 System.out.println("\nENTRARCONROLLER:\nA query retornou verdadeira, você está logado!");
                 String forward = POSTLOGIN;
                 RequestDispatcher view = request.getRequestDispatcher(forward);
                 view.forward(request, response);
+
             } else {
                 System.out.println("\nENTRARCONROLLER:\nA query retornou falsa, você NÃO está logado!");
                 String forward = ERROR;

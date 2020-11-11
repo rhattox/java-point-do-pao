@@ -17,12 +17,13 @@
                 </a>
                 <div id="statusUsuarioLogado" class="align-self-end">
                     <i class="fas fa-user-circle fa-lg"></i>
-                    <span>Bem vindo, ${sessionScope['nome']}.</span>
+                    <span>Bem vindo, ${SessionEmail}.</span>
+
                     <span class="mr-3">Deseja sair? <a class="font-normal" href="#">sign out</a>.</span>
                 </div>
-                    <div id="statusUsuarioDeslogado" class="align-self-end">
+                <div id="statusUsuarioDeslogado" class="align-self-end">
                     <a href="javascript:navegarParaPagina('acesso','entrar');"  class="mr-2">Entrar</a>
-                    <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('acesso','cadastrar')">Cadastrar</button>
+                    <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('acesso', 'cadastrar')">Cadastrar</button>
                 </div>
             </nav>
             <hr class="mb-0" style="border-top: 2px solid #b34c1b;">
