@@ -16,7 +16,7 @@ a:active {
 }
 
 input:focus::placeholder {
-  color: transparent;
+    color: transparent;
 }
 
 .navbar, .barra-botoes {
@@ -25,6 +25,11 @@ input:focus::placeholder {
 
 .cor-padrao-txt {
     color: #b34c1b;
+}
+
+.cor-tabela-header {
+    background-color: #b34c1b;
+    color: white;
 }
 
 .btn-procurar {

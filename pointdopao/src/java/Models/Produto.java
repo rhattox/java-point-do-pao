@@ -6,7 +6,9 @@ public class Produto {
     private String descricao;
     private float preco;
     private int quantidade;
-
+    
+    public Produto(){}
+    
     public Produto(String nome, String descricao, float preco, int quantidade) {
         this.nome = nome;
         this.descricao = descricao;
@@ -33,7 +35,11 @@ public class Produto {
     public int getQuantidade() {
         return quantidade;
     }
-
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public void setNome(String nome) {
         this.nome = nome;
     }
