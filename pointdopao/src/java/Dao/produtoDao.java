@@ -25,11 +25,10 @@ public class ProdutoDao {
     private final String jdbcUsername = "admin";
     private final String jdbcPassword = "admin";
 
-    private static final String INSERT_PRODUTO_SQL = "INSERT INTO produto (nome, preco, descricao, quantidade) VALUES (?,?,?,?,?);";
     private static final String GET_PRODUTOS_SQL = "SELECT * FROM produto";
+    private static final String INSERT_PRODUTO_SQL = "INSERT INTO produto (nome, preco, descricao, quantidade) VALUES (?,?,?,?,?);";
     private static final String SELECT_PRODUTO_BY_NOME = "SELECT nome FROM produto WHERE nome = ?";
-
-    private static final String UPDATE_PRODUTO_PASS_BY_NOME = "UPDATE produto SET quantidade = ? WHERE nome = ?";
+    private static final String UPDATE_PRODUTO_QUANTIDADE_BY_NOME = "UPDATE produto SET quantidade = ? WHERE nome = ?";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -60,72 +59,6 @@ public class ProdutoDao {
         } catch (Exception e) {
             e.getMessage();
         }
-    }
-
-    public Boolean searchUser(String nome) {
-        System.out.println(SELECT_PRODUTO_BY_NOME);
-        boolean autenticado = false;
-
-        try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUTO_BY_NOME)) {
-
-            preparedStatement.setString(1, nome);
-
-            ResultSet rs;
-            rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                String nomeBanco = rs.getString("nome");
-
-                autenticado = true;
-                System.out.println("RETORNO BOOL: " + nomeBanco);
-            }
-
-            System.out.println(preparedStatement);
-            preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        return autenticado;
-    }
-
-    public boolean changeUserPass(int quantidade, String nome) {
-
-        boolean autenticado = false;
-
-        try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUTO_PASS_BY_NOME)) {
-            preparedStatement.setString(1, nome);
-
-            ResultSet rs;
-            rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                String nomeBanco = rs.getString("nome");
-                int row = rs.getRow();
-
-                if (row == 1) {
-                    try (PreparedStatement preparePostCheck = connection.prepareStatement(UPDATE_PRODUTO_PASS_BY_NOME)) {
-
-                        preparePostCheck.setString(2, nome);
-                        preparePostCheck.setInt(1, quantidade);
-                        System.out.println(preparePostCheck);
-                        preparePostCheck.executeUpdate();
-                        autenticado = true;
-                    }
-
-                } else {
-                    autenticado = false;
-                    System.out.println("NOME NÃO ENCONTRADO!!");
-                }
-
-            }
-
-        } catch (Exception e) {
-
-            e.getMessage();
-        }
-        return autenticado;
     }
 
     public List<Produto> getAllProducts() {

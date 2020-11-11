@@ -41,6 +41,7 @@ public class EntrarController extends HttpServlet {
         try {
             Boolean login = usuarioDao.searchUser(usuario.getEmail(), usuario.getSenha());
             if (login) {
+
                 HttpSession session = request.getSession();
                 String SessionNome = usuarioDao.searchUsernameByEmail(usuario.getEmail());
                 String forward = "";
