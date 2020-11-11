@@ -33,11 +33,13 @@ public class EntrarController extends HttpServlet {
 
             Boolean login = usuarioDao.searchUser(usuario.getEmail(), usuario.getSenha());
             if (login) {
-                
+
                 HttpSession session = request.getSession();
-                String SessionNome = usuarioDao.searchUsernameByEmail(usuario.getEmail());
-                session.setAttribute("SessionNome", SessionNome);
-                System.out.println("Email de sessão: "+SessionNome);
+                System.out.println("\nEmail de sessão: " + usuario.getEmail());
+                usuario.setNome(usuarioDao.searchUsernameByEmail(usuario.getEmail()));
+                String SessionNome = usuario.getNome();
+                session.setAttribute("\nSessionNome", SessionNome);
+                System.out.println("\nNome de sessão: " + SessionNome);
                 System.out.println("\nENTRARCONROLLER:\nA query retornou verdadeira, você está logado!");
                 String forward = POSTLOGIN;
                 RequestDispatcher view = request.getRequestDispatcher(forward);

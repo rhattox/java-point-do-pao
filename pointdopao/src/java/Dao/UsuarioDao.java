@@ -136,26 +136,23 @@ public class UsuarioDao {
     }
 
     public String searchUsernameByEmail(String email) {
-        String nome = "";
+        String nome = null;
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_NAME_BY_EMAIL)) {
-
             preparedStatement.setString(1, email);
-
             ResultSet rs;
             rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
                 nome = rs.getString("nome");
             }
-            System.out.println("\nUSUARIODAO:\n" + preparedStatement);
             preparedStatement.executeUpdate();
-            System.out.println("\n\n NOME = " + nome);
-            return nome;
 
+            return nome;
         } catch (Exception e) {
             System.out.println("\n\nErro em searchUsernameByEmail : " + e.getMessage());
         }
+        System.out.println("\nNOME searchUsernameByEmail: " + nome);
         return nome;
     }
 
