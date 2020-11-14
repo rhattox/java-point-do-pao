@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SairController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String INDEX = "/index.jsp";
+    private static String INDEX = "/pointdopao";
 
     public SairController() {
         super();
@@ -32,11 +33,14 @@ public class SairController extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
 
         // Invalida sessão e redireciona para login
+        HttpSession session = request.getSession();
+        session.setAttribute("autenticado", false);
+   
         request.getSession().invalidate();
         System.out.println("SAIRCONTROLLER: Invalidando Sessão!!");
+        
         String forward = INDEX;
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+        response.sendRedirect(forward);
     }
 
     protected void doPost(HttpServletRequest request,

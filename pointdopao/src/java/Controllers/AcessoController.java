@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "AcessoController", urlPatterns = {"/acesso"})
 public class AcessoController extends HttpServlet {
@@ -23,7 +24,15 @@ public class AcessoController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String forward = "";
         String action = request.getParameter("pr");
-
+        HttpSession session = request.getSession();
+        if (action == null) {
+            
+            session.setAttribute("autenticado", false);
+            action = "";
+        } else {
+            session.setAttribute("autenticado", true);
+        }
+        
         switch (action) {
             case "cadastrar":
                 System.out.println("Passando para Cadastro!");

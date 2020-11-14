@@ -4,6 +4,7 @@ import Dao.ProdutoDao;
 import Dao.UsuarioDao;
 import Models.Produto;
 import Models.Usuario;
+import Utils.StringUtils;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "EntrarController", urlPatterns = {"/entrar"})
 public class EntrarController extends HttpServlet {
-
+    
     private static String ADM_LOGIN = "ADM";
     private static String ADM_SENHA = "Pointdopao";
 
@@ -32,7 +33,7 @@ public class EntrarController extends HttpServlet {
         UsuarioDao usuarioDao = new UsuarioDao();
         Usuario usuario = new Usuario();
 
-        String emailLoginForm = request.getParameter("emailLoginForm");
+        String emailLoginForm = request.getParameter("emailLoginForm").toUpperCase();
         String senhaLoginForm = request.getParameter("senhaLoginForm");
         usuario.setEmail(emailLoginForm);
         usuario.setSenha(senhaLoginForm);
@@ -40,20 +41,21 @@ public class EntrarController extends HttpServlet {
 
         try {
             Boolean login = usuarioDao.searchUser(usuario.getEmail(), usuario.getSenha());
+            HttpSession session = request.getSession();
             if (login) {
-
-                HttpSession session = request.getSession();
                 String SessionNome = usuarioDao.searchUsernameByEmail(usuario.getEmail());
                 String forward = "";
                 if (ehAdm(emailLoginForm, senhaLoginForm)) {
-                    session.setAttribute("SessionNome", SessionNome);
+                    session.setAttribute("SessionNome", StringUtils.capitalize(SessionNome));
+                    session.setAttribute("autenticado", true);
                     ProdutoDao produtoDao = new ProdutoDao();
                     List<Produto> listaProdutos = produtoDao.getAllProducts();
                     request.setAttribute("listaProdutos", listaProdutos); // Will be available as ${products} in JSP
                     forward = GESTAO_ADM;
                     
                 } else {
-                    session.setAttribute("SessionNome", SessionNome);
+                    session.setAttribute("SessionNome", StringUtils.capitalize(SessionNome));
+                    session.setAttribute("autenticado", true);
                     //System.out.println("Email de sessão: " + SessionNome);
                     //System.out.println("\nENTRARCONROLLER:\nA query retornou verdadeira, você está logado!");
                     forward = POSTLOGIN;
@@ -63,6 +65,7 @@ public class EntrarController extends HttpServlet {
                 
             } else {
                 System.out.println("\nENTRARCONROLLER:\nA query retornou falsa, você NÃO está logado!");
+                session.setAttribute("autenticado", false);
                 String forward = ERROR;
                 RequestDispatcher view = request.getRequestDispatcher(forward);
                 view.forward(request, response);
@@ -79,6 +82,6 @@ public class EntrarController extends HttpServlet {
     }// </editor-fold>
     
     private boolean ehAdm(String emailLoginForm, String senhaLoginForm) {
-        return emailLoginForm.equals(ADM_LOGIN) && senhaLoginForm.equals(ADM_SENHA);
+        return emailLoginForm.equals(ADM_LOGIN.toUpperCase()) && senhaLoginForm.equals(ADM_SENHA);
     }
 }

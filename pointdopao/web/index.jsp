@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,19 +13,23 @@
     <body>
         <section id="cabecalho">
             <nav class="navbar">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/pointdopao">
                     <img src="./assets/logo_pdp.jpg" width="351" height="59.4" class="d-inline-block align-top" alt="">
                 </a>
-                <div id="statusUsuarioLogado" class="align-self-end">
-                    <i class="fas fa-user-circle fa-lg"></i>
-                    <span>Bem vindo, ${SessionNome}.</span>
+                <c:if test = "${autenticado == true}">
+                    <div id="statusUsuarioLogado" class="align-self-end">
+                        <i class="fas fa-user-circle fa-lg"></i>
+                        <span>Bem vindo, ${SessionNome}.</span>
 
-                    <span class="mr-3">Deseja sair? <a class="font-normal" href="javascript:navegarParaPagina('acesso','sair');">sign out</a>.</span>
-                </div>
-                <div id="statusUsuarioDeslogado" class="align-self-end">
-                    <a href="javascript:navegarParaPagina('acesso','entrar');"  class="mr-2">Entrar</a>
-                    <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('acesso', 'cadastrar')">Cadastrar</button>
-                </div>
+                        <span class="mr-3">Deseja sair? <a class="font-normal" href="javascript:navegarParaPagina('acesso','sair');">sign out</a>.</span>
+                    </div>
+                </c:if>
+                <c:if test = "${autenticado == false}">
+                    <div id="statusUsuarioDeslogado" class="align-self-end">
+                        <a href="javascript:navegarParaPagina('acesso','entrar');"  class="mr-2">Entrar</a>
+                        <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('acesso', 'cadastrar')">Cadastrar</button>
+                    </div>
+                </c:if>
             </nav>
             <hr class="mb-0" style="border-top: 2px solid #b34c1b;">
 
