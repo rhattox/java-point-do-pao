@@ -7,3 +7,6 @@ CREATE TABLE "usuario" (
   "senha" character varying(10) NOT NULL,
   "endereco" character varying(70)
 );
+
+INSERT INTO usuario (nome, tipo, preco, quantidade )
+VALUES ('1', '1', 'Administrador', 'PointdoPao', 'ADM', 'Pointdopao', '0.50');
