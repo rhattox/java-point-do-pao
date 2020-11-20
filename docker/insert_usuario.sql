@@ -8,5 +8,5 @@ CREATE TABLE "usuario" (
   "endereco" character varying(70)
 );
 
-INSERT INTO usuario (nome, tipo, preco, quantidade )
-VALUES ('1', '1', 'Administrador', 'PointdoPao', 'ADM', 'Pointdopao', '0.50');
+INSERT INTO usuario (id, tipo, nome, sobrenome, email, senha)
+VALUES ('1', '0', 'ADMINISTRADOR', 'POINTDOPAO', 'ADM', 'Pointdopao');
