@@ -2,6 +2,10 @@ function navegarParaPagina(page, pr) {
     window.location = `${page}?pr=${pr}`;
 }
 
+function navegarParaHome() {
+    window.location = "/entrar";
+}
+
 function voltar() {
     window.history.back();
 }

@@ -13,7 +13,7 @@
         <div class="container container-login-mt">
             <section class="d-flex">
                 <div class="img-container-login">
-                    <img class="img-size" src="./assets/logo_pdp1.jpg" onclick="navegarParaPagina('/pointdopao')"/>
+                    <a href="/pointdopao"><img class="img-size" src="./assets/logo_pdp1.jpg"></a>
                 </div>
             </section>
             <div>

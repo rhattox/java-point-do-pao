@@ -15,6 +15,10 @@ a:active {
     text-decoration: none
 }
 
+.cursor {
+    cursor: pointer;
+}
+
 input:focus::placeholder {
     color: transparent;
 }

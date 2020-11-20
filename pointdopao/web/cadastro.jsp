@@ -13,7 +13,7 @@
         <div class="container container-cadastro-mt">
             <section class="d-flex">
                 <div class="img-container-cadastro">
-                    <img class="img-size" src="./assets/logo_pdp1.jpg" onclick="navegarParaPagina('/pointdopao')"/>
+                    <a href="/pointdopao"><img class="img-size cursor" src="./assets/logo_pdp1.jpg"/></a>
                 </div>
                 <div class="linha-vertical mt-3"></div>
 
