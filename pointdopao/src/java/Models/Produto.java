@@ -1,15 +1,17 @@
 package Models;
 
+import java.math.BigDecimal;
+
 public class Produto {
     private int id;
     private String nome;
     private String descricao;
-    private float preco;
+    private BigDecimal preco;
     private int quantidade;
     
     public Produto(){}
     
-    public Produto(String nome, String descricao, float preco, int quantidade) {
+    public Produto(String nome, String descricao, BigDecimal preco, int quantidade) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -28,7 +30,7 @@ public class Produto {
         return descricao;
     }
 
-    public float getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
@@ -48,7 +50,7 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 

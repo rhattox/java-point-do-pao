@@ -22,7 +22,6 @@ public class EntrarController extends HttpServlet {
     private static String ADM_SENHA = "Pointdopao";
 
     private static String POSTLOGIN = "/index.jsp";
-    private static String LOGADO = "/administracao-usuario.jsp";
     private static String ERROR = "/entrar.jsp";
     private static String GESTAO_ADM = "/gestao-produtos.jsp";
 
@@ -51,6 +50,7 @@ public class EntrarController extends HttpServlet {
                     ProdutoDao produtoDao = new ProdutoDao();
                     List<Produto> listaProdutos = produtoDao.getAllProducts();
                     request.setAttribute("listaProdutos", listaProdutos); // Will be available as ${products} in JSP
+                    System.out.println("Redirect para tela de gestão");
                     forward = GESTAO_ADM;
                     
                 } else {

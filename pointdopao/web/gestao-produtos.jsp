@@ -13,13 +13,13 @@
     <body>
         <section id="cabecalho">
             <nav class="navbar">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/pointdopao">
                     <img src="./assets/logo_pdp.jpg" width="351" height="59.4" class="d-inline-block align-top" alt="">
                 </a>
                 <c:if test = "${autenticado == true}">
                     <div id="statusUsuarioLogado" class="align-self-end">
                         <i class="fas fa-user-circle fa-lg"></i>
-                        <span>Bem vindo, ${SessionNome.lowercase()}.</span>
+                        <span>Bem vindo, ${SessionNome}.</span>
 
                         <span class="mr-3">Deseja sair? <a class="font-normal" href="javascript:navegarParaPagina('acesso','sair');">sign out</a>.</span>
                     </div>
@@ -55,7 +55,7 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nome do Produto</th>
-                        <th scope="col">Descrição</th>
+                        <th scope="col">Quantidade</th>
                         <th scope="col">Preço</th>
                     </tr>
                 </thead>
@@ -64,8 +64,8 @@
                         <tr>
                             <td>${produto.id}</td>
                             <td>${produto.nome}</td>
-                            <td>${produto.descricao}</td>
-                            <td>${produto.preco}</td>
+                            <td>${produto.quantidade}</td>
+                            <td>R$ ${produto.preco}</td>
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -1,7 +1,7 @@
 CREATE TABLE "produto" (
   "id" 			serial NOT NULL,
   "nome" 		character varying(120) NOT NULL,
-  "preco" 		float NOT NULL,
+  "preco" 		NUMERIC(5,2) NOT NULL,
   "quantidade" 		int NOT NULL
 );
 
