@@ -1,7 +1,9 @@
 package Controllers;
 
+import Dao.ProdutoDao;
+import Models.Produto;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,6 +59,9 @@ public class AcessoController extends HttpServlet {
                 break;
             default:
                 System.out.println("Passando para Index!");
+                ProdutoDao produtoDao = new ProdutoDao();
+                List<Produto> listaProdutos = produtoDao.getAllProducts();
+                request.setAttribute("listaProdutos", listaProdutos);
                 forward = INDEX;
                 break;
         }

@@ -64,15 +64,24 @@
                 <img src="./assets/banner_home.jpg" class="centralizar-img" alt="">
             </div>
 
-            <section id="produtos" class="alinhamento-conteudo-esq">
+            <section id="produtos" class="alinhamento-conteudo-esq alinhamento-cards-produtos">
                 <h3 class="mt-4 mb-4 titulos">Nossos Produtos</h3>
-                <div class="card mb-3">
-                    <img class="card-img-top" src="./assets/produtos/pao_frances.jpg" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">Pão Francês</h5>
-                        <p class="card-text">O queridinho do café da manhã.</p>
-                        <button class="btn btn-procurar d-flex ml-auto">Adicionar</button>
-                    </div>
+                <div class="row">
+                    <c:forEach items="${listaProdutos}" var="produto" varStatus="status">
+                        <div class="col-3">
+                            <div class="card-deck">
+                                <div class="card mb-3">
+                                    <!--<img class="card-img-top" src="..." alt="">-->
+                                    <div class="card-body">
+                                        <h5 class="card-title">${produto.nome}</h5>
+                                        <p class="card-text"><small class="text-muted">Quantidade: ${produto.quantidade}</small></p>
+                                        <p class="card-text"><small class="text-muted">Valor: ${produto.preco}</small></p>
+                                        <button class="btn btn-procurar d-flex ml-auto">Adicionar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                    </c:forEach>
                 </div>
             </section>
         </section>

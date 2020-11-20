@@ -51,7 +51,6 @@ public class ProdutoDao {
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUTO_SQL)) {
             preparedStatement.setString(1, p.getNome());
             preparedStatement.setBigDecimal(2, p.getPreco());
-            preparedStatement.setString(3, p.getDescricao());
             preparedStatement.setInt(4, p.getQuantidade());
 
             System.out.println(preparedStatement);

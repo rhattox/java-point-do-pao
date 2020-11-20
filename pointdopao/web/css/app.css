@@ -70,6 +70,10 @@ input:focus::placeholder {
     margin-right: 1.2rem;
 }
 
+.alinhamento-cards-produtos {
+    margin-right: 1.8rem;
+}
+
 .titulos {
     font-family: cursive;
     color: #b34c1b;
