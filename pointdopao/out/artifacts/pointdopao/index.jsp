@@ -75,7 +75,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">${control.index} - ${produto.nome}</h5>
                                 <p class="card-text"><small class="text-muted">Quantidade: ${produto.quantidade}</small></p>
-                                <p class="card-text">Valor: ${produto.preco}</p>
+                                <p class="card-text valor-produto">R$ ${produto.preco}</p>
 
                                 <div class="d-flex">
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">

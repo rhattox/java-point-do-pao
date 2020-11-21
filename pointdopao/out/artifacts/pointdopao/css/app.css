@@ -121,3 +121,11 @@ input:focus::placeholder {
 .card{
     width: 15rem;
 }
+
+.valor-produto {
+    font-family: cursive;
+    font-size: large;
+    color: #b34c1b;
+    display: flex;
+    flex-direction: row-reverse;
+}
