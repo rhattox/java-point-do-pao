@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,47 +26,18 @@
                 <br>
                 <p>Carrinho</p>
                 <spam>${carrinhoLista.size()}</spam>
-
-
-
-
-
-
-                <c:forEach items="${carrinhoLista}" var="produto" varStatus="control">
-                    <div class="col-3">
-                        <div class="card-deck">
-                            <div class="card mb-3">
-                                <!--<img class="card-img-top" src="..." alt="">-->
-                                <div class="card-body">
-                                    <h5 class="card-title">${produto.nome}</h5>
-                                    <p class="card-text"><small class="text-muted">Quantidade: ${produto.quantidade}</small></p>
-                                    <p class="card-text valor-produto">R$ ${produto.preco}</p>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </c:forEach>
-
-
-                <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('acesso', 'default')">Adcionar Mais</button>
-
-
-
-                <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('acesso', 'limpar')">Limpar</button>
-
-
-
-
-
-
-
-
-
-
-
             </section>
+
+            <section class="d-flex">
+                <c:forEach items="${carrinhoLista}" var="produto" varStatus="control">
+
+                    <h5>${produto.nome}</h5>
+                    <p>${produto.quantidade}</p>
+                    <p>${produto.preco}</p>
+                </c:forEach>
+            </section>
+            <button  onclick="navegarParaPagina('acesso', 'default')">Adcionar Mais</button>
+            <button  onclick="navegarParaPagina('acesso', 'limpar')">Limpar</button>
         </div>
     </body>
 </html>

@@ -27,7 +27,7 @@ public class CarrinhoController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String forward = "";
-        HttpSession session = request.getSession();
+        HttpSession sessionCarrinho = request.getSession();
 
         String produtoId = request.getParameter("produto");
         String qtdItem = request.getParameter("qtd");
@@ -39,7 +39,7 @@ public class CarrinhoController extends HttpServlet {
         request.setAttribute("carrinhoLista", carrinhoLista);
 
         //carrinhoLista.clear();
-        session.setAttribute("carrinhoLista", carrinhoLista.add(produto));
+        sessionCarrinho.setAttribute("carrinhoLista", carrinhoLista.add(produto));
 
         forward = CARRINHO;
 
