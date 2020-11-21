@@ -15,16 +15,56 @@
         <div class="container container-cadastro-mt">
             <section class="d-flex">
                 <p>Nome: </p>  
-                ${produto.nome}
+                <spam>${produto.nome}</spam>
+                <br>
                 <p>Quantidade</p>
-                ${produto.quantidade}
+                <spam>${produto.quantidade}</spam>
+                <br>
                 <p>Preco</p>
-                ${produto.preco}
+                <spam>${produto.preco}</spam>
+                <br>
+                <p>Carrinho</p>
+                <spam>${carrinhoLista.size()}</spam>
 
 
 
 
-                <p>Valor final: ${valorFinal}</p>
+
+
+                <c:forEach items="${carrinhoLista}" var="produto" varStatus="control">
+                    <div class="col-3">
+                        <div class="card-deck">
+                            <div class="card mb-3">
+                                <!--<img class="card-img-top" src="..." alt="">-->
+                                <div class="card-body">
+                                    <h5 class="card-title">${produto.nome}</h5>
+                                    <p class="card-text"><small class="text-muted">Quantidade: ${produto.quantidade}</small></p>
+                                    <p class="card-text valor-produto">R$ ${produto.preco}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </c:forEach>
+
+
+                <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('acesso', 'default')">Adcionar Mais</button>
+
+
+
+                <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('acesso', 'limpar')">Limpar</button>
+
+
+
+
+
+
+
+
+
+
+
             </section>
         </div>
     </body>

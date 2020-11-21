@@ -18,6 +18,7 @@ public class AcessoController extends HttpServlet {
     private static String CADASTRAR = "/cadastro.jsp";
     private static String ENTRAR = "/entrar.jsp";
     private static String REDEFINIR_SENHA = "/redefinir-senha.jsp";
+    private static String LIMPAR = "/limpar";
     private static String GESTAO_ADM = "/gestao-produtos.jsp";
     private static String CARRINHO = "/carrinho";
     private static String INDEX = "/index.jsp";
@@ -30,13 +31,13 @@ public class AcessoController extends HttpServlet {
         String action = request.getParameter("pr");
         HttpSession session = request.getSession();
         if (action == null) {
-            
+
             session.setAttribute("acesso", false);
             action = "";
         } else {
             session.setAttribute("acesso", true);
         }
-        
+
         switch (action) {
             case "cadastrar":
                 System.out.println("Passando para Cadastro!");
@@ -61,6 +62,10 @@ public class AcessoController extends HttpServlet {
             case "sair":
                 System.out.println("Passando para Sair!");
                 forward = SAIR;
+                break;
+            case "limpar":
+                System.out.println("Limpando Carrinho!");
+                forward = LIMPAR;
                 break;
             default:
                 System.out.println("Passando para Index!");
