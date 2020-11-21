@@ -24,13 +24,15 @@ public class CarrinhoController extends HttpServlet {
         String forward = "";
         String produtoId = request.getParameter("produto");
         String qtdItem = request.getParameter("qtd");
-
+        System.out.println("ID primeiro:" + produtoId);
         ProdutoDao produtoDao = new ProdutoDao();
-        Produto produto = produtoDao.getProductById(produtoId);
-        request.setAttribute("listaProdutos", produto);
+        Produto produtoRetornado = new Produto();
+        produtoRetornado = produtoDao.getProductById(produtoId);
+        System.out.println("ID segundo:" + produtoRetornado.getId());
+        request.setAttribute("produto", produtoRetornado);
         forward = CARRINHO;
 
-        System.out.println("ID:" + produto.getId());
+        float valorFinal = 10;
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -52,5 +54,13 @@ public class CarrinhoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private float calculaPreco(float preco) {
+
+        float valorFinal = 0;
+
+        return valorFinal;
+
+    }
 
 }

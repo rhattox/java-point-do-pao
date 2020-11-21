@@ -14,10 +14,17 @@
     <body>
         <div class="container container-cadastro-mt">
             <section class="d-flex">
+                <p>Nome: </p>  
+                ${produto.nome}
+                <p>Quantidade</p>
+                ${produto.quantidade}
+                <p>Preco</p>
+                ${produto.preco}
 
-                <span>${produto.nome}</span>
-                <span>${produto.quantidade}</span>
-                <span>${produto.preco}</span
+
+
+
+                <p>Valor final: ${valorFinal}</p>
             </section>
         </div>
     </body>

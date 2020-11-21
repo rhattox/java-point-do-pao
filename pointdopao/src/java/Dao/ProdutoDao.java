@@ -29,8 +29,8 @@ public class ProdutoDao {
 
     private static final String GET_PRODUTOS_SQL = "SELECT * FROM produto";
     private static final String INSERT_PRODUTO_SQL = "INSERT INTO produto (nome, preco, quantidade) VALUES (?,?,?);";
-    private static final String SELECT_IMAGEM = "SELECT IMAGEM FROM PRDOTUO WHERE ID=?";    
-    private static final String GET_PRODUTO_BY_ID = "SELECT * FROM produto WHERE id = ?;";
+    private static final String SELECT_IMAGEM = "SELECT IMAGEM FROM PRDOTUO WHERE ID=?";
+    private static final String GET_PRODUTO_BY_ID = "SELECT id,nome,preco,quantidade FROM produto WHERE id = ?;";
     private static final String UPDATE_PRODUTO_QUANTIDADE_BY_NOME = "UPDATE produto SET quantidade = ? WHERE nome = ?";
 
     protected Connection getConnection() {
@@ -62,19 +62,21 @@ public class ProdutoDao {
 
     public Produto getProductById(String id) {
         // try-with-resource statement will auto close the connection.
-        Produto listaProduto = new Produto();
+        Produto produto = new Produto();
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(GET_PRODUTO_BY_ID)) {
             ResultSet rs;
+
             preparedStatement.setInt(1, Integer.parseInt(id));
             rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                Produto produto = new Produto();
+
                 produto.setId(rs.getInt("id"));
                 produto.setNome(rs.getString("nome"));
                 produto.setPreco(rs.getBigDecimal("preco"));
                 produto.setQuantidade(rs.getInt("quantidade"));
+                System.out.println(produto.getId());
             }
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
@@ -83,7 +85,7 @@ public class ProdutoDao {
         } catch (Exception e) {
             e.getMessage();
         }
-        return listaProduto;
+        return produto;
     }
 
     public List<Produto> getAllProducts() {
@@ -100,7 +102,7 @@ public class ProdutoDao {
                 produto.setNome(rs.getString("nome"));
                 produto.setPreco(rs.getBigDecimal("preco"));
                 produto.setQuantidade(rs.getInt("quantidade"));
-                
+
                 listaProduto.add(produto);
             }
             System.out.println(preparedStatement);
