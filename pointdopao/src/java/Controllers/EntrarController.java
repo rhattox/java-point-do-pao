@@ -21,7 +21,7 @@ public class EntrarController extends HttpServlet {
     private static String ADM_LOGIN = "ADM";
     private static String ADM_SENHA = "Pointdopao";
 
-    private static String POSTLOGIN = "/index.jsp";
+    private static String POSTLOGIN = "/acesso";
     private static String ERROR = "/entrar.jsp";
     private static String GESTAO_ADM = "/gestao-produtos.jsp";
 

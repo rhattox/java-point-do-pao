@@ -31,10 +31,10 @@ public class AcessoController extends HttpServlet {
         HttpSession session = request.getSession();
         if (action == null) {
             
-            session.setAttribute("autenticado", false);
+            session.setAttribute("acesso", false);
             action = "";
         } else {
-            session.setAttribute("autenticado", true);
+            session.setAttribute("acesso", true);
         }
         
         switch (action) {
