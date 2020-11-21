@@ -34,27 +34,24 @@ public class ProdutoDao {
 
     protected Connection getConnection() {
         Connection connection = null;
-        System.out.println(INSERT_PRODUTO_SQL);
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
         } catch (SQLException | ClassNotFoundException e) {
             // TODO Auto-generated catch block
-
+            e.getMessage();
         }
         // TODO Auto-generated catch block
         return connection;
     }
 
     public void insertProduto(Produto p) throws SQLException {
-        System.out.println(INSERT_PRODUTO_SQL);
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUTO_SQL)) {
             preparedStatement.setString(1, p.getNome());
             preparedStatement.setBigDecimal(2, p.getPreco());
             preparedStatement.setInt(4, p.getQuantidade());
-
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -63,7 +60,6 @@ public class ProdutoDao {
     }
 
     public Produto getProductById(String id) {
-        System.out.println(GET_PRODUTO_BY_ID);
         // try-with-resource statement will auto close the connection.
         Produto listaProduto = new Produto();
         try (Connection connection = getConnection();
@@ -90,7 +86,6 @@ public class ProdutoDao {
     }
 
     public List<Produto> getAllProducts() {
-        System.out.println(GET_PRODUTOS_SQL);
         // try-with-resource statement will auto close the connection.
         List<Produto> listaProduto = new ArrayList<Produto>();
         try (Connection connection = getConnection();
