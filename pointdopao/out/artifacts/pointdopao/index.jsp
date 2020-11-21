@@ -67,29 +67,31 @@
             <section id="produtos" class="alinhamento-conteudo-esq alinhamento-cards-produtos">
                 <h3 class="mt-4 mb-4 titulos">Nossos Produtos</h3>
                 <div class="row">
-                    <c:forEach items="${listaProdutos}" var="produto" varStatus="status">
+                    <c:forEach items="${listaProdutos}" var="produto" varStatus="control">
                         <div class="col-3">
                             <div class="card-deck">
                                 <div class="card mb-3">
                                     <!--<img class="card-img-top" src="..." alt="">-->
                                     <div class="card-body">
-                                        <h5 class="card-title">${produto.nome}</h5>
+                                        <h5 class="card-title">${control.index} - ${produto.nome}</h5>
                                         <p class="card-text"><small class="text-muted">Quantidade: ${produto.quantidade}</small></p>
                                         <p class="card-text">Valor: ${produto.preco}</p>
-                                        <button class="btn btn-procurar d-flex ml-auto">Adicionar</button>
-                                        
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label class="btn btn-secondary active">
-                                                <input type="radio" name="options" id="option1" autocomplete="off" checked>
-                                                <i class="fas fa-plus"></i>
-                                            </label>
-                                            <label class="btn btn-secondary">
-                                                <input type="radio" name="options" id="option2" autocomplete="off" readonly>0
-                                            </label>
-                                            <label class="btn btn-secondary">
-                                                <input type="radio" name="options" id="option3" autocomplete="off">
-                                                <i class="fas fa-minus"></i>
-                                            </label>
+
+                                        <div class="d-flex">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-procurar active">
+                                                    <input type="radio" name="options" id="${control.index}-aumentar" autocomplete="off" onclick="quantidadeItemControl(${control.index}, 'aumentar')" checked>
+                                                    <i class="fas fa-plus"></i>
+                                                </label>
+                                                <label class="btn btn-procurar" id="${control.index}-label">
+                                                    <input type="radio" name="options" id="${control.index}-total" autocomplete="off">0
+                                                </label>
+                                                <label class="btn btn-procurar">
+                                                    <input type="radio" name="options" id="${control.index}-diminuir" autocomplete="off" onclick="quantidadeItemControl(${control.index}, 'diminuir')">
+                                                    <i class="fas fa-minus"></i>
+                                                </label>
+                                            </div>
+                                            <button class="btn btn-procurar ml-auto">Comprar</button>
                                         </div>
                                     </div>
                                 </div>
