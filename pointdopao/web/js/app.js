@@ -56,10 +56,10 @@ function validaSenhasRedefinicao() {
 
 function validaFormCadastro() {
     if (document.getElementById('nomeHelp').style.display === "none" &&
-            document.getElementById('sobrenomeHelp').style.display === "none" &&
-            document.getElementById('emailHelp').style.display === "none" &&
-            document.getElementById('senhaHelp').style.display === "none" &&
-            document.getElementById('senhaHelp').style.display === "none") {
+        document.getElementById('sobrenomeHelp').style.display === "none" &&
+        document.getElementById('emailHelp').style.display === "none" &&
+        document.getElementById('senhaHelp').style.display === "none" &&
+        document.getElementById('senhaHelp').style.display === "none") {
         return true;
     } else {
         validaCampoTexto('nomeForm', 'nomeHelp', 'nome');
@@ -78,7 +78,7 @@ function validarLogin() {
     var senha = document.getElementById('senhaLoginForm').value;
 
     if (email.length > 0 &&
-            (senha.length >= 6 && senha.length <= 10)) {
+        (senha.length >= 6 && senha.length <= 10)) {
         return true;
     } else {
         window.alert("O email e/ou senha inválido(s).");
@@ -90,4 +90,21 @@ function alertLoginSuccess(variable) {
     if (variable===true) {
         alert('Usuário cadastrado com sucesso!');
     }
+}
+
+/*------------------------------*/
+/*Funcionais para controlar quantidade dos itens*/
+function quantidadeItemControl(index, acao) {
+    const item = `${index}-${acao}`;
+    console.log(item);
+    let valor = parseInt(document.getElementById(`${index}-label`).innerText);
+    console.log("valor: "+valor);
+    if (acao === 'diminuir' && valor > 0) {
+        valor--;
+    } else if (acao === 'aumentar') {
+        valor++;
+    } else {
+        return;
+    }
+    document.getElementById(`${index}-label`).innerHTML = `${valor}`;
 }
