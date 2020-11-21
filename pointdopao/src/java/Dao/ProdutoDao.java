@@ -67,7 +67,7 @@ public class ProdutoDao {
         // try-with-resource statement will auto close the connection.
         Produto listaProduto = new Produto();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_PRODUTO_BY_ID)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(GET_PRODUTO_BY_ID)) {
             ResultSet rs;
             preparedStatement.setInt(1, Integer.parseInt(id));
             rs = preparedStatement.executeQuery();
@@ -94,10 +94,10 @@ public class ProdutoDao {
         // try-with-resource statement will auto close the connection.
         List<Produto> listaProduto = new ArrayList<Produto>();
         try (Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_PRODUTOS_SQL)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(GET_PRODUTOS_SQL)) {
             ResultSet rs;
             rs = preparedStatement.executeQuery();
-            
+
             while (rs.next()) {
                 Produto produto = new Produto();
                 produto.setId(rs.getInt("id"));
@@ -110,7 +110,7 @@ public class ProdutoDao {
             preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
-            
+
         } catch (Exception e) {
             e.getMessage();
         }

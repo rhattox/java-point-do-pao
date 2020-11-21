@@ -50,7 +50,7 @@ public class UsuarioDao {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        System.out.println("\nUSUARIODAO:\nIniciada a conexão com o banco de dados:\t" + connection);
+        //System.out.println("\nUSUARIODAO:\nIniciada a conexão com o banco de dados:\t" + connection);
         return connection;
     }
 
@@ -66,7 +66,7 @@ public class UsuarioDao {
             preparedStatement.setString(5, user.getSenha());
 
             preparedStatement.executeUpdate();
-            System.out.println("\nUSUARIODAO:\n" + preparedStatement);
+            //System.out.println("\nUSUARIODAO:\n" + preparedStatement);
         } catch (Exception e) {
             e.getMessage();
         }
@@ -91,7 +91,7 @@ public class UsuarioDao {
                 autenticado = true;
             }
             preparedStatement.executeUpdate();
-            System.out.println("\nUSUARIODAO:\n" + preparedStatement);
+            //System.out.println("\nUSUARIODAO:\n" + preparedStatement);
         } catch (Exception e) {
             e.getMessage();
         }
@@ -107,7 +107,7 @@ public class UsuarioDao {
 
             ResultSet rs;
             rs = preparedStatement.executeQuery();
-            System.out.println("\nUSUARIODAO:\n" + preparedStatement);
+            //System.out.println("\nUSUARIODAO:\n" + preparedStatement);
             if (rs.next()) {
                 String loginBanco = rs.getString("email");
                 int row = rs.getRow();
@@ -117,9 +117,9 @@ public class UsuarioDao {
 
                         preparePostCheck.setString(2, email);
                         preparePostCheck.setString(1, senha);
-                        System.out.println(preparePostCheck);
+                        //System.out.println(preparePostCheck);
                         preparePostCheck.executeUpdate();
-                        System.out.println("\nUSUARIODAO:\n" + preparePostCheck);
+                        //System.out.println("\nUSUARIODAO:\n" + preparePostCheck);
                         autenticado = true;
                     }
                 } else {
@@ -138,7 +138,7 @@ public class UsuarioDao {
     public String searchUsernameByEmail(String email) {
         String nome = null;
         try (Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_NAME_BY_EMAIL)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_NAME_BY_EMAIL)) {
             preparedStatement.setString(1, email);
             ResultSet rs;
             rs = preparedStatement.executeQuery();
@@ -150,9 +150,9 @@ public class UsuarioDao {
 
             return nome;
         } catch (Exception e) {
-            System.out.println("\n\nErro em searchUsernameByEmail : " + e.getMessage());
+            //System.out.println("\n\nErro em searchUsernameByEmail : " + e.getMessage());
         }
-        System.out.println("\nNOME searchUsernameByEmail: " + nome);
+        //System.out.println("\nNOME searchUsernameByEmail: " + nome);
         return nome;
     }
 

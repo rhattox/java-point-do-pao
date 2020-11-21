@@ -43,7 +43,7 @@ public class CadastrarController extends HttpServlet {
         try {
             usuarioDao.insertUser(usuario);
 
-            System.out.println("\nCADASTRARCONTROLLER:\n" + "Email: " + usuario.getEmail() + " Nome:" + usuario.getNome() + " Sobrenome:" + usuario.getSobrenome() + " Senha:" + usuario.getSenha());
+            //System.out.println("\nCADASTRARCONTROLLER:\n" + "Email: " + usuario.getEmail() + " Nome:" + usuario.getNome() + " Sobrenome:" + usuario.getSobrenome() + " Senha:" + usuario.getSenha());
 
             boolean success = true;
             request.setAttribute("success", success);

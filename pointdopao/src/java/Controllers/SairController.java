@@ -35,10 +35,10 @@ public class SairController extends HttpServlet {
         // Invalida sessão e redireciona para login
         HttpSession session = request.getSession();
         session.setAttribute("autenticado", false);
-   
+
         request.getSession().invalidate();
-        System.out.println("SAIRCONTROLLER: Invalidando Sessão!!");
-        
+        //System.out.println("SAIRCONTROLLER: Invalidando Sessão!!");
+
         String forward = INDEX;
         response.sendRedirect(forward);
     }

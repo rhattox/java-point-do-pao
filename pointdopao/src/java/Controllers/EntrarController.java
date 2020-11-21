@@ -36,7 +36,7 @@ public class EntrarController extends HttpServlet {
         String senhaLoginForm = request.getParameter("senhaLoginForm");
         usuario.setEmail(emailLoginForm);
         usuario.setSenha(senhaLoginForm);
-        System.out.println("\nENTRARCONROLLER:\nEmail: " + request.getParameter("emailLoginForm") + "\t Senha: " + request.getParameter("senhaLoginForm"));
+        //System.out.println("\nENTRARCONROLLER:\nEmail: " + request.getParameter("emailLoginForm") + "\t Senha: " + request.getParameter("senhaLoginForm"));
 
         try {
             Boolean login = usuarioDao.searchUser(usuario.getEmail(), usuario.getSenha());
@@ -50,7 +50,7 @@ public class EntrarController extends HttpServlet {
                     ProdutoDao produtoDao = new ProdutoDao();
                     List<Produto> listaProdutos = produtoDao.getAllProducts();
                     request.setAttribute("listaProdutos", listaProdutos); // Will be available as ${products} in JSP
-                    System.out.println("Redirect para tela de gestão");
+                    //System.out.println("Redirect para tela de gestão");
                     forward = GESTAO_ADM;
                     
                 } else {
@@ -64,7 +64,7 @@ public class EntrarController extends HttpServlet {
                 view.forward(request, response);
                 
             } else {
-                System.out.println("\nENTRARCONROLLER:\nA query retornou falsa, você NÃO está logado!");
+                //System.out.println("\nENTRARCONROLLER:\nA query retornou falsa, você NÃO está logado!");
                 session.setAttribute("autenticado", false);
                 String forward = ERROR;
                 RequestDispatcher view = request.getRequestDispatcher(forward);

@@ -10,5 +10,5 @@ package Dao;
  * @author Rodrigo
  */
 public class CompraDao {
-    
+
 }

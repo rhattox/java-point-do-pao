@@ -26,7 +26,7 @@ public class RedefinirSenhaController extends HttpServlet {
 
         usuario.setEmail(request.getParameter("emailResetForm"));
         usuario.setSenha(request.getParameter("novaSenhaResetForm"));
-        System.out.println(request.getParameter("emailResetForm") + request.getParameter("novaSenhaResetForm"));
+        //System.out.println(request.getParameter("emailResetForm") + request.getParameter("novaSenhaResetForm"));
 
         try {
 
