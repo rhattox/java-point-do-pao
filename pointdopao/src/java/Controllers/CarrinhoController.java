@@ -15,6 +15,7 @@ import java.util.List;
 
 @WebServlet(name = "CarrinhoController", urlPatterns = {"/carrinho"})
 public class CarrinhoController extends HttpServlet {
+
     private static String CARRINHO = "/carrinho.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -28,6 +29,8 @@ public class CarrinhoController extends HttpServlet {
         Produto produto = produtoDao.getProductById(produtoId);
         request.setAttribute("listaProdutos", produto);
         forward = CARRINHO;
+
+        System.out.println("ID:" + produto.getId());
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
