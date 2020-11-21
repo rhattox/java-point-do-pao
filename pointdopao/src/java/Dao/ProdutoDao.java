@@ -29,6 +29,7 @@ public class ProdutoDao {
 
     private static final String GET_PRODUTOS_SQL = "SELECT * FROM produto";
     private static final String INSERT_PRODUTO_SQL = "INSERT INTO produto (nome, preco, quantidade) VALUES (?,?,?);";
+    private static final String SELECT_IMAGEM = "SELECT IMAGEM FROM PRDOTUO WHERE ID=?";    
     private static final String GET_PRODUTO_BY_ID = "SELECT * FROM produto WHERE id = ?;";
     private static final String UPDATE_PRODUTO_QUANTIDADE_BY_NOME = "UPDATE produto SET quantidade = ? WHERE nome = ?";
 
@@ -104,6 +105,7 @@ public class ProdutoDao {
                 produto.setNome(rs.getString("nome"));
                 produto.setPreco(rs.getBigDecimal("preco"));
                 produto.setQuantidade(rs.getInt("quantidade"));
+                
                 listaProduto.add(produto);
             }
             System.out.println(preparedStatement);
