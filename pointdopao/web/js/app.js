@@ -108,3 +108,8 @@ function quantidadeItemControl(index, acao) {
     }
     document.getElementById(`${index}-label`).innerHTML = `${valor}`;
 }
+
+function fecharPedido(index) {
+    let qtdItem = parseInt(document.getElementById(`${index}-label`).innerText);
+    window.location = `acesso?pr=carrinho&produto=${index}&qtd=${qtdItem}`;
+}

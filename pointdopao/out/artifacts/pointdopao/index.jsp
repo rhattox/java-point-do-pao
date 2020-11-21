@@ -88,7 +88,7 @@
                                             <i class="fas fa-minus"></i>
                                         </label>
                                     </div>
-                                    <button class="btn btn-procurar-comprar ml-auto">Comprar</button>
+                                    <button class="btn btn-procurar-comprar ml-auto" onclick="fecharPedido(${control.index})">Comprar</button>
                                 </div>
                             </div>
                         </div>

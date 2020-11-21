@@ -19,6 +19,7 @@ public class AcessoController extends HttpServlet {
     private static String ENTRAR = "/entrar.jsp";
     private static String REDEFINIR_SENHA = "/redefinir-senha.jsp";
     private static String GESTAO_ADM = "/gestao-produtos.jsp";
+    private static String CARRINHO = "/carrinho";
     private static String INDEX = "/index.jsp";
     private static String SAIR = "/sair";
 
@@ -44,6 +45,10 @@ public class AcessoController extends HttpServlet {
             case "gestao":
                 System.out.println("Passando para Gestão!");
                 forward = GESTAO_ADM;
+                break;
+            case "carrinho":
+                System.out.println("Passando para Carrinho!");
+                forward = CARRINHO;
                 break;
             case "entrar":
                 System.out.println("Passando para Entrar!");

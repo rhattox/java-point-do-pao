@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.valueOf;
+
 /**
  *
  * @author Rodrigo
@@ -27,7 +29,7 @@ public class ProdutoDao {
 
     private static final String GET_PRODUTOS_SQL = "SELECT * FROM produto";
     private static final String INSERT_PRODUTO_SQL = "INSERT INTO produto (nome, preco, quantidade) VALUES (?,?,?);";
-    private static final String SELECT_PRODUTO_BY_NOME = "SELECT nome FROM produto WHERE nome = ?";
+    private static final String GET_PRODUTO_BY_ID = "SELECT * FROM produto WHERE id = ?;";
     private static final String UPDATE_PRODUTO_QUANTIDADE_BY_NOME = "UPDATE produto SET quantidade = ? WHERE nome = ?";
 
     protected Connection getConnection() {
@@ -58,6 +60,33 @@ public class ProdutoDao {
         } catch (Exception e) {
             e.getMessage();
         }
+    }
+
+    public Produto getProductById(String id) {
+        System.out.println(GET_PRODUTO_BY_ID);
+        // try-with-resource statement will auto close the connection.
+        Produto listaProduto = new Produto();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_PRODUTO_BY_ID)) {
+            ResultSet rs;
+            preparedStatement.setInt(1, Integer.parseInt(id));
+            rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("id"));
+                produto.setNome(rs.getString("nome"));
+                produto.setPreco(rs.getBigDecimal("preco"));
+                produto.setQuantidade(rs.getInt("quantidade"));
+            }
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return listaProduto;
     }
 
     public List<Produto> getAllProducts() {
