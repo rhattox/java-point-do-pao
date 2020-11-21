@@ -47,6 +47,12 @@ input:focus::placeholder {
     border-color: #b34c1b;
 }
 
+.btn-procurar-comprar {
+    color: #fff;
+    background-color: #b34c1b;
+    border-color: #b34c1b;
+}
+
 .footer-bg {
     background-color: #4e230c;
 }
