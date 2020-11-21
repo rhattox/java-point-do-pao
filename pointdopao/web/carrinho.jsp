@@ -15,28 +15,21 @@
     <body>
         <div class="container container-cadastro-mt">
             <section class="d-flex">
-                <p>Nome: </p>  
-                <spam>${produto.nome}</spam>
-                <br>
-                <p>Quantidade</p>
-                <spam>${produto.quantidade}</spam>
-                <br>
-                <p>Preco</p>
-                <spam>${produto.preco}</spam>
-                <br>
-                <p>Carrinho</p>
-                <spam>${carrinhoLista.size()}</spam>
-            </section>
-
-            <section class="d-flex">
                 <c:forEach items="${carrinhoLista}" var="produto" varStatus="control">
 
-                    <h5>${produto.nome}</h5>
-                    <p>${produto.quantidade}</p>
-                    <p>${produto.preco}</p>
+                    <s:property value="tmp" escape="false"/>
+                    <p>Nome:  ${produto.nome}</p> 
+                    <s:property value="tmp" escape="false"/>
+                    <p>Quantidade: ${produto.quantidade}</p>
+                    <s:property value="tmp" escape="false"/>
+                    <p>Preco: ${produto.preco}</p>
+
                 </c:forEach>
             </section>
+            <s:property value="tmp" escape="false"/>
             <button  onclick="navegarParaPagina('acesso', 'default')">Adcionar Mais</button>
+
+            <s:property value="tmp" escape="false"/>
             <button  onclick="navegarParaPagina('acesso', 'limpar')">Limpar</button>
         </div>
     </body>

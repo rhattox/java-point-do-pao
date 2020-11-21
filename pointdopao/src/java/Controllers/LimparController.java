@@ -34,12 +34,6 @@ public class LimparController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    protected void doPost(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
-        // Invalida sessão e redireciona para login
         HttpSession sessionCarrinho = request.getSession();
         System.out.println("Teste");
         sessionCarrinho.invalidate();
@@ -47,6 +41,12 @@ public class LimparController extends HttpServlet {
 
         String forward = INDEX;
         response.sendRedirect(forward);
+    }
+
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+        // Invalida sessão e redireciona para login
+
     }
 
 }
