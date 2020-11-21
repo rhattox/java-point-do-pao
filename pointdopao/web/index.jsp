@@ -39,9 +39,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/pointdopao">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Produtos</a>
-                </li>
             </ul>
         </section>
         <section class="d-inline-flex">
@@ -73,7 +70,7 @@
                         <div class="card mb-3">
                             <!--<img class="card-img-top" src="..." alt="">-->
                             <div class="card-body">
-                                <h5 class="card-title">${control.index} - ${produto.nome}</h5>
+                                <h5 class="card-title">${produto.nome}</h5>
                                 <p class="card-text"><small class="text-muted">Quantidade: ${produto.quantidade}</small></p>
                                 <p class="card-text valor-produto">R$ ${produto.preco}</p>
 
