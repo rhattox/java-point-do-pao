@@ -36,7 +36,11 @@ public class UsuarioDao {
     private static final String SELECT_USER_BY_EMAIL = "SELECT email FROM usuario WHERE email = ?";
     private static final String SELECT_NAME_BY_EMAIL = "SELECT nome FROM usuario WHERE email = ?";
     private static final String UPDATE_USER_PASS_BY_EMAIL = "UPDATE usuario SET senha = ? WHERE email = ?";
-    private static final String UPDATE_USER_ENDERECO_BY_ID = "UPDATE usuario SET endereco = ? WHERE id = ?";
+    private static final String UPDATE_USER_ENDERECO_BY_ID =
+            "UPDATE usuario " +
+                    "SET logradouro=?, numero=?, complemento=?, bairro=?, estado=?, cep=? " +
+                    "WHERE id = ?";
+    private static final String SELECT_USER_BY_ID = "SELECT * FROM usuario WHERE id = ?";
 
 //    private static final String SELECT_ALL_USERS = "select * from usuario";
 //    private static final String DELETE_USERS_SQL = "delete from usuario where id = ?;";
@@ -70,7 +74,7 @@ public class UsuarioDao {
             preparedStatement.setString(3, user.getSobrenome());
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getSenha());
-
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
             //System.out.println("\nUSUARIODAO:\n" + preparedStatement);
         } catch (Exception e) {
@@ -149,13 +153,23 @@ public class UsuarioDao {
         return usuario;
     }
 
-    public boolean insertEndereco(String endereco, int id) throws SQLException {
+    public boolean insertEndereco(String logradouro,
+                                  String numero,
+                                  String complemento,
+                                  String bairro,
+                                  String estado,
+                                  String cep,int id) throws SQLException {
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_ENDERECO_BY_ID)) {
-            preparedStatement.setString(1, endereco);
-            preparedStatement.setInt(2, id);
-
+            preparedStatement.setString(1, logradouro);
+            preparedStatement.setString(2, numero);
+            preparedStatement.setString(3, complemento);
+            preparedStatement.setString(4, bairro);
+            preparedStatement.setString(5, estado);
+            preparedStatement.setString(6, cep);
+            preparedStatement.setInt(7, id);
+            System.out.println(preparedStatement);
             ResultSet rs;
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
@@ -166,5 +180,32 @@ public class UsuarioDao {
             Logger.getLogger(CadastrarController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public Usuario getEndereco(int id) {
+        Usuario usuario = new Usuario();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            ResultSet rs;
+            rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("logradouro") != null) {
+                    usuario.setLogradouro(rs.getString("logradouro"));
+                    usuario.setNumero(rs.getString("numero"));
+                    usuario.setComplemento(rs.getString("complemento"));
+                    usuario.setBairro(rs.getString("bairro"));
+                    usuario.setEstado(rs.getString("estado"));
+                    usuario.setCep(rs.getString("cep"));
+
+                }
+                preparedStatement.executeUpdate();
+            }
+            return usuario;
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return usuario;
     }
 }

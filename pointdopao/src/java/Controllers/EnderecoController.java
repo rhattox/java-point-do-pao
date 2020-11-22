@@ -22,7 +22,7 @@ import java.util.Enumeration;
 @WebServlet(name = "EnderecoController", urlPatterns = {"/atualizar-dados"})
 public class EnderecoController extends HttpServlet {
 
-    private static String CARRINHO = "/carrinho.jsp";
+    private static String CARRINHO = "/pointdopao/carrinho";
     UsuarioDao usuarioDao = new UsuarioDao();
     Usuario usuario = new Usuario();
 
@@ -32,20 +32,25 @@ public class EnderecoController extends HttpServlet {
         HttpSession session = request.getSession();
         String forward = "";
 
-        String endereco = request.getParameter("enderecoCheckoutForm").toUpperCase();
+        String logradouro = request.getParameter("enderecoCheckoutForm").toUpperCase();
         String numero = request.getParameter("numeroCheckoutForm").toUpperCase();
         String complemento = request.getParameter("cpCheckoutForm").toUpperCase();
         String bairro = request.getParameter("bairroCheckoutForm").toUpperCase();
         String estado = request.getParameter("estadoCheckoutForm").toUpperCase();
         String cep = request.getParameter("cepCheckoutForm").toUpperCase();
 
-        String enderecoCompleto = endereco + ", " + numero + ", " + complemento + " - " + bairro + ", " + estado + " - " + cep;
         try {
-            boolean sucesso = usuarioDao.insertEndereco(enderecoCompleto, (int) session.getAttribute("SessionIdUsuario"));
+            boolean sucesso = usuarioDao.insertEndereco(
+                    logradouro,
+                    numero,
+                    complemento,
+                    bairro,
+                    estado,
+                    cep,
+                    (int) session.getAttribute("SessionIdUsuario"));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-
         forward = CARRINHO;
         response.sendRedirect(forward);;
     }

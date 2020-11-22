@@ -1,7 +1,9 @@
 package Controllers;
 
 import Dao.ProdutoDao;
+import Dao.UsuarioDao;
 import Models.Produto;
+import Models.Usuario;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,6 +32,7 @@ public class CarrinhoController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String forward = "";
         HttpSession sessionCarrinho = request.getSession();
+        UsuarioDao usuarioDao = new UsuarioDao();
 
         Enumeration<String> params = request.getParameterNames();
 
@@ -64,6 +67,10 @@ public class CarrinhoController extends HttpServlet {
 
         sessionCarrinho.setAttribute("SessionValorCarrinho", valorTotal);
 
+        Usuario usuarioLogado = usuarioDao.getEndereco((Integer) sessionCarrinho.getAttribute("SessionIdUsuario"));
+        if (usuarioLogado.getLogradouro() != null) {
+            request.setAttribute("usuarioLogado", usuarioLogado);
+        }
         forward = CARRINHO;
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);

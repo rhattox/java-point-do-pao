@@ -23,14 +23,18 @@
                         <label for="enderecoCheckoutForm">Endereço</label>
                         <input id="enderecoCheckoutForm" name="enderecoCheckoutForm" type="text" class="form-control"
                                placeholder="Endereço"
-                               onblur="validaCampoTexto('enderecoCheckoutForm', 'enderecoCheckoutHelp', 'endereço')">
+                               onblur="validaCampoTexto('enderecoCheckoutForm', 'enderecoCheckoutHelp', 'endereço')"
+                               value="${usuarioLogado.logradouro}"
+                        >
                         <small id="enderecoCheckoutHelp" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group col-3">
                         <label for="numeroCheckoutForm">Nº</label>
                         <input id="numeroCheckoutForm" name="numeroCheckoutForm" type="number" class="form-control"
                                placeholder="Número"
-                               onblur="validaCampoTexto('numeroCheckoutForm', 'numeroCheckoutHelp', 'número')">
+                               onblur="validaCampoTexto('numeroCheckoutForm', 'numeroCheckoutHelp', 'número')"
+                               value="${usuarioLogado.numero}"
+                        >
                         <small id="numeroCheckoutHelp" class="form-text text-danger"></small>
                     </div>
                 </div>
@@ -38,7 +42,7 @@
                     <div class="form-group col-10">
                         <label for="cpCheckoutForm">Complemento</label>
                         <input id="cpCheckoutForm" name="cpCheckoutForm" type="text" class="form-control"
-                               placeholder="Complemento">
+                               placeholder="Complemento" value="${usuarioLogado.complemento}">
                     </div>
                 </div>
                 <div class="form-row mt-2">
@@ -46,20 +50,26 @@
                         <label for="bairroCheckoutForm">Bairro</label>
                         <input id="bairroCheckoutForm" name="bairroCheckoutForm" type="text" class="form-control"
                                placeholder="Bairro"
-                               onblur="validaCampoTexto('bairroCheckoutForm', 'bairroCheckoutHelp', 'bairro')">
+                               onblur="validaCampoTexto('bairroCheckoutForm', 'bairroCheckoutHelp', 'bairro')"
+                               value="${usuarioLogado.bairro}"
+                        >
                         <small id="bairroCheckoutHelp" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group col-2">
                         <label for="estadoCheckoutForm">Estado</label>
                         <input id="estadoCheckoutForm" name="estadoCheckoutForm" type="text" class="form-control"
                                placeholder="Sigla"
-                               onblur="validaCampoTexto('estadoCheckoutForm', 'estadoCheckoutHelp', 'estado')">
+                               onblur="validaCampoTexto('estadoCheckoutForm', 'estadoCheckoutHelp', 'estado')"
+                               value="${usuarioLogado.estado}"
+                        >
                         <small id="estadoCheckoutHelp" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group col-3">
                         <label for="cepCheckoutForm">CEP</label>
                         <input id="cepCheckoutForm" name="cepCheckoutForm" type="number" class="form-control"
-                               placeholder="CEP" onblur="validaCampoTexto('cepCheckoutForm', 'cepCheckoutHelp', 'CEP')">
+                               placeholder="CEP" onblur="validaCampoTexto('cepCheckoutForm', 'cepCheckoutHelp', 'CEP')"
+                               value="${usuarioLogado.cep}"
+                        >
                         <small id="cepCheckoutHelp" class="form-text text-danger"></small>
                     </div>
                 </div>
