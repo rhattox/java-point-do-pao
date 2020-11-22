@@ -61,6 +61,10 @@ input:focus::placeholder {
     color: white;
 }
 
+.valor-size {
+    font-size: larger !important;
+}
+
 .centralizar-img {
     display: block;
     margin-left: auto;

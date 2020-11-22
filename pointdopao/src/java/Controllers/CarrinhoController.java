@@ -1,7 +1,6 @@
 package Controllers;
 
 import Dao.ProdutoDao;
-import Models.Carrinho;
 import Models.Produto;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Enumeration;
+import java.util.concurrent.atomic.AtomicReference;
 
 @WebServlet(name = "CarrinhoController", urlPatterns = {"/carrinho"})
 public class CarrinhoController extends HttpServlet {
@@ -29,27 +32,33 @@ public class CarrinhoController extends HttpServlet {
         String forward = "";
         HttpSession sessionCarrinho = request.getSession();
 
-        String removerIndex = request.getParameter("remover");
-        if (removerIndex != null) {
-            int indexProdRemovido = Integer.parseInt(removerIndex);
-            carrinhoLista.remove(indexProdRemovido);
-            request.setAttribute("carrinhoLista", carrinhoLista);
-        } else {
-            String produtoId = request.getParameter("produto");
-            int qtdItem = Integer.parseInt(request.getParameter("qtd"));
+        Enumeration<String> params = request.getParameterNames();
 
-            produto = produtoDao.getProductById(produtoId);
-            produto.setQuantidade(qtdItem);
-            carrinhoLista.add(produto);
+        if(params.hasMoreElements()) {
+            String removerIndex = request.getParameter("remover");
+            if (removerIndex != null) {
+                int indexProdRemovido = Integer.parseInt(removerIndex);
+                carrinhoLista.remove(indexProdRemovido);
+                request.setAttribute("carrinhoLista", carrinhoLista);
+            } else {
+                String produtoId = request.getParameter("produto");
+                int qtdItem = Integer.parseInt(request.getParameter("qtd"));
 
-            //carrinhoLista.add(produto);
-            request.setAttribute("carrinhoLista", carrinhoLista);
-            //carrinhoLista.clear();
-            sessionCarrinho.setAttribute("carrinhoLista", carrinhoLista);
+                produto = produtoDao.getProductById(produtoId);
+                produto.setQuantidade(qtdItem);
+                carrinhoLista.add(produto);
+
+                //carrinhoLista.add(produto);
+                request.setAttribute("carrinhoLista", carrinhoLista);
+                //carrinhoLista.clear();
+                sessionCarrinho.setAttribute("carrinhoLista", carrinhoLista);
+            }
         }
+        String valorTotal = calcularTotal(carrinhoLista);
 
+        request.setAttribute("carrinhoLista", carrinhoLista);
+        request.setAttribute("total", valorTotal);
         forward = CARRINHO;
-
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
@@ -71,4 +80,16 @@ public class CarrinhoController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private String calcularTotal(ArrayList<Produto> carrinhoLista) {
+        if (carrinhoLista.size() == 0) {
+            return "0,00";
+        }
+
+        NumberFormat formatter = new DecimalFormat("#.00");
+        double total = 0;
+        for (Produto item : carrinhoLista) {
+           total += Double.parseDouble(item.getPreco().toString()) * (double) item.getQuantidade();
+        }
+        return formatter.format(total);
+    }
 }

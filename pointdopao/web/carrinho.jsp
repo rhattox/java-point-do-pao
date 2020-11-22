@@ -72,7 +72,7 @@
         <div id="total-a-pagar" class="largura-compras">
             <h3 class="mt-3 cor-padrao-txt">Compras</h3>
             <h5 class="mt-4">Produtos</h5>
-            <form class="mt-4 p-0" method="POST" action='cadastrar' name="adicionarUsuario"
+            <form class="mt-4 p-0" method="POST" action='' name="listaCompra"
                   onsubmit="return validaFormCadastro()">
                 <div class="form-row compras-title-row">
                     <div class="form-group col-6">
@@ -98,11 +98,15 @@
                             <label id="precoProdutoCompra">${produto.preco}</label>
                         </div>
                         <div class="form-group">
-                            <label id="cancelarProdutoCompra" onclick="removerProdutoListaCompra(${control.index})">X</label>
+                            <label id="cancelarProdutoCompra" class="cursor" onclick="removerProdutoListaCompra(${control.index})">X</label>
                         </div>
                     </div>
                 </c:forEach>
-
+                <div class="form-row">
+                    <div class="form-group col-6 mt-4">
+                        <label id="valorCompraTitle"><b class="valor-size">Total: R$ ${total}</b></label>
+                    </div>
+                </div>
                 <div class="d-flex justify-content-end mt-4 col-10 pr-0">
                     <button type="button" class="btn btn-secondary mr-2" onclick="navegarParaHome()">
                         <i class="fas fa-angle-left"></i>
