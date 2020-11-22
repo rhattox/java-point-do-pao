@@ -5,7 +5,10 @@
  */
 package Dao;
 
+import Controllers.CadastrarController;
 import Models.Usuario;
+
+import javax.servlet.RequestDispatcher;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,6 +36,7 @@ public class UsuarioDao {
     private static final String SELECT_USER_BY_EMAIL = "SELECT email FROM usuario WHERE email = ?";
     private static final String SELECT_NAME_BY_EMAIL = "SELECT nome FROM usuario WHERE email = ?";
     private static final String UPDATE_USER_PASS_BY_EMAIL = "UPDATE usuario SET senha = ? WHERE email = ?";
+    private static final String UPDATE_USER_ENDERECO_BY_ID = "UPDATE usuario SET endereco = ? WHERE id = ?";
 
 //    private static final String SELECT_ALL_USERS = "select * from usuario";
 //    private static final String DELETE_USERS_SQL = "delete from usuario where id = ?;";
@@ -100,36 +106,18 @@ public class UsuarioDao {
 
     public boolean changeUserPass(String email, String senha) {
         boolean autenticado = false;
-
         try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_EMAIL)) {
-            preparedStatement.setString(1, email);
+                PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_PASS_BY_EMAIL)) {
+            preparedStatement.setString(2, email.toUpperCase());
+            preparedStatement.setString(1, senha);
 
             ResultSet rs;
             rs = preparedStatement.executeQuery();
-            //System.out.println("\nUSUARIODAO:\n" + preparedStatement);
             if (rs.next()) {
-                String loginBanco = rs.getString("email");
-                int row = rs.getRow();
-
-                if (row == 1) {
-                    try (PreparedStatement preparePostCheck = connection.prepareStatement(UPDATE_USER_PASS_BY_EMAIL)) {
-
-                        preparePostCheck.setString(2, email);
-                        preparePostCheck.setString(1, senha);
-                        //System.out.println(preparePostCheck);
-                        preparePostCheck.executeUpdate();
-                        //System.out.println("\nUSUARIODAO:\n" + preparePostCheck);
-                        autenticado = true;
-                    }
-                } else {
-                    autenticado = false;
-
-                }
-
+                preparedStatement.executeUpdate();
+                autenticado = true;
             }
         } catch (Exception e) {
-
             e.getMessage();
         }
         return autenticado;
@@ -156,4 +144,20 @@ public class UsuarioDao {
         return nome;
     }
 
+    public void insertEndereco(String endereco, int id) throws SQLException {
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_ENDERECO_BY_ID)) {
+            preparedStatement.setString(1, endereco);
+            preparedStatement.setInt(2, id);
+
+            ResultSet rs;
+            rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
