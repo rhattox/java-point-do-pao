@@ -39,14 +39,17 @@ public class EntrarController extends HttpServlet {
         //System.out.println("\nENTRARCONROLLER:\nEmail: " + request.getParameter("emailLoginForm") + "\t Senha: " + request.getParameter("senhaLoginForm"));
 
         try {
-            Boolean login = usuarioDao.searchUser(usuario.getEmail(), usuario.getSenha());
+            Boolean login = usuarioDao.authByEmailSenha(usuario.getEmail(), usuario.getSenha());
             HttpSession session = request.getSession();
             if (login) {
-                String SessionNome = usuarioDao.searchUsernameByEmail(usuario.getEmail());
+                Usuario usuarioSession = usuarioDao.searchUsernameByEmail(usuario.getEmail(), usuario.getSenha());
                 String forward = "";
                 if (ehAdm(emailLoginForm, senhaLoginForm)) {
-                    session.setAttribute("SessionNome", StringUtils.capitalize(SessionNome));
+                    session.setAttribute("SessionIdUsuario", usuarioSession.getId());
+                    session.setAttribute("SessionNome", StringUtils.capitalize(usuarioSession.getNome()));
+                    session.setAttribute("SessionEmail", usuarioSession.getEmail());
                     session.setAttribute("autenticado", true);
+
                     ProdutoDao produtoDao = new ProdutoDao();
                     List<Produto> listaProdutos = produtoDao.getAllProducts();
                     request.setAttribute("listaProdutos", listaProdutos); // Will be available as ${products} in JSP
@@ -54,7 +57,9 @@ public class EntrarController extends HttpServlet {
                     forward = GESTAO_ADM;
                     
                 } else {
-                    session.setAttribute("SessionNome", StringUtils.capitalize(SessionNome));
+                    session.setAttribute("SessionIdUsuario", usuarioSession.getId());
+                    session.setAttribute("SessionNome", StringUtils.capitalize(usuarioSession.getNome()));
+                    session.setAttribute("SessionEmail", usuarioSession.getEmail());
                     session.setAttribute("autenticado", true);
                     //System.out.println("Email de sessão: " + SessionNome);
                     //System.out.println("\nENTRARCONROLLER:\nA query retornou verdadeira, você está logado!");

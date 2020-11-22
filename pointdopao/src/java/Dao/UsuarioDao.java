@@ -32,7 +32,7 @@ public class UsuarioDao {
 
     private static final String INSERT_USERS_SQL = "INSERT INTO usuario (tipo, nome, sobrenome, email, senha) VALUES (?,?,?,?,?);";
 
-    private static final String SELECT_USER_BY_EMAIL_PASS = "SELECT email, senha FROM usuario WHERE email = ? AND senha = ?";
+    private static final String SELECT_USER_BY_EMAIL_PASS = "SELECT * FROM usuario WHERE email = ? AND senha = ?;";
     private static final String SELECT_USER_BY_EMAIL = "SELECT email FROM usuario WHERE email = ?";
     private static final String SELECT_NAME_BY_EMAIL = "SELECT nome FROM usuario WHERE email = ?";
     private static final String UPDATE_USER_PASS_BY_EMAIL = "UPDATE usuario SET senha = ? WHERE email = ?";
@@ -78,7 +78,7 @@ public class UsuarioDao {
         }
     }
 
-    public Boolean searchUser(String email, String senha) {
+    public Boolean authByEmailSenha(String email, String senha) {
 
         boolean autenticado = false;
 
@@ -123,28 +123,33 @@ public class UsuarioDao {
         return autenticado;
     }
 
-    public String searchUsernameByEmail(String email) {
-        String nome = null;
+    public Usuario searchUsernameByEmail(String email, String senha) {
+        Usuario usuario = new Usuario();
+
         try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_NAME_BY_EMAIL)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_EMAIL_PASS)) {
             preparedStatement.setString(1, email);
+            preparedStatement.setString(2, senha);
+
             ResultSet rs;
             rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                nome = rs.getString("nome");
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
             }
             preparedStatement.executeUpdate();
 
-            return nome;
+            return usuario;
         } catch (Exception e) {
             //System.out.println("\n\nErro em searchUsernameByEmail : " + e.getMessage());
         }
         //System.out.println("\nNOME searchUsernameByEmail: " + nome);
-        return nome;
+        return usuario;
     }
 
-    public void insertEndereco(String endereco, int id) throws SQLException {
+    public boolean insertEndereco(String endereco, int id) throws SQLException {
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_ENDERECO_BY_ID)) {
@@ -156,8 +161,10 @@ public class UsuarioDao {
             if (rs.next()) {
                 preparedStatement.executeUpdate();
             }
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
     }
 }

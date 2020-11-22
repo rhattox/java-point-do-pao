@@ -17,7 +17,7 @@
     <section class="d-flex">
         <div>
             <h3 class="mt-3 cor-padrao-txt">Local de Entrega</h3>
-            <form class="mt-4 p-0" method="POST" action='cadastrar' name="dadosEndereco">
+            <form class="mt-4 p-0" method="POST" action='atualizar-dados' name="dadosEndereco">
                 <div class="form-row">
                     <div class="form-group col-7">
                         <label for="enderecoCheckoutForm">Endereço</label>
@@ -62,6 +62,9 @@
                                placeholder="CEP" onblur="validaCampoTexto('cepCheckoutForm', 'cepCheckoutHelp', 'CEP')">
                         <small id="cepCheckoutHelp" class="form-text text-danger"></small>
                     </div>
+                </div>
+                <div class="d-flex justify-content-end mt-4 col-10 pr-0">
+                    <button type="submit" class="btn btn-info">Salvar</button>
                 </div>
             </form>
         </div>
