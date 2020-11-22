@@ -38,7 +38,7 @@ public class CompraController extends HttpServlet {
 
             System.out.println("2:" + valorTotalCarrinho);
             
-            Double valorTotalCarrinho2 = Double.parseDouble(valorTotalCarrinho) ;
+            Double valorTotalCarrinho2 = Double.parseDouble(valorTotalCarrinho.replace(',', '.'));
             
             System.out.println("3:" + valorTotalCarrinho2);
             
