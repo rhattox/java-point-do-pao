@@ -57,6 +57,9 @@ public class CarrinhoController extends HttpServlet {
 
         request.setAttribute("carrinhoLista", carrinhoLista);
         request.setAttribute("total", valorTotal);
+        
+        sessionCarrinho.setAttribute("valorTotalCarrinho", valorTotal);
+        
         forward = CARRINHO;
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
