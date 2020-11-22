@@ -18,78 +18,44 @@ import java.sql.SQLException;
  */
 public class CarrinhoDao {
 
-    public class UsuarioDao {
+    private String jdbcURL = "jdbc:postgresql://localhost:12002/pointdopao";
 
-        private String jdbcURL = "jdbc:postgresql://localhost:12002/pointdopao";
+    private String jdbcUsername = "admin";
+    private String jdbcPassword = "admin";
 
-        private String jdbcUsername = "admin";
-        private String jdbcPassword = "admin";
+    private static final String INSERT_CARRINHO_SQL = "INSERT INTO carrinho (id_produto, quantidade) VALUES (?,?);";
 
-        private static final String INSERT_CARRINHO_SQL = "INSERT INTO carrinho (id_produto, quantidade) VALUES (?,?);";
+    protected Connection getConnection() {
 
-        private static final String SELECT_CARRINHO_BY_PRODUTO = "SELECT id FROM carrinho WHERE id_produto = ?";
+        Connection connection = null;
 
-        protected Connection getConnection() {
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
 
-            Connection connection = null;
-
-            try {
-                Class.forName("org.postgresql.Driver");
-                connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            System.out.println("\nCARRINHODAO:\nIniciada a conexão com o banco de dados:\t" + connection);
-            return connection;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-
-        public void insertProduto(Produto id, Produto quantidade) throws SQLException {
-
-            // try-with-resource statement will auto close the connection.
-            try (Connection connection = getConnection();
-                    PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CARRINHO_SQL)) {
-                preparedStatement.setInt(1, id.getId());
-                preparedStatement.setInt(2, quantidade.getQuantidade());
-
-                preparedStatement.executeUpdate();
-                System.out.println("\nCARRINHODAO:\n" + preparedStatement);
-            } catch (Exception e) {
-                e.getMessage();
-            }
-        }
-
-        public Boolean searchCarrinho(int id, int id_produto) {
-
-            boolean autenticado = false;
-
-            try (Connection connection = getConnection();
-                    PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CARRINHO_BY_PRODUTO)) {
-
-                preparedStatement.setInt(1, id);
-                preparedStatement.setInt(2, id_produto);
-
-                ResultSet rs;
-                rs = preparedStatement.executeQuery();
-
-                if (rs.next()) {
-                    String loginBanco = rs.getString("id");
-                    String senhaBanco = rs.getString("id_produto");
-                    autenticado = true;
-                }
-                preparedStatement.executeUpdate();
-                System.out.println("\nCarrinhoDAO:\n" + preparedStatement);
-            } catch (Exception e) {
-                e.getMessage();
-            }
-            return autenticado;
-        }
-
+        System.out.println("\nCARRINHODAO:\nIniciada a conexão com o banco de dados:\t" + connection);
+        return connection;
     }
-    
+
+    public void insertProduto(int idProduto, int quantidadeProduto) throws SQLException {
+
+        // try-with-resource statement will auto close the connection.
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CARRINHO_SQL)) {
+            preparedStatement.setInt(1, idProduto);
+            preparedStatement.setInt(2, quantidadeProduto);
+            preparedStatement.executeUpdate();
+            System.out.println("\nCARRINHODAO:\n" + preparedStatement);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
 
 }

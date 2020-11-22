@@ -11,17 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.concurrent.atomic.AtomicReference;
 
 @WebServlet(name = "CarrinhoController", urlPatterns = {"/carrinho"})
 public class CarrinhoController extends HttpServlet {
 
     private static String CARRINHO = "/carrinho.jsp";
+
     ProdutoDao produtoDao = new ProdutoDao();
     Produto produto = new Produto();
     ArrayList<Produto> carrinhoLista = new ArrayList();
@@ -34,8 +33,9 @@ public class CarrinhoController extends HttpServlet {
 
         Enumeration<String> params = request.getParameterNames();
 
-        if(params.hasMoreElements()) {
+        if (params.hasMoreElements()) {
             String removerIndex = request.getParameter("remover");
+
             if (removerIndex != null) {
                 int indexProdRemovido = Integer.parseInt(removerIndex);
                 carrinhoLista.remove(indexProdRemovido);
@@ -49,17 +49,21 @@ public class CarrinhoController extends HttpServlet {
                 carrinhoLista.add(produto);
 
                 request.setAttribute("carrinhoLista", carrinhoLista);
-                //carrinhoLista.clear();
-                sessionCarrinho.setAttribute("carrinhoLista", carrinhoLista);
+                sessionCarrinho.setAttribute("SessionProdutoId", produto.getId());
+                sessionCarrinho.setAttribute("SessionProdutoQnt", produto.getQuantidade());
+
             }
         }
+
+        sessionCarrinho.setAttribute("SessionCarrinhoProduto", carrinhoLista);
+
         String valorTotal = calcularTotal(carrinhoLista);
 
         request.setAttribute("carrinhoLista", carrinhoLista);
         request.setAttribute("total", valorTotal);
-        
-        sessionCarrinho.setAttribute("valorTotalCarrinho", valorTotal);
-        
+
+        sessionCarrinho.setAttribute("SessionValorCarrinho", valorTotal);
+
         forward = CARRINHO;
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -90,7 +94,7 @@ public class CarrinhoController extends HttpServlet {
         NumberFormat formatter = new DecimalFormat("#.00");
         double total = 0;
         for (Produto item : carrinhoLista) {
-           total += Double.parseDouble(item.getPreco().toString()) * (double) item.getQuantidade();
+            total += Double.parseDouble(item.getPreco().toString()) * (double) item.getQuantidade();
         }
         return formatter.format(total);
     }
