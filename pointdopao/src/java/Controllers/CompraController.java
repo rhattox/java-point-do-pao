@@ -31,41 +31,50 @@ public class CompraController extends HttpServlet {
 
     private static String ENTRAR = "/entrar.jsp";
 
+    private static String ERRO = "/entrar.jsp";
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-
-            HttpSession sessionCarrinho = request.getSession();
+            //USUARIO
             HttpSession session = request.getSession();
+            //USUARIO ID
+            int SessionIdUsuario = (int) session.getAttribute("SessionIdUsuario");
+
+            //CARRINHO
+            HttpSession sessionCarrinho = request.getSession();
+            //CARRINHO VALOR TOTAL
             String SessionValorCarrinho = (String) sessionCarrinho.getAttribute("SessionValorCarrinho");
             Double SessionValorCarrinho2 = Double.parseDouble(SessionValorCarrinho.replace(',', '.'));
-            int SessionQntItemCarrinho = (int) sessionCarrinho.getAttribute("SessionProdutoQnt");
-            //carrinhoDao.insertProduto(int id, int quantidade);
+            ArrayList<Produto> SessionListaProduto = (ArrayList<Produto>) sessionCarrinho.getAttribute("SessionCarrinhoProduto");
 
-            System.out.println("Qnt: " + SessionQntItemCarrinho + "   Valor total: " + SessionValorCarrinho2);
-
-            ArrayList<Produto> SessionArrayProduto = (ArrayList<Produto>) sessionCarrinho.getAttribute("SessionCarrinhoProduto");
-
-            System.out.println("Array POST: " + SessionArrayProduto.isEmpty());
-
-            SessionArrayProduto.forEach(produto -> {
-                System.out.println("produto ID: " + produto.getId());
-                System.out.println("produto Quantidade: " + produto.getQuantidade());
-                int idProduto = produto.getId();
-                int qntProduto = produto.getQuantidade();
-
+            //VERIFICA SE TÁ LOGADO
+            if (SessionIdUsuario == 0) {
+                System.out.println("é nulo");
+                String forward = ERRO;
+                RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            } else {
+                //agora monta o carrinho pro banco de dados
                 try {
-                    carrinhoDao.insertProduto(idProduto, qntProduto);
-                } catch (SQLException ex) {
-                    Logger.getLogger(CompraController.class.getName()).log(Level.SEVERE, null, ex);
+                    int idTabelaCompra = carrinhoDao.insertProduto(SessionIdUsuario, SessionValorCarrinho2);
+                    SessionListaProduto.forEach(produto -> {
+                        try {
+                            carrinhoDao.insertProdutoDetalhe(idTabelaCompra, produto.getId(), produto.getQuantidade());
+                        } catch (SQLException e) {
+                            e.getMessage();
+                        }
+                    });
+
+                } catch (SQLException e) {
+                    e.getMessage();
                 }
 
-            });
-
-            String forward = ENTRAR;
-            RequestDispatcher view = request.getRequestDispatcher(forward);
-            view.forward(request, response);
+                String forward = ERRO;
+                RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            }
 
         } catch (Exception e) {
             e.getMessage();

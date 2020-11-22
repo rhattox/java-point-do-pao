@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,8 +24,10 @@ public class CarrinhoDao {
     private String jdbcUsername = "admin";
     private String jdbcPassword = "admin";
 
-    private static final String INSERT_CARRINHO_SQL = "INSERT INTO carrinho (id_produto, quantidade) VALUES (?,?);";
+    private static final String INSERT_DETALHE_COMPRA_SQL = "INSERT INTO detalhe_compra (id_compra,id_produto,quantidade_produto) VALUES (?,?,?);";
+    private static final String INSERT_RETURN_COMPRA_SQL = "INSERT INTO compra (id_usuario, valor_total) VALUES (?,?) RETURNING id ;";
 
+    //private static final String INSERT_CARRINHO_SQL = "INSERT INTO carrinho (id_produto, quantidade) VALUES (?,?);";
     protected Connection getConnection() {
 
         Connection connection = null;
@@ -44,15 +47,41 @@ public class CarrinhoDao {
         return connection;
     }
 
-    public void insertProduto(int idProduto, int quantidadeProduto) throws SQLException {
+    public int insertProduto(int idUsuario, Double valorTotal) throws SQLException {
+        // try-with-resource statement will auto close the connection.
+        int id_tabela = 0;
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_RETURN_COMPRA_SQL)) {
+            preparedStatement.setInt(1, idUsuario);
+            preparedStatement.setDouble(2, valorTotal);
+
+            ResultSet rs;
+            rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                rs.getInt("id");
+                id_tabela = rs.getInt("id");
+            }
+
+            preparedStatement.close();
+            connection.close();
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return id_tabela;
+    }
+
+    public void insertProdutoDetalhe(int idTabelaCompra, int idProduto, int qntProduto) throws SQLException {
 
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CARRINHO_SQL)) {
-            preparedStatement.setInt(1, idProduto);
-            preparedStatement.setInt(2, quantidadeProduto);
+                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_DETALHE_COMPRA_SQL)) {
+            preparedStatement.setInt(1, idTabelaCompra);
+            preparedStatement.setInt(2, idProduto);
+            preparedStatement.setInt(3, qntProduto);
             preparedStatement.executeUpdate();
-            System.out.println("\nCARRINHODAO:\n" + preparedStatement);
+            preparedStatement.close();
+            connection.close();
         } catch (Exception e) {
             e.getMessage();
         }
