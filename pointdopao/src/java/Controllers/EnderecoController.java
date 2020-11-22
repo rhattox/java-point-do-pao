@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class EnderecoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
         String forward = "";
 
         String endereco = request.getParameter("enderecoCheckoutForm").toUpperCase();
@@ -38,11 +40,14 @@ public class EnderecoController extends HttpServlet {
         String cep = request.getParameter("cepCheckoutForm").toUpperCase();
 
         String enderecoCompleto = endereco + ", " + numero + ", " + complemento + " - " + bairro + ", " + estado + " - " + cep;
-
+        try {
+            boolean sucesso = usuarioDao.insertEndereco(enderecoCompleto, (int) session.getAttribute("SessionIdUsuario"));
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
         forward = CARRINHO;
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+        response.sendRedirect(forward);;
     }
 
     @Override
