@@ -30,7 +30,7 @@
                 <div class="form-row mt-2">
                     <div class="col-12">
                         <label for="NovaSenha">Nova Senha</label>
-                        <input id="novaSenhaResetForm" name="senhaResetForm" type="password" class="form-control" placeholder="Nova Senha" onblur="validaSenhasRedefinicao()">
+                        <input id="novaSenhaResetForm" name="novaSenhaResetForm" type="password" class="form-control" placeholder="Nova Senha" onblur="validaSenhasRedefinicao()">
                         <small id="novaSenhaHelpReset" class="form-text text-danger"></small>
                     </div>
                 </div>

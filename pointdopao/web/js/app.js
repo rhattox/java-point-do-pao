@@ -147,3 +147,8 @@ function validaFormCarrinho() {
     }
 }
 
+
+function notificaPrecisaEstarLogado() {
+    window.alert("Você necessita estar logado!");
+}
+

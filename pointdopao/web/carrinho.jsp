@@ -71,7 +71,7 @@
         <div id="total-a-pagar" class="largura-compras">
             <h3 class="mt-3 cor-padrao-txt">Compras</h3>
             <h5 class="mt-4">Produtos</h5>
-            <form class="mt-4 p-0" method="POST" action='acesso' name="listaCompra"
+            <form class="mt-4 p-0" method="POST" action='compra' name="listaCompra"
                   onsubmit="return validaFormCarrinho()">
                 <div class="form-row compras-title-row">
                     <div class="form-group col-6">

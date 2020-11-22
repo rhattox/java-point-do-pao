@@ -1,7 +1,9 @@
 package Controllers;
 
 import Dao.ProdutoDao;
+import Dao.UsuarioDao;
 import Models.Produto;
+import Models.Usuario;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,55 +13,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.concurrent.atomic.AtomicReference;
 
-@WebServlet(name = "CarrinhoController", urlPatterns = {"/carrinho"})
-public class CarrinhoController extends HttpServlet {
+@WebServlet(name = "EnderecoController", urlPatterns = {"/atualizar-dados"})
+public class EnderecoController extends HttpServlet {
 
     private static String CARRINHO = "/carrinho.jsp";
-    ProdutoDao produtoDao = new ProdutoDao();
-    Produto produto = new Produto();
-    ArrayList<Produto> carrinhoLista = new ArrayList();
+    UsuarioDao usuarioDao = new UsuarioDao();
+    Usuario usuario = new Usuario();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String forward = "";
-        HttpSession sessionCarrinho = request.getSession();
 
-        Enumeration<String> params = request.getParameterNames();
+        String endereco = request.getParameter("enderecoCheckoutForm").toUpperCase();
+        String numero = request.getParameter("numeroCheckoutForm").toUpperCase();
+        String complemento = request.getParameter("cpCheckoutForm").toUpperCase();
+        String bairro = request.getParameter("bairroCheckoutForm").toUpperCase();
+        String estado = request.getParameter("estadoCheckoutForm").toUpperCase();
+        String cep = request.getParameter("cepCheckoutForm").toUpperCase();
 
-        if(params.hasMoreElements()) {
-            String removerIndex = request.getParameter("remover");
-            if (removerIndex != null) {
-                int indexProdRemovido = Integer.parseInt(removerIndex);
-                carrinhoLista.remove(indexProdRemovido);
-                request.setAttribute("carrinhoLista", carrinhoLista);
-            } else {
-                String produtoId = request.getParameter("produto");
-                int qtdItem = Integer.parseInt(request.getParameter("qtd"));
+        String enderecoCompleto = endereco + ", " + numero + ", " + complemento + " - " + bairro + ", " + estado + " - " + cep;
 
-                produto = produtoDao.getProductById(produtoId);
-                produto.setQuantidade(qtdItem);
-                carrinhoLista.add(produto);
 
-                request.setAttribute("carrinhoLista", carrinhoLista);
-                //carrinhoLista.clear();
-                sessionCarrinho.setAttribute("carrinhoLista", carrinhoLista);
-            }
-        }
-        String valorTotal = calcularTotal(carrinhoLista);
-
-        request.setAttribute("carrinhoLista", carrinhoLista);
-        request.setAttribute("total", valorTotal);
-        
-        sessionCarrinho.setAttribute("valorTotalCarrinho", valorTotal);
-        
         forward = CARRINHO;
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
