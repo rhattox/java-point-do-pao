@@ -5,12 +5,12 @@ CREATE TABLE "usuario" (
   "sobrenome" character varying(50) NOT NULL,
   "email" character varying(50) NOT NULL,
   "senha" character varying(10) NOT NULL,
-  "logradouro" character varying(70) NOT NULL,
-  "numero" character varying(6) NOT NULL,
+  "logradouro" character varying(70),
+  "numero" character varying(6),
   "complemento" character varying(70),
-  "bairro" character varying(20) NOT NULL,
-  "estado" character varying(2) NOT NULL,
-  "cep" character varying(9) NOT NULL,
+  "bairro" character varying(20),
+  "estado" character varying(2),
+  "cep" character varying(9),
   PRIMARY KEY (id)
 );
 

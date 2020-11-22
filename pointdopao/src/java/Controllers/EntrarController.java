@@ -55,7 +55,6 @@ public class EntrarController extends HttpServlet {
                     request.setAttribute("listaProdutos", listaProdutos); // Will be available as ${products} in JSP
                     //System.out.println("Redirect para tela de gestão");
                     forward = GESTAO_ADM;
-                    
                 } else {
                     session.setAttribute("SessionIdUsuario", usuarioSession.getId());
                     session.setAttribute("SessionNome", StringUtils.capitalize(usuarioSession.getNome()));
