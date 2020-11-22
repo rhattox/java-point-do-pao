@@ -29,17 +29,24 @@ public class CarrinhoController extends HttpServlet {
         String forward = "";
         HttpSession sessionCarrinho = request.getSession();
 
-        String produtoId = request.getParameter("produto");
-        String qtdItem = request.getParameter("qtd");
+        String removerIndex = request.getParameter("remover");
+        if (removerIndex != null) {
+            int indexProdRemovido = Integer.parseInt(removerIndex);
+            carrinhoLista.remove(indexProdRemovido);
+            request.setAttribute("carrinhoLista", carrinhoLista);
+        } else {
+            String produtoId = request.getParameter("produto");
+            int qtdItem = Integer.parseInt(request.getParameter("qtd"));
 
-        produto = produtoDao.getProductById(produtoId);
-        request.setAttribute("produto", produto);
+            produto = produtoDao.getProductById(produtoId);
+            produto.setQuantidade(qtdItem);
+            carrinhoLista.add(produto);
 
-        //carrinhoLista.add(produto);
-        request.setAttribute("carrinhoLista", carrinhoLista);
-
-        //carrinhoLista.clear();
-        sessionCarrinho.setAttribute("carrinhoLista", carrinhoLista.add(produto));
+            //carrinhoLista.add(produto);
+            request.setAttribute("carrinhoLista", carrinhoLista);
+            //carrinhoLista.clear();
+            sessionCarrinho.setAttribute("carrinhoLista", carrinhoLista);
+        }
 
         forward = CARRINHO;
 

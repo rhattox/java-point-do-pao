@@ -3,7 +3,7 @@ function navegarParaPagina(page, pr) {
 }
 
 function navegarParaHome() {
-    window.location = "/entrar";
+    window.location = "/pointdopao";
 }
 
 function voltar() {
@@ -107,9 +107,21 @@ function quantidadeItemControl(index, acao) {
         return;
     }
     document.getElementById(`${index}-label`).innerHTML = `${valor}`;
+
+    let btnComprar = document.getElementById(`${index}-comprar`)
+    btnComprar.disabled = valor <= 0;
 }
 
 function fecharPedido(index) {
     let qtdItem = parseInt(document.getElementById(`${index}-label`).innerText);
     window.location = `acesso?pr=carrinho&produto=${index + 1}&qtd=${qtdItem}`;
+}
+
+function podeComprar(index) {
+    let qtdItem = parseInt(document.getElementById(`${index}-label`).innerText);
+    return qtdItem > 0;
+}
+
+function removerProdutoListaCompra(index) {
+    window.location = `carrinho?remover=${index}`;
 }

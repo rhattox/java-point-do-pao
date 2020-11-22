@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,33 +72,39 @@
         <div id="total-a-pagar" class="largura-compras">
             <h3 class="mt-3 cor-padrao-txt">Compras</h3>
             <h5 class="mt-4">Produtos</h5>
-                <form class="mt-4 p-0" method="POST" action='cadastrar' name="adicionarUsuario"
-                      onsubmit="return validaFormCadastro()">
+            <form class="mt-4 p-0" method="POST" action='cadastrar' name="adicionarUsuario"
+                  onsubmit="return validaFormCadastro()">
+                <div class="form-row compras-title-row">
+                    <div class="form-group col-6">
+                        <label id="nomeProdutoCompraTitle"><b>Nome</b></label>
+                    </div>
+                    <div class="form-group col-2">
+                        <label id="qtdProdutoCompraTitle"><b>Qtd</b></label>
+                    </div>
+                    <div class="form-group col-3">
+                        <label id="precoProdutoCompraTitle"><b>Preço</b></label>
+                    </div>
+                </div>
+                <jsp:useBean id="carrinhoLista" scope="request" type="java.util.List"/>
+                <c:forEach items="${carrinhoLista}" var="produto" varStatus="control">
                     <div class="form-row compras-title-row">
                         <div class="form-group col-6">
-                            <label id="nomeProdutoCompraTitle"><b>Nome</b></label>
+                            <label id="nomeProdutoCompra">${produto.nome}</label>
                         </div>
                         <div class="form-group col-2">
-                            <label id="qtdProdutoCompraTitle"><b>Qtd</b></label>
+                            <label id="qtdProdutoCompra">${produto.quantidade}</label>
                         </div>
                         <div class="form-group col-3">
-                            <label id="precoProdutoCompraTitle"><b>Preço</b></label>
+                            <label id="precoProdutoCompra">${produto.preco}</label>
+                        </div>
+                        <div class="form-group">
+                            <label id="cancelarProdutoCompra" onclick="removerProdutoListaCompra(${control.index})">X</label>
                         </div>
                     </div>
-                    <div class="form-row compras-title-row">
-                        <div class="form-group col-6">
-                            <label id="nomeProdutoCompra">Pão Francês</label>
-                        </div>
-                        <div class="form-group col-2">
-                            <label id="qtdProdutoCompra">1</label>
-                        </div>
-                        <div class="form-group col-3">
-                            <label id="precoProdutoCompra">R$ 2,50</label>
-                        </div>
-                    </div>
+                </c:forEach>
 
                 <div class="d-flex justify-content-end mt-4 col-10 pr-0">
-                    <button type="button" class="btn btn-secondary mr-2" onclick="voltar()">
+                    <button type="button" class="btn btn-secondary mr-2" onclick="navegarParaHome()">
                         <i class="fas fa-angle-left"></i>
                         Voltar
                     </button>
@@ -107,22 +113,6 @@
             </form>
         </div>
     </section>
-    <%--<c:forEach items="${carrinhoLista}" var="produto" varStatus="control">
-
-        <s:property value="tmp" escape="false"/>
-        <p>Nome:  ${produto.nome}</p>
-        <s:property value="tmp" escape="false"/>
-        <p>Quantidade: ${produto.quantidade}</p>
-        <s:property value="tmp" escape="false"/>
-        <p>Preco: ${produto.preco}</p>
-
-    </c:forEach>
-</section>
-<s:property value="tmp" escape="false"/>
-<button  onclick="navegarParaPagina('acesso', 'default')">Adcionar Mais</button>
-
-<s:property value="tmp" escape="false"/>
-<button  onclick="navegarParaPagina('acesso', 'limpar')">Limpar</button>--%>
 </div>
 </body>
 </html>
