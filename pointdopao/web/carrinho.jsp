@@ -97,7 +97,7 @@
                             <label id="precoProdutoCompra">${produto.preco}</label>
                         </div>
                         <div class="form-group">
-                            <label id="cancelarProdutoCompra" class="cursor" onclick="removerProdutoListaCompra(${control.index})">X</label>
+                            <label id="cancelarProdutoCompra" class="cursor" onclick="removerProdutoListaCompra(${control.index})"><i class="fas fa-times cor-padrao-txt"></i></label>
                         </div>
                     </div>
                 </c:forEach>
