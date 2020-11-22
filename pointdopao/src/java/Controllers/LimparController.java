@@ -40,8 +40,10 @@ public class LimparController extends HttpServlet {
         System.out.println("Teste");
 
         System.out.println(session.getAttribute("carrinhoLista"));
-        //session.removeAttribute("carrinhoLista");
-        //System.out.println("SAIRCONTROLLER: Invalidando Sessão!!");
+        session.removeAttribute("carrinhoLista");
+       
+        
+        System.out.println("SAIRCONTROLLER: Invalidando Sessão!!");
         String forward = INDEX;
         response.sendRedirect(forward);
     }
@@ -49,5 +51,7 @@ public class LimparController extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
     }
-
+    
+    
+    
 }

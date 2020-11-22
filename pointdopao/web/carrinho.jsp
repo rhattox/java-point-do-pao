@@ -56,7 +56,7 @@
                 <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('acesso', 'limpar')">Limpar</button>
 
 
-
+                <button class="btn btn-procurar alinhamento-conteudo-dir" onclick= "navegarParaPagina()">Finalizar compra</button>
 
 
 

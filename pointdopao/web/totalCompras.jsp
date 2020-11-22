@@ -37,13 +37,7 @@
 
     <nav class="navbar navbar-expand-sm barra-botoes">
         
-            <section>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="totalCompras.jsp">Total de vendas</a>
-                </li>
-            </ul>
-        </section>
+            
         <section class="d-flex ml-auto">
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Procurar" aria-label="Search">

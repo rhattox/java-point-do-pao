@@ -113,3 +113,4 @@ function fecharPedido(index) {
     let qtdItem = parseInt(document.getElementById(`${index}-label`).innerText);
     window.location = `acesso?pr=carrinho&produto=${index + 1}&qtd=${qtdItem}`;
 }
+
