@@ -3,7 +3,7 @@ function navegarParaPagina(page, pr) {
 }
 
 function navegarParaHome() {
-    window.location = "/entrar";
+    window.location = "/pointdopao";
 }
 
 function voltar() {
@@ -56,10 +56,10 @@ function validaSenhasRedefinicao() {
 
 function validaFormCadastro() {
     if (document.getElementById('nomeHelp').style.display === "none" &&
-        document.getElementById('sobrenomeHelp').style.display === "none" &&
-        document.getElementById('emailHelp').style.display === "none" &&
-        document.getElementById('senhaHelp').style.display === "none" &&
-        document.getElementById('senhaHelp').style.display === "none") {
+            document.getElementById('sobrenomeHelp').style.display === "none" &&
+            document.getElementById('emailHelp').style.display === "none" &&
+            document.getElementById('senhaHelp').style.display === "none" &&
+            document.getElementById('senhaHelp').style.display === "none") {
         return true;
     } else {
         validaCampoTexto('nomeForm', 'nomeHelp', 'nome');
@@ -78,7 +78,7 @@ function validarLogin() {
     var senha = document.getElementById('senhaLoginForm').value;
 
     if (email.length > 0 &&
-        (senha.length >= 6 && senha.length <= 10)) {
+            (senha.length >= 6 && senha.length <= 10)) {
         return true;
     } else {
         window.alert("O email e/ou senha inválido(s).");
@@ -87,7 +87,7 @@ function validarLogin() {
 }
 /*-----------------------------*/
 function alertLoginSuccess(variable) {
-    if (variable===true) {
+    if (variable === true) {
         alert('Usuário cadastrado com sucesso!');
     }
 }
@@ -98,7 +98,7 @@ function quantidadeItemControl(index, acao) {
     const item = `${index}-${acao}`;
     console.log(item);
     let valor = parseInt(document.getElementById(`${index}-label`).innerText);
-    console.log("valor: "+valor);
+    console.log("valor: " + valor);
     if (acao === 'diminuir' && valor > 0) {
         valor--;
     } else if (acao === 'aumentar') {
@@ -107,9 +107,41 @@ function quantidadeItemControl(index, acao) {
         return;
     }
     document.getElementById(`${index}-label`).innerHTML = `${valor}`;
+
+    let btnComprar = document.getElementById(`${index}-comprar`)
+    btnComprar.disabled = valor <= 0;
 }
 
 function fecharPedido(index) {
     let qtdItem = parseInt(document.getElementById(`${index}-label`).innerText);
-    window.location = `acesso?pr=carrinho&produto=${index}&qtd=${qtdItem}`;
+    window.location = `acesso?pr=carrinho&produto=${index + 1}&qtd=${qtdItem}`;
+}
+
+function podeComprar(index) {
+    let qtdItem = parseInt(document.getElementById(`${index}-label`).innerText);
+    return qtdItem > 0;
+}
+
+function removerProdutoListaCompra(index) {
+    window.location = `carrinho?remover=${index}`;
+}
+
+/*----------------------------------------*/
+function validaFormCarrinho() {
+    if (document.getElementById('enderecoCheckoutHelp').style.display === "none" &&
+        document.getElementById('numeroCheckoutHelp').style.display === "none" &&
+        document.getElementById('bairroCheckoutHelp').style.display === "none" &&
+        document.getElementById('estadoCheckoutHelp').style.display === "none" &&
+        document.getElementById('cepCheckoutHelp').style.display === "none") {
+        window.alert("Compra realizada com sucesso! \nEm breve estará na sua casa =D");
+        return true;
+    } else {
+        validaCampoTexto('enderecoCheckoutForm', 'enderecoCheckoutHelp', 'endereço');
+        validaCampoTexto('numeroCheckoutForm', 'numeroCheckoutHelp', 'número');
+        validaCampoTexto('bairroCheckoutForm', 'bairroCheckoutHelp', 'bairro');
+        validaCampoTexto('estadoCheckoutForm', 'estadoCheckoutHelp', 'estado');
+        validaCampoTexto('cepCheckoutForm', 'cepCheckoutHelp', 'CEP');
+        window.alert("O formulário contém campos inválidos!");
+        return false;
+    }
 }

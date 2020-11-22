@@ -61,6 +61,10 @@ input:focus::placeholder {
     color: white;
 }
 
+.valor-size {
+    font-size: larger !important;
+}
+
 .centralizar-img {
     display: block;
     margin-left: auto;
@@ -128,4 +132,12 @@ input:focus::placeholder {
     color: #b34c1b;
     display: flex;
     flex-direction: row-reverse;
+}
+
+.largura-compras {
+    width: 30rem !important;
+}
+
+.compras-title-row {
+    height: 2rem;
 }

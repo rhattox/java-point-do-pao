@@ -1,3 +1,5 @@
+<%@page import="java.sql.*"%>
+<%@page import="java.io.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -65,11 +67,46 @@
                 <td>${produto.id}</td>
                 <td>${produto.nome}</td>
                 <td>${produto.quantidade}</td>
-                <td>R$ ${produto.preco}</td>
+                <td>R$ ${produto.preco}</td>             
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <% 
+        String url = "jdbc:postgresql://localhost:12002/pointdopao";
+        String user = "admin";
+        String senha = "admin";
+        String select = "select imagem from produto where id=1";
+        try{
+            /* TODO output your page here. You may use following sample code. */
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(url,user,senha);
+            PreparedStatement stm = c.prepareStatement(select);
+            //stm.setInt(1,1);
+            ResultSet rs = stm.executeQuery();
+            
+            while (rs.next()) {
+                
+                byte[] rb = new byte[30000];
+                int read = 0;
+                InputStream readImg = rs.getBinaryStream(1);
+                OutputStream os = response.getOutputStream();
+                while ((read = readImg.read(rb)) != -1) {
+                    os.write(rb,0,read);
+                }
+                os.flush();
+                os.close();
+            }
+            //out.print("Deu certo");
+            
+            rs.close();
+            stm.close();
+            c.close();
+        }
+        catch(IOException | ClassNotFoundException | SQLException e){
+            System.out.println(e);
+        }
+    %>
 </section>
 
 </body>

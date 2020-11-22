@@ -5,7 +5,8 @@ CREATE TABLE "usuario" (
   "sobrenome" character varying(50) NOT NULL,
   "email" character varying(50) NOT NULL,
   "senha" character varying(10) NOT NULL,
-  "endereco" character varying(70)
+  "endereco" character varying(70),
+  PRIMARY KEY (id)
 );
 
 INSERT INTO usuario (id, tipo, nome, sobrenome, email, senha)

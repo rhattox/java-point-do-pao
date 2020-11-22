@@ -3,7 +3,7 @@ function navegarParaPagina(page, pr) {
 }
 
 function navegarParaHome() {
-    window.location = "/entrar";
+    window.location = "/pointdopao";
 }
 
 function voltar() {
@@ -107,10 +107,43 @@ function quantidadeItemControl(index, acao) {
         return;
     }
     document.getElementById(`${index}-label`).innerHTML = `${valor}`;
+
+    let btnComprar = document.getElementById(`${index}-comprar`)
+    btnComprar.disabled = valor <= 0;
 }
 
 function fecharPedido(index) {
     let qtdItem = parseInt(document.getElementById(`${index}-label`).innerText);
     window.location = `acesso?pr=carrinho&produto=${index + 1}&qtd=${qtdItem}`;
+}
+
+
+function podeComprar(index) {
+    let qtdItem = parseInt(document.getElementById(`${index}-label`).innerText);
+    return qtdItem > 0;
+}
+
+function removerProdutoListaCompra(index) {
+    window.location = `carrinho?remover=${index}`;
+}
+
+/*----------------------------------------*/
+function validaFormCarrinho() {
+    if (document.getElementById('enderecoCheckoutHelp').style.display === "none" &&
+        document.getElementById('numeroCheckoutHelp').style.display === "none" &&
+        document.getElementById('bairroCheckoutHelp').style.display === "none" &&
+        document.getElementById('estadoCheckoutHelp').style.display === "none" &&
+        document.getElementById('cepCheckoutHelp').style.display === "none") {
+        window.alert("Compra realizada com sucesso! \nEm breve estará na sua casa =D");
+        return true;
+    } else {
+        validaCampoTexto('enderecoCheckoutForm', 'enderecoCheckoutHelp', 'endereço');
+        validaCampoTexto('numeroCheckoutForm', 'numeroCheckoutHelp', 'número');
+        validaCampoTexto('bairroCheckoutForm', 'bairroCheckoutHelp', 'bairro');
+        validaCampoTexto('estadoCheckoutForm', 'estadoCheckoutHelp', 'estado');
+        validaCampoTexto('cepCheckoutForm', 'cepCheckoutHelp', 'CEP');
+        window.alert("O formulário contém campos inválidos!");
+        return false;
+    }
 }
 
