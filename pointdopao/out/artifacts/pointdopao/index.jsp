@@ -24,7 +24,7 @@
                 <span class="mr-3">Deseja sair? <a class="font-normal" href="javascript:navegarParaPagina('acesso','sair');">sign out</a>.</span>
             </div>
         </c:if>
-        <c:if test = "${autenticado == false}">
+        <c:if test = "${autenticado == false || autenticado == null }">
             <div id="statusUsuarioDeslogado" class="align-self-end">
                 <a href="javascript:navegarParaPagina('acesso','entrar');"  class="mr-2">Entrar</a>
                 <button class="btn btn-procurar alinhamento-conteudo-dir" onclick="navegarParaPagina('acesso', 'cadastrar')">Cadastrar</button>

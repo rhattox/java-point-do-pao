@@ -129,3 +129,11 @@ input:focus::placeholder {
     display: flex;
     flex-direction: row-reverse;
 }
+
+.largura-compras {
+    width: 30rem !important;
+}
+
+.compras-title-row {
+    height: 2rem;
+}
