@@ -10,9 +10,9 @@ CREATE TABLE "usuario" (
   "complemento" character varying(70),
   "bairro" character varying(20) NOT NULL,
   "estado" character varying(2) NOT NULL,
-  "CEP" character varying(9) NOT NULL,
+  "cep" character varying(9) NOT NULL,
   PRIMARY KEY (id)
 );
 
-INSERT INTO usuario (id, tipo, nome, sobrenome, email, senha)
-VALUES ('1', '0', 'ADMINISTRADOR', 'POINTDOPAO', 'ADM', 'Pointdopao');
+INSERT INTO usuario (id, tipo, nome, sobrenome, email, senha, logradouro, numero, complemento, bairro, estado, cep)
+VALUES ('1', '0', 'ADMINISTRADOR', 'POINTDOPAO', 'ADM', 'Pointdopao', 'POINTDOPAO', '123', null, 'TIJUCA', 'RJ', '32145897');
