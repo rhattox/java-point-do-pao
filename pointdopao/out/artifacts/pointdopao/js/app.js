@@ -125,3 +125,23 @@ function podeComprar(index) {
 function removerProdutoListaCompra(index) {
     window.location = `carrinho?remover=${index}`;
 }
+
+/*----------------------------------------*/
+function validaFormCarrinho() {
+    if (document.getElementById('enderecoCheckoutHelp').style.display === "none" &&
+        document.getElementById('numeroCheckoutHelp').style.display === "none" &&
+        document.getElementById('bairroCheckoutHelp').style.display === "none" &&
+        document.getElementById('estadoCheckoutHelp').style.display === "none" &&
+        document.getElementById('cepCheckoutHelp').style.display === "none") {
+        window.alert("Compra realizada com sucesso! \nEm breve estará na sua casa =D");
+        return true;
+    } else {
+        validaCampoTexto('enderecoCheckoutForm', 'enderecoCheckoutHelp', 'endereço');
+        validaCampoTexto('numeroCheckoutForm', 'numeroCheckoutHelp', 'número');
+        validaCampoTexto('bairroCheckoutForm', 'bairroCheckoutHelp', 'bairro');
+        validaCampoTexto('estadoCheckoutForm', 'estadoCheckoutHelp', 'estado');
+        validaCampoTexto('cepCheckoutForm', 'cepCheckoutHelp', 'CEP');
+        window.alert("O formulário contém campos inválidos!");
+        return false;
+    }
+}

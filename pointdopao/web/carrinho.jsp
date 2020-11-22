@@ -17,8 +17,7 @@
     <section class="d-flex">
         <div>
             <h3 class="mt-3 cor-padrao-txt">Local de Entrega</h3>
-            <form class="mt-4 p-0" method="POST" action='cadastrar' name="adicionarUsuario"
-                  onsubmit="return validaFormCadastro()">
+            <form class="mt-4 p-0" method="POST" action='cadastrar' name="dadosEndereco">
                 <div class="form-row">
                     <div class="form-group col-7">
                         <label for="enderecoCheckoutForm">Endereço</label>
@@ -29,7 +28,7 @@
                     </div>
                     <div class="form-group col-3">
                         <label for="numeroCheckoutForm">Nº</label>
-                        <input id="numeroCheckoutForm" name="numeroCheckoutForm" type="text" class="form-control"
+                        <input id="numeroCheckoutForm" name="numeroCheckoutForm" type="number" class="form-control"
                                placeholder="Número"
                                onblur="validaCampoTexto('numeroCheckoutForm', 'numeroCheckoutHelp', 'número')">
                         <small id="numeroCheckoutHelp" class="form-text text-danger"></small>
@@ -59,7 +58,7 @@
                     </div>
                     <div class="form-group col-3">
                         <label for="cepCheckoutForm">CEP</label>
-                        <input id="cepCheckoutForm" name="cepCheckoutForm" type="text" class="form-control"
+                        <input id="cepCheckoutForm" name="cepCheckoutForm" type="number" class="form-control"
                                placeholder="CEP" onblur="validaCampoTexto('cepCheckoutForm', 'cepCheckoutHelp', 'CEP')">
                         <small id="cepCheckoutHelp" class="form-text text-danger"></small>
                     </div>
@@ -72,8 +71,8 @@
         <div id="total-a-pagar" class="largura-compras">
             <h3 class="mt-3 cor-padrao-txt">Compras</h3>
             <h5 class="mt-4">Produtos</h5>
-            <form class="mt-4 p-0" method="POST" action='' name="listaCompra"
-                  onsubmit="return validaFormCadastro()">
+            <form class="mt-4 p-0" method="POST" action='acesso' name="listaCompra"
+                  onsubmit="return validaFormCarrinho()">
                 <div class="form-row compras-title-row">
                     <div class="form-group col-6">
                         <label id="nomeProdutoCompraTitle"><b>Nome</b></label>
