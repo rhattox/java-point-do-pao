@@ -48,7 +48,6 @@ public class CarrinhoController extends HttpServlet {
                 produto.setQuantidade(qtdItem);
                 carrinhoLista.add(produto);
 
-                //carrinhoLista.add(produto);
                 request.setAttribute("carrinhoLista", carrinhoLista);
                 //carrinhoLista.clear();
                 sessionCarrinho.setAttribute("carrinhoLista", carrinhoLista);

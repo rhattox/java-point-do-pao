@@ -1,54 +1,37 @@
 package Models;
 
+import java.util.ArrayList;
+
 public class Compra {
     private int id;
     private Usuario usuario;
-    private Carrinho carrinho;
-    private int metodoPagamento;
-    private String estadoCompra;
+    private ArrayList<Produto> listaProdutos;
 
-    public Compra(Usuario usuario, Carrinho carrinho, int metodoPagamento, String estadoCompra) {
+    public Compra(int id, Usuario usuario, ArrayList <Produto> listaProdutos) {
+        this.id = id;
         this.usuario = usuario;
-        this.carrinho = carrinho;
-        this.metodoPagamento = metodoPagamento;
-        this.estadoCompra = estadoCompra;
+        this.listaProdutos = listaProdutos;
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) { this.id = id; }
+
     public Usuario getUsuario() {
         return usuario;
-    }
-
-    public Carrinho getCarrinho() {
-        return carrinho;
-    }
-
-    public int getMetodoPagamento() {
-        return metodoPagamento;
-    }
-
-    public String getEstadoCompra() {
-        return estadoCompra;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public void setCarrinho(Carrinho carrinho) {
-        this.carrinho = carrinho;
+    public ArrayList<Produto> getListaProdutos() {
+        return listaProdutos;
     }
 
-    public void setMetodoPagamento(int metodoPagamento) {
-        this.metodoPagamento = metodoPagamento;
+    public void setListaProdutos(ArrayList<Produto> listaProdutos) {
+        this.listaProdutos = listaProdutos;
     }
-
-    public void setEstadoCompra(String estadoCompra) {
-        this.estadoCompra = estadoCompra;
-    }
-    
-    
 }
