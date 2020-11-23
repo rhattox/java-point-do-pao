@@ -52,7 +52,7 @@ public class ProdutoDao {
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUTO_SQL)) {
             preparedStatement.setString(1, p.getNome());
             preparedStatement.setBigDecimal(2, p.getPreco());
-            preparedStatement.setInt(4, p.getQuantidade());
+            preparedStatement.setInt(3, p.getQuantidade());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (Exception e) {

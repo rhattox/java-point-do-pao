@@ -22,31 +22,31 @@
             <form class="mt-4" method="POST" action='cadastrar' name="adicionarUsuario" onsubmit="return validaFormCadastro()">
                 <div class="form-row">
                     <div class="col">
-                        <label for="Nome">Nome</label>
+                        <label for="nomeForm">Nome</label>
                         <input id="nomeForm" name="nomeForm" type="text" class="form-control" placeholder="Nome" onblur="validaCampoTexto('nomeForm', 'nomeHelp', 'nome')">
                         <small id="nomeHelp" class="form-text text-danger"></small>
                     </div>
                     <div class="col">
-                        <label for="Sobrenome">Sobrenome</label>
+                        <label for="sobrenomeForm">Sobrenome</label>
                         <input id="sobrenomeForm" name="sobrenomeForm" type="text" class="form-control" placeholder="Sobrenome" onblur="validaCampoTexto('sobrenomeForm', 'sobrenomeHelp', 'sobrenome')">
                         <small id="sobrenomeHelp" class="form-text text-danger"></small>
                     </div>
                 </div>
                 <div class="form-row mt-2">
                     <div class="col-12">
-                        <label for="Nome">Email</label>
+                        <label for="emailForm">Email</label>
                         <input id="emailForm" name="emailForm" type="email" class="form-control" placeholder="Email" onblur="validaCampoTexto('emailForm', 'emailHelp', 'email')">
                         <small id="emailHelp" class="form-text text-danger"></small>
                     </div>
                 </div>
                 <div class="form-row mt-2">
                     <div class="col">
-                        <label for="Nome">Senha</label>
+                        <label for="senhaForm">Senha</label>
                         <input id="senhaForm" name="senhaForm" type="password" class="form-control" placeholder="Senha" onblur="validaSenhas()">
                         <small id="senhaHelp" class="form-text text-danger"></small>
                     </div>
                     <div class="col">
-                        <label for="Sobrenome">Confirmar senha</label>
+                        <label for="confirmacaoSenhaForm">Confirmar senha</label>
                         <input id="confirmacaoSenhaForm" name="confirmacaoSenhaForm" type="password" class="form-control" placeholder="Confirme a senha" onblur="validaSenhas()">
                         <small id="confirmacaoSenhaHelp" class="form-text text-danger"></small>
                     </div>

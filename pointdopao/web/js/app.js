@@ -157,3 +157,7 @@ function notificaPrecisaEstarLogado() {
     window.alert("Você necessita estar logado!");
 }
 
+function formatPrecoProduto() {
+    let valor = document.getElementById('precoProdutoForm').value.replace(',', '.');
+    document.getElementById('precoProdutoForm').value = new Intl.NumberFormat('pt').format(valor);
+}

@@ -141,3 +141,7 @@ input:focus::placeholder {
 .compras-title-row {
     height: 2rem;
 }
+
+.btn-incluir-produto {
+    margin-top: 2rem;
+}
