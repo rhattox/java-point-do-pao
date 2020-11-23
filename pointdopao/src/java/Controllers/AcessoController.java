@@ -21,7 +21,7 @@ public class AcessoController extends HttpServlet {
     private static String REDEFINIR_SENHA = "/redefinir-senha.jsp";
     private static String LIMPAR = "/limpar";
     private static String GESTAO_ADM = "/gestao-produtos.jsp";
-    private static String LISTAR_COMPRAS = "/totalCompras.jsp";
+    private static String LISTAR_COMPRAS = "/AdmController";
     private static String CARRINHO = "/carrinho";
     private static String INDEX = "/index.jsp";
     private static String SAIR = "/sair";

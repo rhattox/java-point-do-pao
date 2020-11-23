@@ -68,58 +68,20 @@
     <table class="table">
         <thead class="cor-tabela-header">
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nome do Produto</th>
-            <th scope="col">Quantidade</th>
-            <th scope="col">Preço</th>
+            <th scope="col">ID Usuario</th>
+            <th scope="col">Valor Total</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${listaProdutos}" var="produto" varStatus="status">
+        <c:forEach items="${listaCompras}" var="produto" varStatus="status">
             <tr>
-                <td>${produto.id}</td>
-                <td>${produto.nome}</td>
-                <td>${produto.quantidade}</td>
-                <td>R$ ${produto.preco}</td>             
+                <td>${id_usuario}</td>
+                <td>${produto.nome}</td>       
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <% 
-        String url = "jdbc:postgresql://localhost:12002/pointdopao";
-        String user = "admin";
-        String senha = "admin";
-        String select = "select imagem from produto where id=1";
-        try{
-            /* TODO output your page here. You may use following sample code. */
-            Class.forName("org.postgresql.Driver");
-            Connection c = DriverManager.getConnection(url,user,senha);
-            PreparedStatement stm = c.prepareStatement(select);
-            //stm.setInt(1,1);
-            ResultSet rs = stm.executeQuery();
-            
-            while (rs.next()) {
-                
-                byte[] rb = new byte[30000];
-                int read = 0;
-                InputStream readImg = rs.getBinaryStream(1);
-                OutputStream os = response.getOutputStream();
-                while ((read = readImg.read(rb)) != -1) {
-                    os.write(rb,0,read);
-                }
-                os.flush();
-                os.close();
-            }
-            //out.print("Deu certo");
-            
-            rs.close();
-            stm.close();
-            c.close();
-        }
-        catch(IOException | ClassNotFoundException | SQLException e){
-            System.out.println(e);
-        }
-    %>
+   
 </section>
 
 </body>

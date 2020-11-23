@@ -5,7 +5,9 @@
  */
 package Dao;
 
+import Models.Compra;
 import Models.Produto;
+import Models.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -26,6 +28,7 @@ public class CarrinhoDao {
 
     private static final String INSERT_DETALHE_COMPRA_SQL = "INSERT INTO detalhe_compra (id_compra,id_produto,quantidade_produto) VALUES (?,?,?);";
     private static final String INSERT_RETURN_COMPRA_SQL = "INSERT INTO compra (id_usuario, valor_total) VALUES (?,?) RETURNING id ;";
+    private static final String SELECT_COMPRA_SQL = "SELECT w.id AS ID_COMPRA, id_usuario, valor_total, c.id AS ID_DETALHE, valor_total, id_produto, quantidade_produto FROM compra w, detalhe_compra c WHERE w.id = c.id_compra;;";
 
     //private static final String INSERT_CARRINHO_SQL = "INSERT INTO carrinho (id_produto, quantidade) VALUES (?,?);";
     protected Connection getConnection() {
@@ -60,6 +63,7 @@ public class CarrinhoDao {
             if (rs.next()) {
                 rs.getInt("id");
                 id_tabela = rs.getInt("id");
+
             }
 
             preparedStatement.close();
@@ -85,6 +89,60 @@ public class CarrinhoDao {
         } catch (Exception e) {
             e.getMessage();
         }
+    }
+
+    public ArrayList<Compra> SelectCompras() throws SQLException {
+
+        Produto produto = new Produto();
+
+        ArrayList<Produto> comprasArrayProduto = new ArrayList();
+
+        Compra compra = new Compra();
+
+        ArrayList<Compra> listaComprasTotal = new ArrayList();
+
+        Usuario usuario = new Usuario();
+
+        // try-with-resource statement will auto close the connection.
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_COMPRA_SQL)) {
+            ResultSet rs;
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+
+                System.out.println(rs.getInt("id_compra"));
+                System.out.println(rs.getInt("id_usuario"));
+                System.out.println(rs.getDouble("valor_total"));
+                System.out.println(rs.getInt("id_produto"));
+                System.out.println(rs.getInt("quantidade_produto"));
+                System.out.println("_________");
+
+                usuario.setId(rs.getInt("id_usuario"));
+                compra.setUsuario(usuario);
+
+                produto.setId(rs.getInt("id_produto"));
+
+                produto.setQuantidade(rs.getInt("quantidade_produto"));
+
+                comprasArrayProduto.add(produto);
+
+                compra.setId(rs.getInt("id_compra"));
+
+                compra.setValorTotal(rs.getDouble("valor_total"));
+
+                compra.setListaProdutos(comprasArrayProduto);
+
+                listaComprasTotal.add(compra);
+            }
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
+            return listaComprasTotal;
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return listaComprasTotal;
     }
 
 }
