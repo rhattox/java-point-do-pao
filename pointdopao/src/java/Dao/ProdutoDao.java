@@ -32,6 +32,7 @@ public class ProdutoDao {
     private static final String SELECT_IMAGEM = "SELECT IMAGEM FROM PRDOTUO WHERE ID=?";
     private static final String GET_PRODUTO_BY_ID = "SELECT id,nome,preco,quantidade FROM produto WHERE id = ?;";
     private static final String UPDATE_PRODUTO_QUANTIDADE_BY_NOME = "UPDATE produto SET quantidade = ? WHERE nome = ?";
+    private static final String DELETE_PRODUTO_BY_ID = "DELETE FROM produto WHERE id = ?;";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -114,5 +115,16 @@ public class ProdutoDao {
             e.getMessage();
         }
         return listaProduto;
+    }
+
+    public void removerProduto(int idProduto) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PRODUTO_BY_ID)) {
+            preparedStatement.setInt(1, idProduto);
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 }

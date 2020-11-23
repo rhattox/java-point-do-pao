@@ -145,3 +145,7 @@ input:focus::placeholder {
 .btn-incluir-produto {
     margin-top: 2rem;
 }
+
+.alinhamento-exclusao-produto {
+    margin-left: 1.7rem;
+}

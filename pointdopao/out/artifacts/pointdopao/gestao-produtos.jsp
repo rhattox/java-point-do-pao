@@ -102,15 +102,17 @@
             <th scope="col">Nome do Produto</th>
             <th scope="col">Quantidade</th>
             <th scope="col">Preço</th>
+            <th scope="col">Remover</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${listaProdutos}" var="produto" varStatus="status">
+        <c:forEach items="${listaProdutos}" var="produto" varStatus="control">
             <tr>
                 <td>${produto.id}</td>
                 <td>${produto.nome}</td>
                 <td>${produto.quantidade}</td>
                 <td>R$ ${produto.preco}</td>
+                <td><a class="cursor" href="javascript:removerProdutoLista(${produto.id});"><i class="fas fa-times cor-padrao-txt alinhamento-exclusao-produto"></i></a></td>
             </tr>
         </c:forEach>
         </tbody>

@@ -132,6 +132,13 @@ function removerProdutoListaCompra(index) {
     window.location = `carrinho?remover=${index}`;
 }
 
+function removerProdutoLista(id) {
+    const msg = confirm("Você realmente deseja remover esse produto?\nATENÇÃO: Esta ação não poderá ser revertida!");
+    if (msg === true) {
+        window.location = `produto?remover=${id}`;
+    }
+}
+
 /*----------------------------------------*/
 function validaFormCarrinho() {
     if (document.getElementById('enderecoCheckoutHelp').style.display === "none" &&
@@ -150,11 +157,6 @@ function validaFormCarrinho() {
         window.alert("O formulário contém campos inválidos!");
         return false;
     }
-}
-
-
-function notificaPrecisaEstarLogado() {
-    window.alert("Você necessita estar logado!");
 }
 
 function formatPrecoProduto() {
