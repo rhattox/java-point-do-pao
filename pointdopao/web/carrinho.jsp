@@ -60,6 +60,7 @@
                         <input id="estadoCheckoutForm" name="estadoCheckoutForm" type="text" class="form-control"
                                placeholder="Sigla"
                                onblur="validaCampoTexto('estadoCheckoutForm', 'estadoCheckoutHelp', 'estado')"
+                               maxlength="2"
                                value="${usuarioLogado.estado}"
                         >
                         <small id="estadoCheckoutHelp" class="form-text text-danger"></small>
