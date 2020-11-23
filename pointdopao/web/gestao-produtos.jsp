@@ -103,6 +103,7 @@
             <th scope="col">Quantidade</th>
             <th scope="col">Preço</th>
             <th scope="col">Remover</th>
+            <th scope="col">Editar</th>
         </tr>
         </thead>
         <tbody>
@@ -113,6 +114,9 @@
                 <td>${produto.quantidade}</td>
                 <td>R$ ${produto.preco}</td>
                 <td><a class="cursor" href="javascript:removerProdutoLista(${produto.id});"><i class="fas fa-times cor-padrao-txt alinhamento-exclusao-produto"></i></a></td>
+                <td><a class="cursor" href="#"><i class="fas fa-edit cor-padrao-txt alinhamento-exclusao-produto"></i></a></td>
+
+                <!-- TODO pensar em uma forma de realizar o update do produto -->
             </tr>
         </c:forEach>
         </tbody>
