@@ -163,3 +163,9 @@ function formatPrecoProduto() {
     let valor = document.getElementById('precoProdutoForm').value.replace(',', '.');
     document.getElementById('precoProdutoForm').value = new Intl.NumberFormat('pt').format(valor);
 }
+
+/*Jquery para modal*/
+$('#my-modal').on('show.bs.modal', function (event) {
+    var myVal = $(event.relatedTarget).data('val');
+    $(this).find(".modal-body").text(myVal);
+});

@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
           integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="./css/app.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="./js/app.js"></script>
     <title>Point do pão</title>
 </head>
@@ -114,48 +116,54 @@
                 <td>${produto.quantidade}</td>
                 <td>R$ ${produto.preco}</td>
                 <td><a class="cursor" href="javascript:removerProdutoLista(${produto.id});"><i class="fas fa-times cor-padrao-txt alinhamento-exclusao-produto"></i></a></td>
-                <td><a class="cursor" href="#"><i class="fas fa-edit cor-padrao-txt alinhamento-exclusao-produto"></i></a></td>
+                <td><a
+                        class="cursor"
+                        data-toggle="modal"
+                        data-target="#modalEditProduto"
+                        data-whatever="@mdo">
+                    <i class="fas fa-edit cor-padrao-txt alinhamento-exclusao-produto"></i>
+                </a></td>
 
                 <!-- TODO pensar em uma forma de realizar o update do produto -->
             </tr>
+
+            <section id="modal">
+                <div class="modal fade" id="modalEditProduto" tabindex="-1" aria-labelledby="editProdutoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editProdutoModalLabel">Atualizar produto</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-nome-produto" class="col-form-label">Nome do produto</label>
+                                        <input type="text" class="form-control" id="recipient-nome-produto" value="${produto.nome}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-quantidade-produto" class="col-form-label">Quantidade</label>
+                                        <input type="text" class="form-control" id="recipient-quantidade-produto">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-preco-produto" class="col-form-label">Preço</label>
+                                        <input type="text" class="form-control" id="recipient-preco-produto">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-procurar-comprar">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </c:forEach>
         </tbody>
     </table>
-    <%
-        String url = "jdbc:postgresql://localhost:12002/pointdopao";
-        String user = "admin";
-        String senha = "admin";
-        String select = "select imagem from produto where id=1";
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            Class.forName("org.postgresql.Driver");
-            Connection c = DriverManager.getConnection(url, user, senha);
-            PreparedStatement stm = c.prepareStatement(select);
-            //stm.setInt(1,1);
-            ResultSet rs = stm.executeQuery();
-
-            while (rs.next()) {
-
-                byte[] rb = new byte[30000];
-                int read = 0;
-                InputStream readImg = rs.getBinaryStream(1);
-                OutputStream os = response.getOutputStream();
-                while ((read = readImg.read(rb)) != -1) {
-                    os.write(rb, 0, read);
-                }
-                os.flush();
-                os.close();
-            }
-            //out.print("Deu certo");
-
-            rs.close();
-            stm.close();
-            c.close();
-        } catch (IOException | ClassNotFoundException | SQLException e) {
-            System.out.println(e);
-        }
-    %>
 </section>
-
 </body>
 </html>
