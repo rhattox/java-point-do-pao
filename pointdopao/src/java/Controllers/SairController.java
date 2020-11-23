@@ -7,6 +7,7 @@ package Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,8 +36,7 @@ public class SairController extends HttpServlet {
         // Invalida sessão e redireciona para login
         HttpSession session = request.getSession();
         session.setAttribute("autenticado", false);
-
-        request.getSession().invalidate();
+        session.invalidate();
         //System.out.println("SAIRCONTROLLER: Invalidando Sessão!!");
 
         String forward = INDEX;

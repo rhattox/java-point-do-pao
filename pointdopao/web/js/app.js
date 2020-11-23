@@ -112,9 +112,14 @@ function quantidadeItemControl(index, acao) {
     btnComprar.disabled = valor <= 0;
 }
 
-function fecharPedido(index) {
-    let qtdItem = parseInt(document.getElementById(`${index}-label`).innerText);
-    window.location = `acesso?pr=carrinho&produto=${index + 1}&qtd=${qtdItem}`;
+function fecharPedido(index, autenticado) {
+    console.log(autenticado);
+    if (autenticado == null || autenticado === false) {
+        navegarParaPagina('acesso', 'entrar');
+    } else {
+        let qtdItem = parseInt(document.getElementById(`${index}-label`).innerText);
+        window.location = `acesso?pr=carrinho&produto=${index + 1}&qtd=${qtdItem}`;
+    }
 }
 
 

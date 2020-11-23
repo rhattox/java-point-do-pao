@@ -32,6 +32,10 @@ public class CarrinhoController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String forward = "";
         HttpSession sessionCarrinho = request.getSession();
+        if ((boolean) sessionCarrinho.getAttribute("sessionNew")) {
+            carrinhoLista.clear();
+            sessionCarrinho.setAttribute("sessionNew", false);
+        }
         UsuarioDao usuarioDao = new UsuarioDao();
 
         Enumeration<String> params = request.getParameterNames();

@@ -36,6 +36,14 @@
     <hr class="mb-0" style="border-top: 2px solid #b34c1b;">
 
     <nav class="navbar navbar-expand-sm barra-botoes">
+        
+            <section>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="totalCompras.jsp">Total de vendas</a>
+                </li>
+            </ul>
+        </section>
         <section class="d-flex ml-auto">
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Procurar" aria-label="Search">
@@ -51,7 +59,7 @@
     <hr class="mt-0" style="border-bottom: 2px solid #b34c1b;">
 </section>
 <section class="container">
-    <h3 class="mt-4 mb-4 titulos">Tabela de Produtos</h3>
+    <h3 class="mt-4 mb-4 titulos">Todos os produtos </h3>
     <table class="table">
         <thead class="cor-tabela-header">
         <tr>

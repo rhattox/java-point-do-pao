@@ -88,7 +88,7 @@
                                             <i class="fas fa-minus"></i>
                                         </label>
                                     </div>
-                                    <button id="${control.index}-comprar" class="btn btn-procurar-comprar ml-auto" onclick="fecharPedido(${control.index})" disabled>Comprar</button>
+                                    <button id="${control.index}-comprar" class="btn btn-procurar-comprar ml-auto" onclick="fecharPedido(${control.index}, ${autenticado})" disabled>Comprar</button>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +98,6 @@
         </div>
     </section>
 </section>
-
 <section id="rodape">
     <footer class="bottom footer-bg">
         <div class="footer-copyright text-center py-3">© 2020 Copyright:
