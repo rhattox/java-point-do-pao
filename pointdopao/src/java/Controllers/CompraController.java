@@ -29,7 +29,7 @@ public class CompraController extends HttpServlet {
 
     CarrinhoDao carrinhoDao = new CarrinhoDao();
 
-    private static String ENTRAR = "/entrar.jsp";
+    private static String ENTRAR = "/acesso";
 
     private static String ERRO = "/entrar.jsp";
 
@@ -71,7 +71,7 @@ public class CompraController extends HttpServlet {
                     e.getMessage();
                 }
 
-                String forward = ERRO;
+                String forward = ENTRAR;
                 RequestDispatcher view = request.getRequestDispatcher(forward);
                 view.forward(request, response);
             }

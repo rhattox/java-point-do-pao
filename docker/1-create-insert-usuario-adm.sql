@@ -15,4 +15,4 @@ CREATE TABLE "usuario" (
 );
 
 INSERT INTO usuario (id, tipo, nome, sobrenome, email, senha, logradouro, numero, complemento, bairro, estado, cep)
-VALUES ('1', '0', 'ADMINISTRADOR', 'POINTDOPAO', 'ADM', 'Pointdopao', 'POINTDOPAO', '123', null, 'TIJUCA', 'RJ', '32145897');
+VALUES ('0', '0', 'ADMINISTRADOR', 'POINTDOPAO', 'ADM', 'Pointdopao', 'POINTDOPAO', '123', null, 'TIJUCA', 'RJ', '32145897');
