@@ -28,8 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AdmController extends HttpServlet {
 
     CarrinhoDao carrinhoDao = new CarrinhoDao();
-    
-    ArrayList<Compra> cp = new ArrayList();
+    ArrayList<Compra> cp = new ArrayList<Compra>();
     private static String LISTAR_COMPRAS = "/totalCompras.jsp";
 
     /**
@@ -46,11 +45,11 @@ public class AdmController extends HttpServlet {
         String forward = "";
         try {
             //compra = 
-            cp = carrinhoDao.SelectCompras();
+            cp = carrinhoDao.selectCompras();
 
-            cp.forEach(compra -> {
-                System.out.println(compra.getId());
-            });
+            for (Compra c : cp) {
+              System.out.println(c.getValorTotal());
+            }
         } catch (SQLException e) {
             e.getMessage();
         }

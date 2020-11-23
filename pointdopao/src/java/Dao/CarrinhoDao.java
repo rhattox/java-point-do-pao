@@ -91,24 +91,19 @@ public class CarrinhoDao {
         }
     }
 
-    public ArrayList<Compra> SelectCompras() throws SQLException {
-
-        Produto produto = new Produto();
-
-        ArrayList<Produto> comprasArrayProduto = new ArrayList();
-
-        Compra compra = new Compra();
+    public ArrayList<Compra> selectCompras() throws SQLException {
 
         ArrayList<Compra> listaComprasTotal = new ArrayList();
-
-        Usuario usuario = new Usuario();
-
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_COMPRA_SQL)) {
             ResultSet rs;
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
+                ArrayList<Produto> comprasArrayProduto = new ArrayList();
+                Produto produto = new Produto();
+                Compra compra = new Compra();
+                Usuario usuario = new Usuario();
 
                 System.out.println(rs.getInt("id_compra"));
                 System.out.println(rs.getInt("id_usuario"));
@@ -135,9 +130,9 @@ public class CarrinhoDao {
                 listaComprasTotal.add(compra);
             }
 
-            preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
+
             return listaComprasTotal;
         } catch (Exception e) {
             e.getMessage();
