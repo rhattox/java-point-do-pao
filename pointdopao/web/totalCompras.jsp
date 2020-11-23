@@ -36,8 +36,19 @@
     <hr class="mb-0" style="border-top: 2px solid #b34c1b;">
 
     <nav class="navbar navbar-expand-sm barra-botoes">
-        
-            
+        <section>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/pointdopao">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:navegarParaPagina('acesso','gestao');">Produtos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Vendas</a>
+                </li>
+            </ul>
+        </section>
         <section class="d-flex ml-auto">
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Procurar" aria-label="Search">

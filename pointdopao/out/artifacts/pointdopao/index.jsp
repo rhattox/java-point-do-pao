@@ -39,6 +39,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/pointdopao">Home</a>
                 </li>
+
+                <c:if test="${isAdm == true}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:navegarParaPagina('acesso','gestao');">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:navegarParaPagina('acesso','total-compras');">Vendas</a>
+                    </li>
+                </c:if>
             </ul>
         </section>
         <section class="d-inline-flex">

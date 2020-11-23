@@ -3,6 +3,7 @@ package Controllers;
 import Dao.ProdutoDao;
 import Models.Produto;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,6 +32,9 @@ public class AcessoController extends HttpServlet {
         String forward = "";
         String action = request.getParameter("pr");
         HttpSession session = request.getSession();
+        ProdutoDao produtoDao;
+        List<Produto> listaProdutos;
+
         if (action == null) {
 
             session.setAttribute("acesso", false);
@@ -46,6 +50,9 @@ public class AcessoController extends HttpServlet {
                 break;
             case "gestao":
                 System.out.println("Passando para Gestão!");
+                produtoDao = new ProdutoDao();
+                listaProdutos = produtoDao.getAllProducts();
+                request.setAttribute("listaProdutos", listaProdutos);
                 forward = GESTAO_ADM;
                 break;
             case "total-compras":
@@ -74,8 +81,8 @@ public class AcessoController extends HttpServlet {
                 break;
             default:
                 System.out.println("Passando para Index!");
-                ProdutoDao produtoDao = new ProdutoDao();
-                List<Produto> listaProdutos = produtoDao.getAllProducts();
+                produtoDao = new ProdutoDao();
+                listaProdutos = produtoDao.getAllProducts();
                 request.setAttribute("listaProdutos", listaProdutos);
                 forward = INDEX;
                 break;

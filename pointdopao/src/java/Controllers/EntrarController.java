@@ -47,23 +47,15 @@ public class EntrarController extends HttpServlet {
                 Usuario usuarioSession = usuarioDao.searchUsernameByEmail(usuario.getEmail(), usuario.getSenha());
                 String forward = "";
                 if (ehAdm(emailLoginForm, senhaLoginForm)) {
-                    session.setAttribute("SessionIdUsuario", usuarioSession.getId());
-                    session.setAttribute("SessionNome", StringUtils.capitalize(usuarioSession.getNome()));
-                    session.setAttribute("SessionEmail", usuarioSession.getEmail());
-                    session.setAttribute("autenticado", true);
+                    setSessionAttr(session, usuarioSession, true);
 
                     ProdutoDao produtoDao = new ProdutoDao();
                     List<Produto> listaProdutos = produtoDao.getAllProducts();
-                    request.setAttribute("listaProdutos", listaProdutos); // Will be available as ${products} in JSP
-                    //System.out.println("Redirect para tela de gestão");
+                    request.setAttribute("listaProdutos", listaProdutos);
                     forward = GESTAO_ADM;
                 } else {
-                    session.setAttribute("SessionIdUsuario", usuarioSession.getId());
-                    session.setAttribute("SessionNome", StringUtils.capitalize(usuarioSession.getNome()));
-                    session.setAttribute("SessionEmail", usuarioSession.getEmail());
-                    session.setAttribute("autenticado", true);
-                    //System.out.println("Email de sessão: " + SessionNome);
-                    //System.out.println("\nENTRARCONROLLER:\nA query retornou verdadeira, você está logado!");
+                    setSessionAttr(session, usuarioSession, false);
+
                     forward = POSTLOGIN;
                 }   
                 RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -89,5 +81,13 @@ public class EntrarController extends HttpServlet {
     
     private boolean ehAdm(String emailLoginForm, String senhaLoginForm) {
         return emailLoginForm.equals(ADM_LOGIN.toUpperCase()) && senhaLoginForm.equals(ADM_SENHA);
+    }
+
+    private void setSessionAttr(HttpSession session, Usuario usuarioSession, boolean isAdm) {
+        session.setAttribute("SessionIdUsuario", usuarioSession.getId());
+        session.setAttribute("SessionNome", StringUtils.capitalize(usuarioSession.getNome()));
+        session.setAttribute("SessionEmail", usuarioSession.getEmail());
+        session.setAttribute("isAdm", isAdm);
+        session.setAttribute("autenticado", true);
     }
 }

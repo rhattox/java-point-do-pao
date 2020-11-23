@@ -32,8 +32,7 @@ public class ProdutoController extends HttpServlet {
         UsuarioDao usuarioDao = new UsuarioDao();
         HttpSession session = request.getSession();
 
-        int idUsuario = (int)session.getAttribute("SessionIdUsuario");
-        String emailUsuario = (String)session.getAttribute("SessionEmail");
+        boolean isAdm = (boolean)session.getAttribute("isAdm");
 
         String nomeProdutoForm = request.getParameter("nomeProdutoForm").toLowerCase();
         String precoProdutoForm = request.getParameter("precoProdutoForm").replace(',', '.');
@@ -43,7 +42,7 @@ public class ProdutoController extends HttpServlet {
 
         try {
             String forward = "";
-            if (ehAdm(idUsuario, emailUsuario)) {
+            if (isAdm) {
                 ProdutoDao produtoDao = new ProdutoDao();
                 produtoDao.insertProduto(produto);
                 List<Produto> listaProdutos = produtoDao.getAllProducts();
@@ -63,8 +62,4 @@ public class ProdutoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    private boolean ehAdm(int sessionIdUsuario, String sessionEmail) {
-        return sessionIdUsuario == ADM_ID && sessionEmail.equals(ADM_EMAIL.toUpperCase());
-    }
 }
