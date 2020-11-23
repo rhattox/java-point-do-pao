@@ -59,7 +59,7 @@
     <hr class="mt-0" style="border-bottom: 2px solid #b34c1b;">
 </section>
 <section class="container">
-    <h3 class="mt-4 mb-4 titulos">Total de vendas </h3>
+    <h3 class="mt-4 mb-4 titulos">Todos os produtos </h3>
     <table class="table">
         <thead class="cor-tabela-header">
         <tr>
