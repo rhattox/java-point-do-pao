@@ -27,23 +27,48 @@ public class ProdutoController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         Produto produto = new Produto();
         ProdutoDao produtoDao = new ProdutoDao();
         UsuarioDao usuarioDao = new UsuarioDao();
         String removerIndex = null;
         HttpSession session = request.getSession();
 
-        boolean isAdm = (boolean)session.getAttribute("isAdm");
+        //info para atualizar produto
+        String index = null;
+        String nomeProduto = null;
+        String qtdProduto = null;
+        String preco = null;
+
+
+        Boolean isAdm = (Boolean) session.getAttribute("isAdm");
 
         Enumeration<String> params = request.getParameterNames();
         if (params.hasMoreElements()) {
             removerIndex = request.getParameter("remover");
+
+            index = request.getParameter("up");
+            nomeProduto = request.getParameter("nm");
+            qtdProduto = request.getParameter("qt");
+            preco = request.getParameter("pc");
+
             if (removerIndex != null) {
                 int indexProdRemovido = Integer.parseInt(removerIndex);
                 try {
                     produtoDao.removerProduto(indexProdRemovido);
                 } catch (Exception e) {
                     System.out.println("Erro ao excluir produto: " + e.getMessage());
+                }
+            } else if (index != null) {
+                produto = new Produto();
+                int indexProdAtualizado = Integer.parseInt(index);
+                produto.setNome(nomeProduto);
+                produto.setQuantidade(Integer.parseInt(qtdProduto));
+                produto.setPreco(new BigDecimal(preco.replace(',', '.')));
+                try {
+                    produtoDao.updateProduto(produto, indexProdAtualizado);
+                } catch (Exception e) {
+                    System.out.println("Erro ao atualizar produto: " + e.getMessage());
                 }
             } else {
                 String nomeProdutoForm = request.getParameter("nomeProdutoForm").toLowerCase();
@@ -57,7 +82,7 @@ public class ProdutoController extends HttpServlet {
         try {
             String forward = "";
             if (isAdm) {
-                if (removerIndex == null) { produtoDao.insertProduto(produto);}
+                if (removerIndex == null && index == null) { produtoDao.insertProduto(produto);}
                 List<Produto> listaProdutos = produtoDao.getAllProducts();
                 request.setAttribute("listaProdutos", listaProdutos);
                 forward = GESTAO_ADM;

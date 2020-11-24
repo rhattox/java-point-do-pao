@@ -9,7 +9,7 @@
     <script src="./js/app.js"></script>
     <title>Point do Pão</title>
 </head>
-<body onload="alertLoginSuccess(${success})">
+<body onload="alertLoginSuccess(${success}); isLoginFailed(${loginfailed})">
 <div class="container container-login-mt">
     <section class="d-flex">
         <div class="img-container-login">

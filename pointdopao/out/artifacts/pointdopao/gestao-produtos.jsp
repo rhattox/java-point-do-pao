@@ -12,8 +12,9 @@
           integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="./css/app.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/modal.js"></script>
     <script src="./js/app.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Point do pão</title>
 </head>
 <body>
@@ -120,7 +121,11 @@
                         class="cursor"
                         data-toggle="modal"
                         data-target="#modalEditProduto"
-                        data-whatever="@mdo">
+                        data-id="${produto.id}"
+                        data-nome="${produto.nome}"
+                        data-qtd="${produto.quantidade}"
+                        data-preco="${produto.preco}"
+                >
                     <i class="fas fa-edit cor-padrao-txt alinhamento-exclusao-produto"></i>
                 </a></td>
 
@@ -139,23 +144,24 @@
                             </div>
                             <div class="modal-body">
                                 <form>
+                                    <label id="md-idProduto" hidden></label>
                                     <div class="form-group">
-                                        <label for="recipient-nome-produto" class="col-form-label">Nome do produto</label>
-                                        <input type="text" class="form-control" id="recipient-nome-produto" value="${produto.nome}">
+                                        <label for="md-nome-produto" class="col-form-label">Nome do produto</label>
+                                        <input type="text" class="form-control" id="md-nome-produto">
                                     </div>
                                     <div class="form-group">
-                                        <label for="recipient-quantidade-produto" class="col-form-label">Quantidade</label>
-                                        <input type="text" class="form-control" id="recipient-quantidade-produto">
+                                        <label for="md-quantidade-produto" class="col-form-label">Quantidade</label>
+                                        <input type="text" class="form-control" id="md-quantidade-produto">
                                     </div>
                                     <div class="form-group">
-                                        <label for="recipient-preco-produto" class="col-form-label">Preço</label>
-                                        <input type="text" class="form-control" id="recipient-preco-produto">
+                                        <label for="md-preco-produto" class="col-form-label">Preço</label>
+                                        <input type="text" class="form-control" id="md-preco-produto">
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-procurar-comprar">Salvar</button>
+                                <button type="button" class="btn btn-procurar-comprar" onclick="atualizarProduto()">Salvar</button>
                             </div>
                         </div>
                     </div>
