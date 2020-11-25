@@ -104,14 +104,6 @@ public class CarrinhoDao {
                 Produto produto = new Produto();
                 Compra compra = new Compra();
                 Usuario usuario = new Usuario();
-
-                System.out.println(rs.getInt("id_compra"));
-                System.out.println(rs.getInt("id_usuario"));
-                System.out.println(rs.getDouble("valor_total"));
-                System.out.println(rs.getInt("id_produto"));
-                System.out.println(rs.getInt("quantidade_produto"));
-                System.out.println("_________");
-
                 usuario.setId(rs.getInt("id_usuario"));
                 compra.setUsuario(usuario);
 

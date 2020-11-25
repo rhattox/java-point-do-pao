@@ -46,10 +46,22 @@ public class AdmController extends HttpServlet {
         try {
             //compra = 
             cp = carrinhoDao.selectCompras();
+           
+            cp.forEach(compra -> {
+                System.out.println("ID da compra: "+compra.getId());
+                System.out.println("ID Usuario: "+compra.getUsuario().getId());
+                System.out.println("Valor Total compra: "+compra.getValorTotal());
 
-            for (Compra c : cp) {
-              System.out.println(c.getValorTotal());
-            }
+               compra.getListaProdutos().forEach(tste->{
+               
+               System.out.println("ID_produto: "+tste.getId());
+               System.out.println("Quantidade Produto: "+tste.getQuantidade());
+               });
+               request.setAttribute("listaProdutos", compra.getListaProdutos());
+               
+            });
+     request.setAttribute("listaCompras", cp);
+           
         } catch (SQLException e) {
             e.getMessage();
         }
