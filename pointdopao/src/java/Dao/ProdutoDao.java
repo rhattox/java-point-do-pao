@@ -29,10 +29,9 @@ public class ProdutoDao {
 
     private static final String GET_PRODUTOS_SQL = "SELECT * FROM produto";
     private static final String INSERT_PRODUTO_SQL = "INSERT INTO produto (nome, preco, quantidade) VALUES (?,?,?);";
-    private static final String SELECT_IMAGEM = "SELECT IMAGEM FROM PRDOTUO WHERE ID=?";
     private static final String GET_PRODUTO_BY_ID = "SELECT id,nome,preco,quantidade FROM produto WHERE id = ?;";
-    private static final String UPDATE_PRODUTO_QUANTIDADE_BY_NOME = "UPDATE produto SET quantidade = ? WHERE nome = ?";
     private static final String DELETE_PRODUTO_BY_ID = "DELETE FROM produto WHERE id = ?;";
+    private static final String UPDATE_PRODUTO_BY_ID = "UPDATE produto SET nome = ?, preco = ?, quantidade = ? WHERE id = ?;";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -121,6 +120,22 @@ public class ProdutoDao {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PRODUTO_BY_ID)) {
             preparedStatement.setInt(1, idProduto);
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    public void updateProduto(Produto p, int idProduto) throws SQLException {
+        // try-with-resource statement will auto close the connection.
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUTO_BY_ID)) {
+            preparedStatement.setString(1, p.getNome());
+            preparedStatement.setBigDecimal(2, p.getPreco());
+            preparedStatement.setInt(3, p.getQuantidade());
+            preparedStatement.setInt(3, p.getQuantidade());
+            preparedStatement.setInt(4, idProduto);
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (Exception e) {

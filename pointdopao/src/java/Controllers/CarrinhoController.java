@@ -32,9 +32,10 @@ public class CarrinhoController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String forward = "";
         HttpSession sessionCarrinho = request.getSession();
-        if ((boolean) sessionCarrinho.getAttribute("sessionNew")) {
+        if (((boolean) sessionCarrinho.getAttribute("sessionNew")) || ((boolean) sessionCarrinho.getAttribute("efetuouCompraRecente"))) {
             carrinhoLista.clear();
             sessionCarrinho.setAttribute("sessionNew", false);
+            sessionCarrinho.setAttribute("efetuouCompraRecente", false);
         }
         UsuarioDao usuarioDao = new UsuarioDao();
 
@@ -58,7 +59,6 @@ public class CarrinhoController extends HttpServlet {
                 request.setAttribute("carrinhoLista", carrinhoLista);
                 sessionCarrinho.setAttribute("SessionProdutoId", produto.getId());
                 sessionCarrinho.setAttribute("SessionProdutoQnt", produto.getQuantidade());
-
             }
         }
 

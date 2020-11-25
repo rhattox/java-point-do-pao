@@ -64,6 +64,7 @@ public class EntrarController extends HttpServlet {
             } else {
                 //System.out.println("\nENTRARCONROLLER:\nA query retornou falsa, você NÃO está logado!");
                 session.setAttribute("autenticado", false);
+                session.setAttribute("loginfailed", true);
                 String forward = ERROR;
                 RequestDispatcher view = request.getRequestDispatcher(forward);
                 view.forward(request, response);
@@ -88,6 +89,8 @@ public class EntrarController extends HttpServlet {
         session.setAttribute("SessionNome", StringUtils.capitalize(usuarioSession.getNome()));
         session.setAttribute("SessionEmail", usuarioSession.getEmail());
         session.setAttribute("isAdm", isAdm);
+        session.setAttribute("efetuouCompraRecente", false);
         session.setAttribute("autenticado", true);
+        session.setAttribute("loginfailed", false);
     }
 }

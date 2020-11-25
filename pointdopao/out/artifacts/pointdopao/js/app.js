@@ -141,6 +141,7 @@ function removerProdutoLista(id) {
 
 /*----------------------------------------*/
 function validaFormCarrinho() {
+    updateValueAndValidityCarrinhoForm();
     if (document.getElementById('enderecoCheckoutHelp').style.display === "none" &&
         document.getElementById('numeroCheckoutHelp').style.display === "none" &&
         document.getElementById('bairroCheckoutHelp').style.display === "none" &&
@@ -149,11 +150,7 @@ function validaFormCarrinho() {
         window.alert("Compra realizada com sucesso! \nEm breve estará na sua casa =D");
         return true;
     } else {
-        validaCampoTexto('enderecoCheckoutForm', 'enderecoCheckoutHelp', 'endereço');
-        validaCampoTexto('numeroCheckoutForm', 'numeroCheckoutHelp', 'número');
-        validaCampoTexto('bairroCheckoutForm', 'bairroCheckoutHelp', 'bairro');
-        validaCampoTexto('estadoCheckoutForm', 'estadoCheckoutHelp', 'estado');
-        validaCampoTexto('cepCheckoutForm', 'cepCheckoutHelp', 'CEP');
+        updateValueAndValidityCarrinhoForm();
         window.alert("O formulário contém campos inválidos!");
         return false;
     }
@@ -164,8 +161,35 @@ function formatPrecoProduto() {
     document.getElementById('precoProdutoForm').value = new Intl.NumberFormat('pt').format(valor);
 }
 
-/*Jquery para modal*/
-$('#my-modal').on('show.bs.modal', function (event) {
-    var myVal = $(event.relatedTarget).data('val');
-    $(this).find(".modal-body").text(myVal);
-});
+function atualizarProduto() {
+    let idProduto = document.getElementById('md-idProduto').innerText;
+    let nomeProduto = document.getElementById('md-nome-produto').value;
+    let qtdProduto = document.getElementById('md-quantidade-produto').value;
+    let preco = document.getElementById('md-preco-produto').value;
+
+    if (isNotNullOrEmpty(nomeProduto) &&
+        isNotNullOrEmpty(qtdProduto) &&
+        isNotNullOrEmpty(preco)
+    ) {
+        window.location = `produto?up=${idProduto}&nm=${nomeProduto}&qt=${qtdProduto}&pc=${preco}`;
+        window.alert("Seu produto foi atualizado com sucesso!");
+    } else {
+        window.alert("Os dados sobre o produto precisam ser informados!");
+    }
+}
+
+function isNotNullOrEmpty(valor) {
+    return valor != null && valor !== "";
+}
+
+function updateValueAndValidityCarrinhoForm() {
+    validaCampoTexto('enderecoCheckoutForm', 'enderecoCheckoutHelp', 'endereço');
+    validaCampoTexto('numeroCheckoutForm', 'numeroCheckoutHelp', 'número');
+    validaCampoTexto('bairroCheckoutForm', 'bairroCheckoutHelp', 'bairro');
+    validaCampoTexto('estadoCheckoutForm', 'estadoCheckoutHelp', 'estado');
+    validaCampoTexto('cepCheckoutForm', 'cepCheckoutHelp', 'CEP');
+}
+
+function isLoginFailed(valor) {
+    if (valor) window.alert("Verifique novamente seus dados!");
+}

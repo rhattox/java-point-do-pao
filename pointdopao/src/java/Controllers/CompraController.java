@@ -62,6 +62,7 @@ public class CompraController extends HttpServlet {
                     SessionListaProduto.forEach(produto -> {
                         try {
                             carrinhoDao.insertProdutoDetalhe(idTabelaCompra, produto.getId(), produto.getQuantidade());
+                            sessionCarrinho.setAttribute("efetuouCompraRecente", true);
                         } catch (SQLException e) {
                             e.getMessage();
                         }
