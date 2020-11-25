@@ -73,38 +73,20 @@
                         <th scope="col">Valor Total</th>
                         <th scope="col">ID produto</th>
                         <th scope="col">ID quantidade</th>
-
                     </tr>
-
                 </thead>
                 <tbody>
                     <c:forEach items="${listaCompras}" var="compra" varStatus="status">
                         <tr>
-                            <td>${compra.getId()}</td>
-
-                            <td>${compra.getUsuario().getId()}</td>   
-                            <td>${compra.getValorTotal()}</td>
+                            <td>${compra.id}</td>
+                            <td>${compra.usuario.id}</td>
+                            <td>${compra.valorTotal}</td>
+                            <td>${compra.listaProdutos[0].id}</td>
+                            <td>${compra.listaProdutos[0].quantidade}</td>
                         </tr>
-                        <c:forEach items="${listaProdutos}" var="produto" varStatus="status">
-                            <tr>
-                                <td>${produto.getId()}</td>
-
-                                <td>${produto.getQuantidade()}</td>   
-
-                            </tr>
-                        </c:forEach>
-
-
-
                     </c:forEach>
-
-
-
-
                 </tbody>
             </table>
-
         </section>
-
     </body>
 </html>
