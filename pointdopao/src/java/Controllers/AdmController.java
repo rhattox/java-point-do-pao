@@ -47,10 +47,8 @@ public class AdmController extends HttpServlet {
             throws ServletException, IOException {
         String forward = "";
         try {
-            //compra = 
             cp = carrinhoDao.selectCompras();
             request.setAttribute("listaCompras", cp);
-
         } catch (SQLException e) {
             e.getMessage();
         }

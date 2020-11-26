@@ -8,14 +8,22 @@ package Dao;
 import Models.Compra;
 import Models.Produto;
 import Models.Usuario;
+import Utils.StringUtils;
+
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 import java.util.ArrayList;
 
 /**
@@ -31,7 +39,11 @@ public class CarrinhoDao {
 
     private static final String INSERT_DETALHE_COMPRA_SQL = "INSERT INTO detalhe_compra (id_compra,id_produto,quantidade_produto) VALUES (?,?,?);";
     private static final String INSERT_RETURN_COMPRA_SQL = "INSERT INTO compra (id_usuario, valor_total, hora_compra) VALUES (?,?,?) RETURNING id ;";
-    private static final String SELECT_COMPRA_SQL = "SELECT w.id AS ID_COMPRA, id_usuario, valor_total, c.id AS ID_DETALHE, valor_total, id_produto, quantidade_produto FROM compra w, detalhe_compra c WHERE w.id = c.id_compra;;";
+    private static final String SELECT_COMPRA_SQL
+            = "SELECT w.id AS ID_COMPRA, id_usuario, valor_total, c.id "
+            + "    AS ID_DETALHE, valor_total, id_produto, quantidade_produto "
+            + "    FROM compra w, detalhe_compra c "
+            + "    WHERE w.id = c.id_compra;;";
 
     //private static final String INSERT_CARRINHO_SQL = "INSERT INTO carrinho (id_produto, quantidade) VALUES (?,?);";
     protected Connection getConnection() {
@@ -61,12 +73,10 @@ public class CarrinhoDao {
             LocalDateTime date = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
             System.out.println(date.format(formatter));
-            
+
             preparedStatement.setInt(1, idUsuario);
             preparedStatement.setDouble(2, valorTotal);
             preparedStatement.setTimestamp(3, Timestamp.valueOf(date));
-            
-            System.out.println("HORA AQUI CARAI: "+ Timestamp.valueOf(date));
 
             ResultSet rs;
             rs = preparedStatement.executeQuery();
@@ -102,7 +112,8 @@ public class CarrinhoDao {
     }
 
     public ArrayList<Compra> selectCompras() throws SQLException {
-
+        UsuarioDao usuarioDao = new UsuarioDao();
+        ProdutoDao produtoDao = new ProdutoDao();
         ArrayList<Compra> listaComprasTotal = new ArrayList();
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection();
@@ -114,19 +125,16 @@ public class CarrinhoDao {
                 Produto produto = new Produto();
                 Compra compra = new Compra();
                 Usuario usuario = new Usuario();
-                usuario.setId(rs.getInt("id_usuario"));
+
+                usuario = usuarioDao.getUserById(rs.getInt("id_usuario"));
+                usuario.setNome(StringUtils.capitalize(usuario.getNome()));
                 compra.setUsuario(usuario);
 
-                produto.setId(rs.getInt("id_produto"));
-
-                produto.setQuantidade(rs.getInt("quantidade_produto"));
-
+                produto = produtoDao.getProductById(rs.getInt("id_produto"));
                 comprasArrayProduto.add(produto);
 
                 compra.setId(rs.getInt("id_compra"));
-
                 compra.setValorTotal(rs.getDouble("valor_total"));
-
                 compra.setListaProdutos(comprasArrayProduto);
 
                 listaComprasTotal.add(compra);

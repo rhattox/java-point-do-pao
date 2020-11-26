@@ -60,18 +60,17 @@ public class ProdutoDao {
         }
     }
 
-    public Produto getProductById(String id) {
+    public Produto getProductById(int idProduto) {
         // try-with-resource statement will auto close the connection.
         Produto produto = new Produto();
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(GET_PRODUTO_BY_ID)) {
             ResultSet rs;
 
-            preparedStatement.setInt(1, Integer.parseInt(id));
+            preparedStatement.setInt(1, idProduto);
             rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-
                 produto.setId(rs.getInt("id"));
                 produto.setNome(rs.getString("nome"));
                 produto.setPreco(rs.getBigDecimal("preco"));

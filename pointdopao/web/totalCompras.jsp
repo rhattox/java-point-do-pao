@@ -68,21 +68,23 @@
             <table class="table">
                 <thead class="cor-tabela-header">
                     <tr>
-                        <th scope="col">ID Compra</th>
-                        <th scope="col">ID Usuario</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Comprador</th>
                         <th scope="col">Valor Total</th>
-                        <th scope="col">ID produto</th>
-                        <th scope="col">ID quantidade</th>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col">Data/Hora</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${listaCompras}" var="compra" varStatus="status">
                         <tr>
                             <td>${compra.id}</td>
-                            <td>${compra.usuario.id}</td>
+                            <td>${compra.usuario.nome}</td>
                             <td>${compra.valorTotal}</td>
-                            <td>${compra.listaProdutos[0].id}</td>
+                            <td>${compra.listaProdutos[0].nome}</td>
                             <td>${compra.listaProdutos[0].quantidade}</td>
+                            <td>teste</td>
                         </tr>
                     </c:forEach>
                 </tbody>

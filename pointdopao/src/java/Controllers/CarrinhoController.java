@@ -52,7 +52,7 @@ public class CarrinhoController extends HttpServlet {
                 String produtoId = request.getParameter("produto");
                 int qtdItem = Integer.parseInt(request.getParameter("qtd"));
 
-                produto = produtoDao.getProductById(produtoId);
+                produto = produtoDao.getProductById(Integer.parseInt(produtoId));
                 produto.setQuantidade(qtdItem);
                 carrinhoLista.add(produto);
 
