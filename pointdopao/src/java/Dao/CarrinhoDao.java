@@ -40,10 +40,7 @@ public class CarrinhoDao {
     private static final String INSERT_DETALHE_COMPRA_SQL = "INSERT INTO detalhe_compra (id_compra,id_produto,quantidade_produto) VALUES (?,?,?);";
     private static final String INSERT_RETURN_COMPRA_SQL = "INSERT INTO compra (id_usuario, valor_total, hora_compra) VALUES (?,?,?) RETURNING id ;";
     private static final String SELECT_COMPRA_SQL
-            = "SELECT w.id AS ID_COMPRA, id_usuario, valor_total, c.id "
-            + "    AS ID_DETALHE, valor_total, id_produto, quantidade_produto "
-            + "    FROM compra w, detalhe_compra c "
-            + "    WHERE w.id = c.id_compra;;";
+            = "SELECT w.id AS ID_COMPRA, id_usuario, valor_total, c.id   AS ID_DETALHE, valor_total, id_produto, hora_compra, quantidade_produto FROM compra w, detalhe_compra c  WHERE w.id = c.id_compra;";
 
     //private static final String INSERT_CARRINHO_SQL = "INSERT INTO carrinho (id_produto, quantidade) VALUES (?,?);";
     protected Connection getConnection() {
@@ -72,7 +69,7 @@ public class CarrinhoDao {
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_RETURN_COMPRA_SQL)) {
             LocalDateTime date = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-            System.out.println(date.format(formatter));
+            
 
             preparedStatement.setInt(1, idUsuario);
             preparedStatement.setDouble(2, valorTotal);
@@ -132,7 +129,7 @@ public class CarrinhoDao {
 
                 produto = produtoDao.getProductById(rs.getInt("id_produto"));
                 comprasArrayProduto.add(produto);
-
+                compra.setData(rs.getTimestamp("hora_compra"));
                 compra.setId(rs.getInt("id_compra"));
                 compra.setValorTotal(rs.getDouble("valor_total"));
                 compra.setListaProdutos(comprasArrayProduto);

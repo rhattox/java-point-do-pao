@@ -1,5 +1,6 @@
 package Models;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Compra {
@@ -8,12 +9,22 @@ public class Compra {
     private Usuario usuario;
     private ArrayList<Produto> listaProdutos;
     private double valorTotal;
+    private Timestamp data;
 
-    public Compra(int id, Usuario usuario, ArrayList<Produto> listaProdutos, double valorTotal) {
+    public Compra(int id, Usuario usuario, ArrayList<Produto> listaProdutos, double valorTotal, Timestamp data) {
         this.id = id;
         this.usuario = usuario;
         this.listaProdutos = listaProdutos;
         this.valorTotal = valorTotal;
+        this.data = data;
+    }
+
+    public Timestamp getData() {
+        return data;
+    }
+
+    public void setData(Timestamp data) {
+        this.data = data;
     }
 
     public Compra() {
@@ -50,4 +61,5 @@ public class Compra {
     public void setListaProdutos(ArrayList<Produto> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }
+
 }

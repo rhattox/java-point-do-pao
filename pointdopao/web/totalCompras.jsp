@@ -84,7 +84,7 @@
                             <td>${compra.valorTotal}</td>
                             <td>${compra.listaProdutos[0].nome}</td>
                             <td>${compra.listaProdutos[0].quantidade}</td>
-                            <td>teste</td>
+                            <td>${compra.data}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
