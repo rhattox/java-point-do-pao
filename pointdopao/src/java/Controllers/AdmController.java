@@ -10,6 +10,9 @@ import Models.Compra;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,22 +49,8 @@ public class AdmController extends HttpServlet {
         try {
             //compra = 
             cp = carrinhoDao.selectCompras();
-           
-            cp.forEach(compra -> {
-                System.out.println("ID da compra: "+compra.getId());
-                System.out.println("ID Usuario: "+compra.getUsuario().getId());
-                System.out.println("Valor Total compra: "+compra.getValorTotal());
+            request.setAttribute("listaCompras", cp);
 
-               compra.getListaProdutos().forEach(tste->{
-               
-               System.out.println("ID_produto: "+tste.getId());
-               System.out.println("Quantidade Produto: "+tste.getQuantidade());
-               });
-               request.setAttribute("listaProdutos", compra.getListaProdutos());
-               
-            });
-     request.setAttribute("listaCompras", cp);
-           
         } catch (SQLException e) {
             e.getMessage();
         }

@@ -13,6 +13,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +30,7 @@ public class CarrinhoDao {
     private String jdbcPassword = "admin";
 
     private static final String INSERT_DETALHE_COMPRA_SQL = "INSERT INTO detalhe_compra (id_compra,id_produto,quantidade_produto) VALUES (?,?,?);";
-    private static final String INSERT_RETURN_COMPRA_SQL = "INSERT INTO compra (id_usuario, valor_total) VALUES (?,?) RETURNING id ;";
+    private static final String INSERT_RETURN_COMPRA_SQL = "INSERT INTO compra (id_usuario, valor_total, hora_compra) VALUES (?,?,?) RETURNING id ;";
     private static final String SELECT_COMPRA_SQL = "SELECT w.id AS ID_COMPRA, id_usuario, valor_total, c.id AS ID_DETALHE, valor_total, id_produto, quantidade_produto FROM compra w, detalhe_compra c WHERE w.id = c.id_compra;;";
 
     //private static final String INSERT_CARRINHO_SQL = "INSERT INTO carrinho (id_produto, quantidade) VALUES (?,?);";
@@ -55,8 +58,15 @@ public class CarrinhoDao {
         int id_tabela = 0;
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_RETURN_COMPRA_SQL)) {
+            LocalDateTime date = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            System.out.println(date.format(formatter));
+            
             preparedStatement.setInt(1, idUsuario);
             preparedStatement.setDouble(2, valorTotal);
+            preparedStatement.setTimestamp(3, Timestamp.valueOf(date));
+            
+            System.out.println("HORA AQUI CARAI: "+ Timestamp.valueOf(date));
 
             ResultSet rs;
             rs = preparedStatement.executeQuery();
