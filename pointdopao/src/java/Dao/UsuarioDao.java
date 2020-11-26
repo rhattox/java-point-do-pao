@@ -208,4 +208,38 @@ public class UsuarioDao {
         }
         return usuario;
     }
+
+    public Usuario getUserById(int idUsuario) throws SQLException {
+        Usuario usuario = new Usuario();
+        // try-with-resource statement will auto close the connection.
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)) {
+            preparedStatement.setInt(1, idUsuario);
+            System.out.println(preparedStatement);
+            ResultSet rs;
+            rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                usuario.setId(rs.getInt("id"));
+                usuario.setTipo(rs.getInt("tipo"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setSobrenome(rs.getString("sobrenome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setLogradouro(rs.getString("logradouro"));
+                usuario.setNumero(rs.getString("numero"));
+                usuario.setComplemento(rs.getString("complemento"));
+                usuario.setBairro(rs.getString("bairro"));
+                usuario.setEstado(rs.getString("estado"));
+                usuario.setCep(rs.getString("cep"));
+
+                preparedStatement.executeUpdate();
+            }
+
+            preparedStatement.executeUpdate();
+            //System.out.println("\nUSUARIODAO:\n" + preparedStatement);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return usuario;
+    }
 }
