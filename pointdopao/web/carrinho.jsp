@@ -124,7 +124,7 @@
                 <div class="d-flex justify-content-end mt-4 col-10 pr-0">
                     <button type="button" class="btn btn-secondary mr-2" onclick="navegarParaHome()">
                         <i class="fas fa-angle-left"></i>
-                        Voltar
+                        Continuar comprando
                     </button>
                     <button type="submit" class="btn btn-procurar">Comprar</button>
                 </div>
